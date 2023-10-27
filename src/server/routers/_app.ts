@@ -5,7 +5,14 @@ import prisma from "../../../prisma/client";
 
 export const appRouter = router({
   getMSWs: procedure.query(async () => await prisma.mSW.findMany()),
-  getAllForms: procedure.query(async () => await prisma.form.findMany()),
+  getAllForms: procedure.query(
+    async () =>
+      await prisma.form.findMany({
+        include: {
+          msw_name: true,
+        },
+      }),
+  ),
   getForm: procedure
     .input(
       z.object({
