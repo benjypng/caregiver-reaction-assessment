@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { trpc } from "@/utils/trpc-hooks";
 import AdminTable from "./components/AdminTable";
 import { Form } from "@prisma/client";
