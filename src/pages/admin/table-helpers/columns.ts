@@ -1,4 +1,3 @@
-import { Form } from "@prisma/client";
 import { createColumnHelper } from "@tanstack/react-table";
 import format from "date-fns/format";
 import { handleAge } from "./handle-age";
@@ -6,10 +5,7 @@ import { handleCapitalise } from "./handle-capitalise";
 import { handleMainCaregiver } from "./handle-main-caregiver";
 import { handleQuestions } from "./handle-questions";
 import { handleCaregivingLength } from "./handle-caregiving-length";
-
-export interface TableForm extends Form {
-  msw_name: string;
-}
+import { TableForm } from "..";
 
 const columnHelper = createColumnHelper<TableForm>();
 export const columns = [

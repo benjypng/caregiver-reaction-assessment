@@ -8,11 +8,8 @@ import {
   SortingState,
   getSortedRowModel,
 } from "@tanstack/react-table";
-import { TableForm, columns } from "../table-helpers/columns";
-
-type AdminTableProps = {
-  data: TableForm[];
-};
+import { columns } from "../table-helpers/columns";
+import { AdminTableProps } from "..";
 
 const AdminTable = ({ data }: AdminTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
