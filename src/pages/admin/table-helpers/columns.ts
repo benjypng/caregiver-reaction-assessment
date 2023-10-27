@@ -7,7 +7,7 @@ import { handleMainCaregiver } from "./handle-main-caregiver";
 import { handleQuestions } from "./handle-questions";
 import { handleCaregivingLength } from "./handle-caregiving-length";
 
-interface TableForm extends Form {
+export interface TableForm extends Form {
   msw_name: string;
 }
 
