@@ -23,7 +23,9 @@ const Questions = () => {
   const { control } = useFormContext();
   return (
     <>
-      <Text textStyle="h5">m-CRA (Modified Caregiver Reaction Assessment)</Text>
+      <Text textStyle="h5" mb="5">
+        m-CRA (Modified Caregiver Reaction Assessment)
+      </Text>
       {questions
         .sort((a: { no: string }, b: { no: string }) => {
           const noA = parseInt(a.no.replace("qn", ""));

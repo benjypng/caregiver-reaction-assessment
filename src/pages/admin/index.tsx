@@ -21,18 +21,11 @@ const AdminDashboard = () => {
   }));
 
   return (
-    <Flex
-      gap={5}
-      direction="column"
-      justifyContent="center"
-      alignItems="start"
-      gridColumn={{ base: "1 / -1", md: "2 / 12" }}
-      py={{ base: "3.5rem", md: "5.5rem" }}
-    >
-      <Text textStyle="h4">AdminDashboard</Text>
+    <>
+      <Text textStyle="h4">Admin Dashboard</Text>
       {data && <ExportCSV data={data} />}
       {data && <AdminTable data={data} />}
-    </Flex>
+    </>
   );
 };
 

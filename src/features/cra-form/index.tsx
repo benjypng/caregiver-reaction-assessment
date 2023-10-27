@@ -1,5 +1,6 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { Text } from "@chakra-ui/react";
 import SurveyDetails from "./components/SurveyDetails";
 import CaregiverDetails from "./components/CaregiverDetails";
 import Questions from "./components/Questions";
@@ -29,6 +30,9 @@ const CRAForm = () => {
 
   return (
     <FormProvider {...formMethods}>
+      <Text textStyle="h3" mb="8">
+        Caregiver Reaction Assessment
+      </Text>
       <SurveyDetails />
       <CaregiverDetails />
       <Questions />

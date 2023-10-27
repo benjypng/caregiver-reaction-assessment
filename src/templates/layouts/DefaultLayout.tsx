@@ -2,6 +2,7 @@ import Head from "next/head";
 import { type ReactNode } from "react";
 import { Inter } from "next/font/google";
 import { AppGrid } from "../AppGrid";
+import { Flex } from "@chakra-ui/react";
 const inter = Inter({ subsets: ["latin"] });
 
 type DefaultLayoutProps = { children: ReactNode };
@@ -20,7 +21,16 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         bgRepeat="no-repeat"
         bgPos="bottom right"
       >
-        <main className={inter.className}>{children}</main>
+        <Flex
+          gap={5}
+          direction="column"
+          justifyContent="center"
+          alignItems="start"
+          gridColumn={{ base: "1 / -1", md: "2 / 12" }}
+          py={{ base: "3.5rem", md: "5.5rem" }}
+        >
+          <main className={inter.className}>{children}</main>
+        </Flex>
       </AppGrid>
     </>
   );

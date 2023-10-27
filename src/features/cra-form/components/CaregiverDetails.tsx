@@ -13,10 +13,10 @@ import CaregiverSelect from "./CaregiverSelectComponent";
 const CaregiverDetails = () => {
   return (
     <>
-      <Text size="20" textStyle="h5">
+      <Text size="20" textStyle="h5" mb="5">
         Caregiver Details
       </Text>
-      <SimpleGrid columns={2} gap={3} w="full">
+      <SimpleGrid columns={[1, null, 2]} gap={3} w="full" mb="10">
         <CaregiverSelect
           name="age_group"
           description={"Age Group"}

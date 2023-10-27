@@ -18,8 +18,10 @@ const SurveyDetails = () => {
 
   return (
     <>
-      <Text textStyle="h5">Survey Details</Text>
-      <SimpleGrid columns={2} gap={3} w="full">
+      <Text textStyle="h5" mb="5">
+        Survey Details
+      </Text>
+      <SimpleGrid columns={[1, null, 2]} gap={3} w="full" mb="10">
         <Controller
           control={control}
           name="mSWId"
