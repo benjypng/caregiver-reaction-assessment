@@ -1,0 +1,212 @@
+[
+  {
+    "_id": {
+      "$oid": "6380c838061cedf0e8c19886"
+    },
+    "no": "qn1",
+    "qn": "My activities are centered around care for (name of CR)",
+    "qn-cn": "我的活动是围绕着（被看护者名字）。",
+    "qn-my": "Kesemua kegiatan saya berpusat di sekitar menjaga (name of CR).",
+    "qn-tm": "பராமரிப்பு பெறுபவருக்கு பராமரிப்பு வழங்குவதிலேயே எனது அனைத்து செயல்பாடுகளும் உள்ளது."
+  },
+  {
+    "_id": {
+      "$oid": "63814d84061cedf0e8c19892"
+    },
+    "no": "qn10",
+    "qn": "It is very difficult to get help from my family in taking care of (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனித்துக்கொள்ளக் குடும்பத்தினரிடமிருந்து உதவி கேட்பது மிகவும் கடினமானது.",
+    "qn-cn": "很难从我的家人得到帮助以看护（被看护者名字）。",
+    "qn-my": "Sukar untuk saya mendapatkan bantuan keluarga untuk menjaga (name of CR)."
+  },
+  {
+    "_id": {
+      "$oid": "63814d37061cedf0e8c1988d"
+    },
+    "no": "qn6",
+    "qn": "I have to stop in the middle of my work or activities to provide care",
+    "qn-tm": "வேலை அல்லது செயல்பாடுகளை பாதியில் நிறுத்திவிட்டு CR-யை கவனித்துக்கொள்ளவேண்டயுள்ளது",
+    "qn-cn": "我必须半途停止我的工作或活动以提供看护。",
+    "qn-my": "Saya perlu berhenti melakukan kerja atau kegiatan saya untuk menjaga (name of CR)."
+  },
+  {
+    "_id": {
+      "$oid": "63814d71061cedf0e8c19891"
+    },
+    "no": "qn9",
+    "qn": "Caring for (name of CR) makes me feel good",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனித்துக்கொள்வது எனக்கு மன நிறைவுத் தருகிறது.",
+    "qn-cn": "看护（被看护者名字)，让我感觉很好。",
+    "qn-my": "Menjaga (name of CR) membuatkan saya rasa tenang."
+  },
+  {
+    "_id": {
+      "$oid": "63814db2061cedf0e8c19894"
+    },
+    "no": "qn12",
+    "qn": "Others have dumped caring for (name of CR) onto me",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனித்துக் கொள்ளும் பொறுப்பை மற்றவர்கள் என்மீது தள்ளி விட்டனர்.",
+    "qn-cn": "他人将看护（被看护者名字）的工作丢给我。",
+    "qn-my": "Orang lain telah menolak tanggungjawab menjaga (name of CR) kepada saya."
+  },
+  {
+    "_id": {
+      "$oid": "63814e0a061cedf0e8c19899"
+    },
+    "no": "qn17",
+    "qn": "I really want to care for (name of CR)",
+    "qn-tm": "நான் பராமரிப்பு பெறுபவரை உண்மையிலேயே கவனித்துக்கொள்ள விரும்புகிறேன்.",
+    "qn-cn": "我真的要看护（被看护者名字）。",
+    "qn-my": "Saya benar-benar mahu menjaga (name of CR)."
+  },
+  {
+    "_id": {
+      "$oid": "63814cb5061cedf0e8c19889"
+    },
+    "no": "qn3",
+    "qn": "Caring for (name of CR) is important to me",
+    "qn-tm": "பராமரிப்பு பெறுபவரைப் பார்த்துக்கொள்வது எனக்கு முக்கியம்.",
+    "qn-cn": "看护（被看护者名字） 对我很重要。",
+    "qn-my": "Menjaga (name of CR) adalah penting bagi saya."
+  },
+  {
+    "_id": {
+      "$oid": "63814d48061cedf0e8c1988e"
+    },
+    "no": "qn7",
+    "qn": "My health has gotten worse since I've been caring for (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனிப்பதிலிருந்து எனது உடல்நலம் மோசமாகிவிட்டதுபோல் உணர்கிறேன்.",
+    "qn-cn": "自从看护（被看护者名字） ，我的健康每况愈下。",
+    "qn-my": "Kesihatan saya  merosot semenjak menjaga  (name of CR)."
+  },
+  {
+    "_id": {
+      "$oid": "63814dd0061cedf0e8c19896"
+    },
+    "no": "qn14",
+    "qn": "The constant interruptions make it difficult to find time for relaxation",
+    "qn-tm": "தொடர்ச்சியானத் தொந்தரவுகளினால், நான் ஓய்வெடுப்பதற்குப் போதுமான நேரம் கிடைப்பது சிரமம்.",
+    "qn-cn": "不断的干扰很难有时间放松自己。",
+    "qn-my": "Gangguan yang berterusan menjadikan sukar untuk saya berehat."
+  },
+  {
+    "_id": {
+      "$oid": "63814dea061cedf0e8c19897"
+    },
+    "no": "qn15",
+    "qn": "My family (brothers, sisters, children) left me alone to care for (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனிக்க எனது குடும்பத்தினர் (சகோதரர்கள், சகோதரிகள், குழந்தைகள்) என்னை தனியாக விட்டுவிட்டனர்.",
+    "qn-cn": "我的家人（兄弟姐妹、子女）让我独自看护（被看护者名字）。",
+    "qn-my": "Keluarga saya (adik-beradik, anak-anak) membiarkan saya menjaga (name of CR) seorang diri."
+  },
+  {
+    "_id": {
+      "$oid": "63814dff061cedf0e8c19898"
+    },
+    "no": "qn16",
+    "qn": "Since caring for (name of CR), it seems like I'm tired all of the time",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனித்துக்கொள்வதிலிருந்து எப்போதும் சோர்வடைந்து இருப்பதுபோல் இருக்கிறது.",
+    "qn-cn": "自从看护（被看护者名字） ，我好像一直都很累。",
+    "qn-my": "Sejak menjaga (name of CR),  saya rasa letih setiap masa."
+  },
+  {
+    "_id": {
+      "$oid": "63814e23061cedf0e8c1989a"
+    },
+    "no": "qn18",
+    "qn": "I visit family and friends less since I have been caring for (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனித்துக்கொள்வதிலிருந்துக் குடும்பத்தினரையும் நண்பர்களையும் சந்திப்பதுக் குறைந்துவிட்டது.",
+    "qn-cn": "自从看护（被看护者名字）， 我较少探访家人与朋 友。",
+    "qn-my": "Saya kurang menziarahi keluarga dan kawan-kawan sejak menjaga  (name of CR)."
+  },
+  {
+    "_id": {
+      "$oid": "63814e5b061cedf0e8c1989c"
+    },
+    "no": "qn20",
+    "qn": "It is difficult to pay for (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவருக்காக பணம் கொடுப்பதுச் சிரமம்.",
+    "qn-cn": "很难替（被看护者名字）支付开销。[Interviewer: This is financial payment]",
+    "qn-my": "Sukar untuk membayar bil (name of CR). [Interviewer: This is financial payment]"
+  },
+  {
+    "_id": {
+      "$oid": "63814e68061cedf0e8c1989d"
+    },
+    "no": "qn21",
+    "qn": "Caring for (name of CR) puts a financial strain on me",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனித்துக்கொள்வது என்மீது பெரும் நிதிச்சுமையை ஏற்படுத்துகிறது.",
+    "qn-cn": "看护（被看护者名字）为我带来财务负担。",
+    "qn-my": "Menjaga (name of CR) menimbulkan masalah kewangan bagi saya."
+  },
+  {
+    "_id": {
+      "$oid": "63814ca2061cedf0e8c19888"
+    },
+    "no": "qn2",
+    "qn": "My family works together at caring for (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவரைப் பார்த்துக்கொள்ள என் குடுபத்தினர் ஒன்றிணைந்து செயல்படுவார்கள்.",
+    "qn-cn": "我的家人一起关怀（被看护者名字）。",
+    "qn-my": "Keluarga saya bekerjasama dalam menjaga (name of CR)."
+  },
+  {
+    "_id": {
+      "$oid": "63814cd5061cedf0e8c1988a"
+    },
+    "no": "qn4",
+    "qn": "It takes all my physical strength to care for (name of CR)",
+    "qn-tm": "உடல் பலம் முழுவதையும் பராமரிப்பு பெறுபவரைப் பார்த்துக்கொள்ளப் பயன்படுத்தவேண்டும்.",
+    "qn-cn": "看护（被看护者名字）需要我所有的体力。",
+    "qn-my": "Menjaga (name of CR) sangat meletihkan diri saya."
+  },
+  {
+    "_id": {
+      "$oid": "63814d13061cedf0e8c1988c"
+    },
+    "no": "qn5",
+    "qn": "I enjoy caring for (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவரைப் பார்த்துக்கொள்வதில் எனக்கு மகிழ்ச்சி.",
+    "qn-cn": "我喜欢看护（被看护者名字）。",
+    "qn-my": "Saya gembira menjaga (name of CR)."
+  },
+  {
+    "_id": {
+      "$oid": "63814d59061cedf0e8c1988f"
+    },
+    "no": "qn8",
+    "qn": "Since caring for (name of CR), I feel my family has abandoned me",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனிப்பதிலிருந்து எனது குடும்பம் என்னை கைவிட்டுவிட்டதுபோல் உணர்கிறேன்.",
+    "qn-cn": "自从看护（被看护者名字）， 我觉得我的家人抛弃 了我。",
+    "qn-my": "Sejak menjaga (name of CR),  saya rasa keluarga saya telah menjauhkan diri dari saya."
+  },
+  {
+    "_id": {
+      "$oid": "63814d93061cedf0e8c19893"
+    },
+    "no": "qn11",
+    "qn": "I feel privileged to care for (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனித்துக் கொள்வதுப் கெளரவமானதாக நினைக்கிறேன்.",
+    "qn-cn": "我感到荣幸看护（被看护者名字）。",
+    "qn-my": "Saya rasa istimewa untuk menjaga (name of CR)."
+  },
+  {
+    "_id": {
+      "$oid": "63814dbf061cedf0e8c19895"
+    },
+    "no": "qn13",
+    "qn": "I have eliminated things from my schedule since caring for (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவரை கவனித்துக்கொள்வதிலிருந்த்து எனது திட்டத்திலிருந்து சிலவற்றை நீக்கிவிட்டேன்.",
+    "qn-cn": "自从看护（被看护者名字）， 我必须在我的日程表 中删除工作。",
+    "qn-my": "Saya telah membatalkan banyak perkara dari kegiatan hidup saya sejak menjaga  (name of CR)."
+  },
+  {
+    "_id": {
+      "$oid": "63814e41061cedf0e8c1989b"
+    },
+    "no": "qn19",
+    "qn": "I will never be able to do enough caregiving to repay (name of CR)",
+    "qn-tm": "பராமரிப்பு பெறுபவர் எனக்கு சைதவற்றுக்கெல்லாம், நான் அவரை பார்த்துக்கொள்வதின் மூலம், ஒருபோதும் ஈடுசெய்யமுடியாது.",
+    "qn-cn": "我将永远无法通过看护来报答（被看护者名字）。",
+    "qn-my": "Saya tidak akan mampu menjaga (name of CR) secukupnya untuk membalas budinya."
+  }
+]

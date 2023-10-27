@@ -1,0 +1,51 @@
+{
+  "name": "cra",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.8.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.3.2",
+    "@opengovsg/design-system-react": "^1.4.0",
+    "@prisma/client": "^5.5.0",
+    "@tanstack/react-query": "^4.18.0",
+    "@tanstack/react-table": "^8.10.7",
+    "@trpc/client": "^10.42.0",
+    "@trpc/next": "^10.42.0",
+    "@trpc/react-query": "^10.42.0",
+    "@trpc/server": "^10.42.0",
+    "date-fns": "^2.30.0",
+    "framer-motion": "^10.16.4",
+    "next": "13.5.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.47.0",
+    "react-icons": "^4.11.0",
+    "zod": "^3.22.4",
+    "zod-prisma-types-monorepo": "github:chrishoermann/zod-prisma-types"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.44.6",
+    "@types/node": "^20.8.8",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^13.5.6",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.0.3",
+    "prisma": "^5.5.0",
+    "typescript": "^5.2.2"
+  }
+}

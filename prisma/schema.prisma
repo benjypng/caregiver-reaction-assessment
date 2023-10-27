@@ -1,0 +1,105 @@
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+enum age_group {
+  BELOW_21
+  FROM_21_TO_30
+  FROM_31_TO_40
+  FROM_41_TO_50
+  FROM_51_TO_60
+  FROM_61_TO_70
+  ABOVE_70
+}
+
+enum gender {
+  MALE
+  FEMALE
+  OTHERS
+}
+
+enum race {
+  CHINESE
+  MALAY
+  INDIAN
+  OTHERS
+}
+
+enum marital_status {
+  SINGLE
+  MARRIED
+  WIDOWED
+  DIVORCED
+}
+
+enum education_level {
+  PRIMARY
+  SECONDARY
+  ITE
+  DIPLOMA
+  OTHERS
+  DEGREE    @map("Degree and above")
+}
+
+enum employment_status {
+  FULLTIME
+  PARTTIME
+  UNEMPLOYED @map("Not working")
+}
+
+enum caregiving_length {
+  BELOW_1_YEAR
+  FROM_1_TO_3_YEARS
+  FROM_4_TO_6_YEARS
+  FROM_7_TO_10_YEARS
+  FROM_11_TO_20_YEARS
+  ABOVE_21_YEARS
+}
+
+model Form {
+  id                String            @id @unique @default(cuid())
+  msw_name          MSW               @relation(fields: [mSWId], references: [id])
+  survey_date       DateTime
+  age_group         age_group
+  gender            gender
+  race              race
+  marital_status    marital_status
+  education_level   education_level
+  employment_status employment_status
+  main_caregiver    Boolean
+  caregiving_length caregiving_length
+  mSWId             String
+  qn1               String
+  qn2               String
+  qn3               String
+  qn4               String
+  qn5               String
+  qn6               String
+  qn7               String
+  qn8               String
+  qn9               String
+  qn10              String
+  qn11              String
+  qn12              String
+  qn13              String
+  qn14              String
+  qn15              String
+  qn16              String
+  qn17              String
+  qn18              String
+  qn19              String
+  qn20              String
+  qn21              String
+}
+
+model MSW {
+  id   String @id @unique @default(cuid())
+  name String
+  Form Form[]
+}
