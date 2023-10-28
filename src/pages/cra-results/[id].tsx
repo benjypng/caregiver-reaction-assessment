@@ -1,20 +1,10 @@
+import CRAResults from "@/features/cra-results";
 import { trpc } from "@/utils/trpc-hooks";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  SimpleGrid,
-  Stack,
-  StackDivider,
-  Text,
-} from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import ProfileCard from "@/features/cra-results/components/ProfileCard";
-import { format } from "date-fns";
-import { handleAge } from "@/libs/table-helpers/handle-age";
-import { handleCapitalise } from "@/libs/table-helpers/handle-capitalise";
-import { handleMainCaregiver } from "@/libs/table-helpers/handle-main-caregiver";
-import { handleCaregivingLength } from "@/libs/table-helpers/handle-caregiving-length";
+import { createContext } from "react";
+import { TableForm } from "../admin";
+
+export const ProfileContext = createContext<TableForm | null>(null);
 
 const Result = () => {
   const router = useRouter();
@@ -24,67 +14,19 @@ const Result = () => {
     { enabled: !!router.query.id },
   );
   if (!res.data) return null;
-  const profile = res.data;
+  const profile = {
+    ...res.data,
+    msw_name: {
+      name: res.data.msw_name.name,
+      id: res.data.msw_name.id,
+    },
+    survey_date: new Date(res.data.survey_date),
+  };
 
   return (
-    <>
-      <Card>
-        <CardHeader>
-          <Text textStyle="h4">Profile: {profile.id}</Text>
-        </CardHeader>
-        <CardBody>
-          <Stack divider={<StackDivider />} spacing="4">
-            <SimpleGrid columns={2}>
-              <ProfileCard value={profile.msw_name.name} label={"MSW Name"} />
-              <ProfileCard
-                value={format(new Date(profile.survey_date), "dd-MM-yyyy")}
-                label={"Survey Date"}
-              />
-            </SimpleGrid>
-            <SimpleGrid columns={2}>
-              <ProfileCard
-                value={handleAge(profile.age_group)}
-                label={"Age Group"}
-              />
-              <ProfileCard
-                value={handleCapitalise(profile.gender)}
-                label={"Gender"}
-              />
-            </SimpleGrid>
-            <SimpleGrid columns={2}>
-              <ProfileCard
-                value={handleCapitalise(profile.race)}
-                label={"Ethnicity"}
-              />
-              <ProfileCard
-                value={handleCapitalise(profile.marital_status)}
-                label={"Marital Status"}
-              />
-            </SimpleGrid>
-            <SimpleGrid columns={2}>
-              <ProfileCard
-                value={handleCapitalise(profile.education_level)}
-                label={"Education Level"}
-              />
-              <ProfileCard
-                value={handleCapitalise(profile.employment_status)}
-                label={"Employment Status"}
-              />
-            </SimpleGrid>
-            <SimpleGrid columns={2}>
-              <ProfileCard
-                value={handleMainCaregiver(profile.main_caregiver)}
-                label={"Are you the main caregiver?"}
-              />
-              <ProfileCard
-                value={handleCaregivingLength(profile.caregiving_length)}
-                label={"Length of Caregiving"}
-              />
-            </SimpleGrid>
-          </Stack>
-        </CardBody>
-      </Card>
-    </>
+    <ProfileContext.Provider value={profile}>
+      <CRAResults />
+    </ProfileContext.Provider>
   );
 };
 export default Result;

@@ -24,7 +24,11 @@ import {
 } from "@tanstack/react-table";
 import { columns } from "@/libs/table-helpers/columns";
 import { Button } from "@opengovsg/design-system-react";
-import { AdminTableProps } from "@/pages/admin";
+import { TableForm } from "@/pages/admin";
+
+export type AdminTableProps = {
+  data: TableForm[];
+};
 
 const AdminTable = ({ data }: AdminTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
