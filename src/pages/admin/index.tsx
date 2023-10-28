@@ -1,8 +1,8 @@
 import { Flex, Spacer, Text } from "@chakra-ui/react";
 import { trpc } from "@/utils/trpc-hooks";
-import AdminTable from "./components/AdminTable";
 import { Form } from "@prisma/client";
-import ExportCSV from "./components/ExportCSV";
+import AdminTable from "@/features/admin/components/AdminTable";
+import ExportCSV from "@/features/admin/components/ExportCSV";
 
 export interface TableForm extends Form {
   msw_name: string;

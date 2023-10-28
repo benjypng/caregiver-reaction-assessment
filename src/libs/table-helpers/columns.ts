@@ -5,7 +5,7 @@ import { handleCapitalise } from "./handle-capitalise";
 import { handleMainCaregiver } from "./handle-main-caregiver";
 import { handleQuestions } from "./handle-questions";
 import { handleCaregivingLength } from "./handle-caregiving-length";
-import { TableForm } from "..";
+import { TableForm } from "@/pages/admin";
 
 const columnHelper = createColumnHelper<TableForm>();
 export const columns = [

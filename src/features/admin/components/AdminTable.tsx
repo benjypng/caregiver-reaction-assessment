@@ -22,9 +22,9 @@ import {
   SortingState,
   getSortedRowModel,
 } from "@tanstack/react-table";
-import { columns } from "../table-helpers/columns";
-import { AdminTableProps } from "..";
+import { columns } from "@/libs/table-helpers/columns";
 import { Button } from "@opengovsg/design-system-react";
+import { AdminTableProps } from "@/pages/admin";
 
 const AdminTable = ({ data }: AdminTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);

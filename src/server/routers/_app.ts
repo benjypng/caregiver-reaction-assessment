@@ -24,6 +24,9 @@ export const appRouter = router({
         where: {
           id: opts.input.id,
         },
+        include: {
+          msw_name: true,
+        },
       });
       return craResult;
     }),

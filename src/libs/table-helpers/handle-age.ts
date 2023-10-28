@@ -17,6 +17,6 @@ export const handleAge = (str: age_group) => {
     case "ABOVE_70":
       return "Above 70 years old";
     default:
-      return;
+      return "";
   }
 };

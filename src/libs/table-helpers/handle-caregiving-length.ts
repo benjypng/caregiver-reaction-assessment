@@ -15,5 +15,6 @@ export const handleCaregivingLength = (str: caregiving_length) => {
     case "ABOVE_21_YEARS":
       return "More than 21 years";
     default:
+      return "";
   }
 };
