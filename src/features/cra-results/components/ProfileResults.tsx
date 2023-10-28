@@ -28,7 +28,7 @@ const ProfileResults = () => {
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">
           <SimpleGrid columns={2}>
-            <ProfileCard value={profile.msw_name.name} label={"MSW Name"} />
+            <ProfileCard value={profile.msw_name} label={"MSW Name"} />
             <ProfileCard
               value={format(new Date(profile.survey_date), "dd-MM-yyyy")}
               label={"Survey Date"}

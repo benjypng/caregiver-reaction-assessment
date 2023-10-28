@@ -1,7 +1,7 @@
 import React from "react";
-import { AdminTableProps } from "./AdminTable";
 import { Button } from "@chakra-ui/react";
 import { CSVLink } from "react-csv";
+import { AdminTableProps } from "./AdminTable";
 
 const ExportCSV = ({ data }: AdminTableProps) => {
   const csvData = [

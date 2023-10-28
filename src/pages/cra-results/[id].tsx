@@ -16,10 +16,7 @@ const Result = () => {
   if (!res.data) return null;
   const profile = {
     ...res.data,
-    msw_name: {
-      name: res.data.msw_name.name,
-      id: res.data.msw_name.id,
-    },
+    msw_name: res.data.msw_name.name,
     survey_date: new Date(res.data.survey_date),
   };
 

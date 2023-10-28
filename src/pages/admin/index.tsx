@@ -5,20 +5,15 @@ import AdminTable from "@/features/admin/components/AdminTable";
 import ExportCSV from "@/features/admin/components/ExportCSV";
 
 export interface TableForm extends Form {
-  msw_name: {
-    id: string;
-    name: string;
-  };
+  msw_name: string;
 }
 
 const AdminDashboard = () => {
   const res = trpc.getAllForms.useQuery();
+  if (!res.data) return null;
   const data = res.data?.map((d) => ({
     ...d,
-    msw_name: {
-      name: d.msw_name.name,
-      id: d.msw_name.id,
-    },
+    msw_name: d.msw_name.name,
     survey_date: new Date(d.survey_date),
   }));
 
