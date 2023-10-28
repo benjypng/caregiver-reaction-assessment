@@ -4,9 +4,11 @@ import { useRouter } from "next/router";
 
 const Result = () => {
   const router = useRouter();
-  console.log(router.query.id);
 
-  const res = trpc.getForm.useQuery({ id: router.query.id as string });
+  const res = trpc.getForm.useQuery(
+    { id: router.query.id as string },
+    { enabled: !!router.query.id },
+  );
   if (!res.data) return null;
 
   return (
