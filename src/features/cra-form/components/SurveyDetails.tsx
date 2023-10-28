@@ -4,6 +4,7 @@ import {
   FormErrorMessage,
   FormLabel,
   SimpleGrid,
+  SkeletonText,
   Text,
 } from "@chakra-ui/react";
 import { SingleSelect, DatePicker } from "@opengovsg/design-system-react";
@@ -13,8 +14,8 @@ import { Controller, useFormContext } from "react-hook-form";
 
 const SurveyDetails = () => {
   const { control } = useFormContext();
-  const res = trpc.getMSWs.useQuery();
-  const msws = res.data ?? [];
+  const { data, isLoading, error } = trpc.getMSWs.useQuery();
+  if (error) return <Text>Fatal Error</Text>;
 
   return (
     <>
@@ -29,20 +30,22 @@ const SurveyDetails = () => {
           render={({ field, fieldState: { error } }) => (
             <FormControl isInvalid={!!error}>
               <FormLabel mb={1}>MSW Name</FormLabel>
-              <SingleSelect
-                placeholder="Select option"
-                {...field}
-                size="sm"
-                items={msws.map((m: MSW) => ({
-                  value: m.id,
-                  label: m.name,
-                }))}
-              />
+              {isLoading && <SkeletonText />}
+              {data && (
+                <SingleSelect
+                  placeholder="Select option"
+                  {...field}
+                  size="sm"
+                  items={data.map((m: MSW) => ({
+                    value: m.id,
+                    label: m.name,
+                  }))}
+                />
+              )}
               <FormErrorMessage>{error?.message}</FormErrorMessage>
             </FormControl>
           )}
         />
-
         <Controller
           control={control}
           name={"survey_date"}

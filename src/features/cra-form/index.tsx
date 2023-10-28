@@ -1,27 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Text } from "@chakra-ui/react";
+import { Button, Flex, Spinner, Text } from "@chakra-ui/react";
 import SurveyDetails from "./components/SurveyDetails";
 import CaregiverDetails from "./components/CaregiverDetails";
 import Questions from "./components/Questions";
 import { Form } from "@prisma/client";
 import { trpc } from "@/utils/trpc-hooks";
-import { Button } from "@opengovsg/design-system-react";
 import { useRouter } from "next/navigation";
 
 const CRAForm = () => {
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const router = useRouter();
   const formMethods = useForm<Form>({
     mode: "onBlur",
   });
 
   const submitForm = trpc.submitForm.useMutation({
+    onError: (response) => {
+      console.log(response);
+      setSubmitting(false);
+    },
     onSettled: (response) => {
       router.push(`/cra-results/${response?.id}`);
     },
   });
 
   const onSubmit = (data: Form) => {
+    setSubmitting(true);
     submitForm.mutate({
       ...data,
       main_caregiver: data.main_caregiver == true,
@@ -36,7 +41,16 @@ const CRAForm = () => {
       <SurveyDetails />
       <CaregiverDetails />
       <Questions />
-      <Button onClick={formMethods.handleSubmit(onSubmit)}>Hello</Button>
+      <Flex direction="row" gap="3">
+        <Button
+          isLoading={submitting}
+          onClick={formMethods.handleSubmit(onSubmit)}
+          colorScheme="telegram"
+          w="10em"
+        >
+          Submit
+        </Button>
+      </Flex>
     </FormProvider>
   );
 };

@@ -19,12 +19,12 @@ const QuestionsResults = () => {
 
   return (
     <Box px="3">
-      <Stack divider={<StackDivider borderWidth={"thick"} />} spacing="4">
+      <Stack divider={<StackDivider borderWidth="medium" />} spacing="4">
         {questions.map((q) => {
           const question = profile[q.no as keyof TableForm] as string;
           return (
             <Flex key={q.no} wrap="wrap" gap="2" mb="3">
-              <Box>
+              <Box w="100%">
                 <Text pt="2" fontSize="sm">
                   {q.qn}
                 </Text>
