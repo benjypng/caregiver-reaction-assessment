@@ -1,5 +1,5 @@
 import React from "react";
-import { AdminTableProps } from "..";
+import { AdminTableProps } from "./AdminTable";
 import { Button } from "@chakra-ui/react";
 import { CSVLink } from "react-csv";
 
