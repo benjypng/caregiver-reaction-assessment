@@ -27,14 +27,14 @@ const ProfileResults = () => {
       </CardHeader>
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">
-          <SimpleGrid columns={2}>
+          <SimpleGrid columns={2} gap="2">
             <ProfileCard value={profile.msw_name} label={"MSW Name"} />
             <ProfileCard
               value={format(new Date(profile.survey_date), "dd-MM-yyyy")}
               label={"Survey Date"}
             />
           </SimpleGrid>
-          <SimpleGrid columns={2}>
+          <SimpleGrid columns={2} gap="2">
             <ProfileCard
               value={handleAge(profile.age_group)}
               label={"Age Group"}
@@ -44,7 +44,7 @@ const ProfileResults = () => {
               label={"Gender"}
             />
           </SimpleGrid>
-          <SimpleGrid columns={2}>
+          <SimpleGrid columns={2} gap="2">
             <ProfileCard
               value={handleCapitalise(profile.race)}
               label={"Ethnicity"}
@@ -54,7 +54,7 @@ const ProfileResults = () => {
               label={"Marital Status"}
             />
           </SimpleGrid>
-          <SimpleGrid columns={2}>
+          <SimpleGrid columns={2} gap="2">
             <ProfileCard
               value={handleCapitalise(profile.education_level)}
               label={"Education Level"}
@@ -64,7 +64,7 @@ const ProfileResults = () => {
               label={"Employment Status"}
             />
           </SimpleGrid>
-          <SimpleGrid columns={2}>
+          <SimpleGrid columns={2} gap="2">
             <ProfileCard
               value={handleMainCaregiver(profile.main_caregiver)}
               label={"Are you the main caregiver?"}
