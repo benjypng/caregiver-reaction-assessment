@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Flex, Spacer, Text } from "@chakra-ui/react";
 import { trpc } from "@/utils/trpc-hooks";
 import AdminTable from "./components/AdminTable";
 import { Form } from "@prisma/client";
@@ -22,8 +22,13 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <Text textStyle="h4">Admin Dashboard</Text>
-      {data && <ExportCSV data={data} />}
+      <Flex>
+        <Text textStyle="h4" mb="5">
+          Admin Dashboard
+        </Text>
+        <Spacer />
+        {data && <ExportCSV data={data} />}
+      </Flex>
       {data && <AdminTable data={data} />}
     </>
   );

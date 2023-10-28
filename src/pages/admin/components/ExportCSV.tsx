@@ -114,7 +114,7 @@ const ExportCSV = ({ data }: AdminTableProps) => {
   ];
 
   return (
-    <Button variant="ghost">
+    <Button variant="ghost" mb="5">
       <CSVLink className="downloadbtn" filename="my-file.csv" data={csvData}>
         Export Table to CSV
       </CSVLink>
