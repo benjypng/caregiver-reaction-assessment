@@ -12,6 +12,10 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
       <Head>
         <title>Caregiver Reaction Assessment</title>
         <link rel="icon" href="/favicon.png" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
       </Head>
       <Box p="10" justifyContent="center">
         <main className={inter.className}>{children}</main>
