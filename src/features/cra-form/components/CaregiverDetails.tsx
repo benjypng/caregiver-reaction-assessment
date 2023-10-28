@@ -9,6 +9,7 @@ import {
   caregiving_length,
 } from "@prisma/client";
 import CaregiverSelect from "./CaregiverSelectComponent";
+import { dropdownHelper } from "@/libs/dropdown-helpers";
 
 const CaregiverDetails = () => {
   return (
@@ -20,33 +21,51 @@ const CaregiverDetails = () => {
         <CaregiverSelect
           name="age_group"
           description={"Age Group"}
-          field={age_group}
+          items={dropdownHelper("age_group", age_group)}
         />
-        <CaregiverSelect name="gender" description={"Gender"} field={gender} />
-        <CaregiverSelect name="race" description={"Ethnicity"} field={race} />
+        <CaregiverSelect
+          name="gender"
+          description={"Gender"}
+          items={dropdownHelper("gender", gender)}
+        />
+        <CaregiverSelect
+          name="race"
+          description={"Ethnicity"}
+          items={dropdownHelper("race", race)}
+        />
         <CaregiverSelect
           name="marital_status"
           description={"Marital Status"}
-          field={marital_status}
+          items={dropdownHelper("marital_status", marital_status)}
         />
         <CaregiverSelect
           name="education_level"
           description={"Education Level"}
-          field={education_level}
+          items={dropdownHelper("education_level", education_level)}
         />
         <CaregiverSelect
           name="employment_status"
           description={"Employment Status"}
-          field={employment_status}
+          items={dropdownHelper("employment_status", employment_status)}
         />
         <CaregiverSelect
           name="caregiving_length"
           description={"Caregiving Length"}
-          field={caregiving_length}
+          items={dropdownHelper("caregiving_length", caregiving_length)}
         />
         <CaregiverSelect
           name="main_caregiver"
           description={"Are you the Main Caregiver?"}
+          items={[
+            {
+              value: "true",
+              label: "Yes",
+            },
+            {
+              value: "false",
+              label: "No",
+            },
+          ]}
         />
       </SimpleGrid>
     </>
