@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Button, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import SurveyDetails from "./components/SurveyDetails";
 import CaregiverDetails from "./components/CaregiverDetails";
 import Questions from "./components/Questions";
 import { Form } from "@prisma/client";
 import { trpc } from "@/utils/trpc-hooks";
 import { useRouter } from "next/navigation";
+import { calculateScore } from "@/libs/calculate-score";
 
 const CRAForm = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -27,8 +28,10 @@ const CRAForm = () => {
 
   const onSubmit = (data: Form) => {
     setSubmitting(true);
+    const score = calculateScore(data);
     submitForm.mutate({
       ...data,
+      ...score,
       main_caregiver: data.main_caregiver == true,
     });
   };

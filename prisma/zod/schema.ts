@@ -77,4 +77,20 @@ export const FormSchema = z.object({
   qn19: z.string(),
   qn20: z.string(),
   qn21: z.string(),
+  poor_health: z.number(),
+  lack_of_finances: z.number(),
+  lack_of_family_support: z.number(),
+  esteem: z.number(),
+});
+
+export const MSWSchema = z.object({
+  id: z.string().cuid(),
+  name: z.string(),
+});
+
+export const ScoreSchema = z.object({
+  poor_health: z.number(),
+  lack_of_finances: z.number(),
+  lack_of_family_support: z.number(),
+  esteem: z.number(),
 });

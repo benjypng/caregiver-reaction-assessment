@@ -31,7 +31,7 @@ export const appRouter = router({
       return craResult;
     }),
   submitForm: procedure.input(FormSchema).mutation(async (opts) => {
-    const craForm = prisma.form.create({
+    const craForm = await prisma.form.create({
       data: opts.input,
     });
     return craForm;
