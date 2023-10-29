@@ -86,6 +86,8 @@ export const FormSchema = z.object({
 export const MSWSchema = z.object({
   id: z.string().cuid(),
   name: z.string(),
+  email: z.string(),
+  password: z.string().min(1).max(3),
 });
 
 export const ScoreSchema = z.object({
