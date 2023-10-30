@@ -53,7 +53,7 @@ const SurveyDetails = () => {
           render={({ field, fieldState: { error } }) => (
             <FormControl isInvalid={!!error}>
               <FormLabel mb={1}>Survey Date</FormLabel>
-              <DatePicker {...field} size="sm" />
+              <DatePicker id="datepicker" {...field} size="sm" />
               <FormErrorMessage>{error?.message}</FormErrorMessage>
             </FormControl>
           )}

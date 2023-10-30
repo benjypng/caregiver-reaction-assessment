@@ -1,27 +1,26 @@
 import { z } from "zod";
-import prisma from "prisma/client";
-import { router, procedure } from "../trpc";
+import { router, procedure, protectedProcedure } from "../trpc";
 import { FormSchema } from "prisma/zod/schema";
 
 export const formRouter = router({
-  getAllForms: procedure.query(
-    async () =>
-      await prisma.form.findMany({
-        include: {
-          msw_name: true,
-        },
-      }),
-  ),
+  getAllForms: protectedProcedure.query(async ({ ctx }) => {
+    console.log("CTX", ctx.session);
+    return await ctx.prisma.form.findMany({
+      include: {
+        msw_name: true,
+      },
+    });
+  }),
   getForm: procedure
     .input(
       z.object({
         id: z.string(),
       }),
     )
-    .query(async (opts) => {
-      const craResult = await prisma.form.findUnique({
+    .query(async ({ ctx, input }) => {
+      const craResult = await ctx.prisma.form.findUnique({
         where: {
-          id: opts.input.id,
+          id: input.id,
         },
         include: {
           msw_name: true,
@@ -29,9 +28,9 @@ export const formRouter = router({
       });
       return craResult;
     }),
-  submitForm: procedure.input(FormSchema).mutation(async (opts) => {
-    const craForm = await prisma.form.create({
-      data: opts.input,
+  submitForm: procedure.input(FormSchema).mutation(async ({ input, ctx }) => {
+    const craForm = await ctx.prisma.form.create({
+      data: input,
     });
     return craForm;
   }),

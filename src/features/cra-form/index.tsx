@@ -37,24 +37,26 @@ const CRAForm = () => {
   };
 
   return (
-    <FormProvider {...formMethods}>
+    <>
       <Text textStyle="h3" mb="8">
         Caregiver Reaction Assessment
       </Text>
-      <SurveyDetails />
-      <CaregiverDetails />
-      <Questions />
-      <Flex direction="row" gap="3">
-        <Button
-          isLoading={submitting}
-          onClick={formMethods.handleSubmit(onSubmit)}
-          colorScheme="telegram"
-          w="10em"
-        >
-          Submit
-        </Button>
-      </Flex>
-    </FormProvider>
+      <FormProvider {...formMethods}>
+        <SurveyDetails />
+        <CaregiverDetails />
+        <Questions />
+        <Flex direction="row" gap="3">
+          <Button
+            isLoading={submitting}
+            onClick={formMethods.handleSubmit(onSubmit)}
+            colorScheme="telegram"
+            w="10em"
+          >
+            Submit
+          </Button>
+        </Flex>
+      </FormProvider>
+    </>
   );
 };
 

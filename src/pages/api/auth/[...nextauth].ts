@@ -1,10 +1,11 @@
-import { trpc } from "@/utils/trpc-hooks";
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "prisma/client";
 import { CredentialsSchema } from "prisma/zod/schema";
 
 export const authOptions: AuthOptions = {
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -19,7 +20,6 @@ export const authOptions: AuthOptions = {
             email: creds.email,
           },
         });
-        console.log(user);
         if (user) {
           if (user.password === creds.password) {
             return user;
@@ -32,6 +32,14 @@ export const authOptions: AuthOptions = {
   ],
   session: {
     strategy: "jwt",
+  },
+  callbacks: {
+    async session({ session, user, token }) {
+      console.log("User", user);
+      console.log("Token", token);
+      console.log("Session from callback", session);
+      return session;
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",

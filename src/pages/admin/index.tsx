@@ -9,7 +9,7 @@ export interface TableForm extends Form {
 }
 
 const AdminDashboard = () => {
-  const res = trpc.getAllForms.useQuery();
+  const res = trpc.forms.getAllForms.useQuery();
   if (!res.data) return null;
   const data = res.data?.map((d) => ({
     ...d,
