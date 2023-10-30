@@ -64,7 +64,7 @@ enum caregiving_length {
 
 model Form {
   id                     String            @id @unique @default(cuid())
-  msw_name               MSW               @relation(fields: [mSWId], references: [id])
+  msw_name               User              @relation(fields: [mSWId], references: [id])
   survey_date            DateTime
   age_group              age_group
   gender                 gender
@@ -102,7 +102,7 @@ model Form {
   esteem                 Float
 }
 
-model MSW {
+model User {
   id       String @id @unique @default(cuid())
   name     String
   email    String @unique

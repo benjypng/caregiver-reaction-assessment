@@ -8,13 +8,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { SingleSelect, DatePicker } from "@opengovsg/design-system-react";
-import { MSW } from "@prisma/client";
+import { User } from "@prisma/client";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 const SurveyDetails = () => {
   const { control } = useFormContext();
-  const { data, isLoading, error } = trpc.getMSWs.useQuery();
+  const { data, isLoading, error } = trpc.users.findAll.useQuery();
   if (error) return <Text>Fatal Error</Text>;
 
   return (
@@ -36,7 +36,7 @@ const SurveyDetails = () => {
                   placeholder="Select option"
                   {...field}
                   size="sm"
-                  items={data.map((m: MSW) => ({
+                  items={data.map((m: User) => ({
                     value: m.id,
                     label: m.name,
                   }))}

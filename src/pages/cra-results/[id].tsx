@@ -9,7 +9,7 @@ export const ProfileContext = createContext<TableForm | null>(null);
 const Result = () => {
   const router = useRouter();
 
-  const res = trpc.getForm.useQuery(
+  const res = trpc.forms.getForm.useQuery(
     { id: router.query.id as string },
     { enabled: !!router.query.id },
   );

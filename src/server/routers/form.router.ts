@@ -1,0 +1,38 @@
+import { z } from "zod";
+import prisma from "prisma/client";
+import { router, procedure } from "../trpc";
+import { FormSchema } from "prisma/zod/schema";
+
+export const formRouter = router({
+  getAllForms: procedure.query(
+    async () =>
+      await prisma.form.findMany({
+        include: {
+          msw_name: true,
+        },
+      }),
+  ),
+  getForm: procedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .query(async (opts) => {
+      const craResult = await prisma.form.findUnique({
+        where: {
+          id: opts.input.id,
+        },
+        include: {
+          msw_name: true,
+        },
+      });
+      return craResult;
+    }),
+  submitForm: procedure.input(FormSchema).mutation(async (opts) => {
+    const craForm = await prisma.form.create({
+      data: opts.input,
+    });
+    return craForm;
+  }),
+});

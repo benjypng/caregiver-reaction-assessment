@@ -16,7 +16,7 @@ const CRAForm = () => {
     mode: "onBlur",
   });
 
-  const submitForm = trpc.submitForm.useMutation({
+  const submitForm = trpc.forms.submitForm.useMutation({
     onError: (response) => {
       console.log(response);
       setSubmitting(false);

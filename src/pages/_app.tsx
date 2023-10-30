@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { Skeleton } from "@chakra-ui/react";
 import { DefaultLayout } from "../templates/layouts/DefaultLayout";
 import { ThemeProvider } from "@opengovsg/design-system-react";
+import { SessionProvider } from "next-auth/react";
 
 type AppPropsWithAuthAndLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -12,11 +13,13 @@ type AppPropsWithAuthAndLayout = AppProps & {
 
 const App = ((props: AppPropsWithAuthAndLayout) => {
   return (
-    <ThemeProvider>
-      <Suspense fallback={<Skeleton width="100vw" height="100vh" />}>
-        <ChildWithLayout {...props} />
-      </Suspense>
-    </ThemeProvider>
+    <SessionProvider>
+      <ThemeProvider>
+        <Suspense fallback={<Skeleton width="100vw" height="100vh" />}>
+          <ChildWithLayout {...props} />
+        </Suspense>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }) as AppType;
 

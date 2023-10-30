@@ -1,0 +1,40 @@
+import { trpc } from "@/utils/trpc-hooks";
+import NextAuth, { AuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import prisma from "prisma/client";
+import { CredentialsSchema } from "prisma/zod/schema";
+
+export const authOptions: AuthOptions = {
+  providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const creds = await CredentialsSchema.parseAsync(credentials);
+        const user = await prisma.user.findUnique({
+          where: {
+            email: creds.email,
+          },
+        });
+        console.log(user);
+        if (user) {
+          if (user.password === creds.password) {
+            return user;
+          }
+        }
+        // Failed authorisation
+        return null;
+      },
+    }),
+  ],
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === "development",
+};
+
+export default NextAuth(authOptions);

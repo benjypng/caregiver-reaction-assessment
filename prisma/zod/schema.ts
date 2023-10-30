@@ -96,3 +96,8 @@ export const ScoreSchema = z.object({
   lack_of_family_support: z.number(),
   esteem: z.number(),
 });
+
+export const CredentialsSchema = z.object({
+  email: z.string(),
+  password: z.string().min(1).max(3),
+});
