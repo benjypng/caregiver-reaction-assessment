@@ -10,7 +10,6 @@ import prisma from "prisma/client";
  */
 export async function createContext(opts: CreateNextContextOptions) {
   const session = await getServerSession(opts.req, opts.res, authOptions);
-  console.log("Session", session);
   return {
     session,
     prisma,

@@ -33,14 +33,6 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
-  callbacks: {
-    async session({ session, user, token }) {
-      console.log("User", user);
-      console.log("Token", token);
-      console.log("Session from callback", session);
-      return session;
-    },
-  },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
 };

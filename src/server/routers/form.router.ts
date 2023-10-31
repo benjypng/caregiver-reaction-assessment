@@ -4,7 +4,6 @@ import { FormSchema } from "prisma/zod/schema";
 
 export const formRouter = router({
   getAllForms: protectedProcedure.query(async ({ ctx }) => {
-    console.log("CTX", ctx.session);
     return await ctx.prisma.form.findMany({
       include: {
         msw_name: true,
