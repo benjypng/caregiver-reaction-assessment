@@ -1,10 +1,8 @@
-import { trpc } from "@/utils/trpc-hooks";
 import {
   FormControl,
   FormErrorMessage,
   FormLabel,
   SimpleGrid,
-  SkeletonText,
   Text,
 } from "@chakra-ui/react";
 import { SingleSelect, DatePicker } from "@opengovsg/design-system-react";
@@ -12,10 +10,12 @@ import { User } from "@prisma/client";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-const SurveyDetails = () => {
+type SurveyDetailsProps = {
+  users: User[];
+};
+
+const SurveyDetails = ({ users }: SurveyDetailsProps) => {
   const { control } = useFormContext();
-  const { data, isLoading, error } = trpc.users.findAll.useQuery();
-  if (error) return <Text>Fatal Error</Text>;
 
   return (
     <>
@@ -30,13 +30,12 @@ const SurveyDetails = () => {
           render={({ field, fieldState: { error } }) => (
             <FormControl isInvalid={!!error}>
               <FormLabel mb={1}>MSW Name</FormLabel>
-              {isLoading && <SkeletonText />}
-              {data && (
+              {users && (
                 <SingleSelect
                   placeholder="Select option"
                   {...field}
                   size="sm"
-                  items={data.map((m: User) => ({
+                  items={users.map((m: User) => ({
                     value: m.id,
                     label: m.name,
                   }))}
