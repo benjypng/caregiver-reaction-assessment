@@ -32,9 +32,19 @@ export const authOptions: AuthOptions = {
   ],
   session: {
     strategy: "jwt",
+    maxAge: 3600,
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
+  callbacks: {
+    redirect: async ({ url, baseUrl }) => {
+      console.log("url", url);
+      console.log("baseurl", baseUrl);
+      return url.startsWith(baseUrl)
+        ? Promise.resolve(url)
+        : Promise.resolve(`${baseUrl}/admin`);
+    },
+  },
 };
 
 export default NextAuth(authOptions);

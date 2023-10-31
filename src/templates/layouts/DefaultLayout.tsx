@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { type ReactNode } from "react";
-import { Inter } from "next/font/google";
 import { Box } from "@chakra-ui/react";
+import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 type DefaultLayoutProps = { children: ReactNode };

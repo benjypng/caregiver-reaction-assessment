@@ -2,6 +2,9 @@
   "name": "cra",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "scripts": {
     "dev": "next dev",
     "build:vercel": "prisma generate && next build",
@@ -17,6 +20,7 @@
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.2",
     "@opengovsg/design-system-react": "^1.4.0",
+    "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "^5.5.0",
     "@tanstack/react-query": "^4.18.0",
     "@tanstack/react-table": "^8.10.7",
@@ -40,7 +44,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.44.6",
-    "@types/node": "^20.8.8",
+    "@types/node": "^20.8.9",
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
@@ -53,6 +57,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.0.3",
     "prisma": "^5.5.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
 }
