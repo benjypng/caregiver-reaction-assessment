@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { calculateScore } from "@/libs/calculate-score";
 import { InferGetStaticPropsType } from "next";
 import prisma from "prisma/client";
+import Citations from "@/features/cra-form/components/Citations";
 
 export const getStaticProps = async () => {
   const users = await prisma.user.findMany();
@@ -55,17 +56,16 @@ export default function Home({
         <SurveyDetails users={users} />
         <CaregiverDetails />
         <Questions />
-        <Flex direction="row" gap="3">
-          <Button
-            isLoading={submitting}
-            onClick={formMethods.handleSubmit(onSubmit)}
-            colorScheme="telegram"
-            w="10em"
-          >
-            Submit
-          </Button>
-        </Flex>
+        <Button
+          isLoading={submitting}
+          onClick={formMethods.handleSubmit(onSubmit)}
+          colorScheme="telegram"
+          w="10em"
+        >
+          Submit
+        </Button>
       </FormProvider>
+      <Citations />
     </Box>
   );
 }
