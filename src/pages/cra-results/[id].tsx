@@ -1,10 +1,15 @@
 import CRAResults from "@/features/cra-results";
 import { trpc } from "@/utils/trpc-hooks";
+import { Form } from "@prisma/client";
 import { useRouter } from "next/router";
 import { createContext } from "react";
-import { TableForm } from "../admin";
 
-export const ProfileContext = createContext<TableForm | null>(null);
+export interface FormWithUser extends Form {
+  msw_name: string | undefined;
+  survey_date: Date;
+}
+
+export const ProfileContext = createContext<FormWithUser | null>(null);
 
 const Result = () => {
   const router = useRouter();
@@ -16,7 +21,7 @@ const Result = () => {
   if (!res.data) return null;
   const profile = {
     ...res.data,
-    msw_name: res.data.msw_name.name,
+    msw_name: res.data.User?.name,
     survey_date: new Date(res.data.survey_date),
   };
 

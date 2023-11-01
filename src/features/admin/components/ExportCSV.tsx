@@ -43,7 +43,7 @@ const ExportCSV = ({ data }: AdminTableProps) => {
     ...data.map(
       ({
         id,
-        msw_name,
+        userId,
         survey_date,
         age_group,
         gender,
@@ -53,7 +53,6 @@ const ExportCSV = ({ data }: AdminTableProps) => {
         employment_status,
         main_caregiver,
         caregiving_length,
-        mSWId,
         qn1,
         qn2,
         qn3,
@@ -77,7 +76,7 @@ const ExportCSV = ({ data }: AdminTableProps) => {
         qn21,
       }) => [
         id,
-        msw_name,
+        userId,
         survey_date,
         age_group,
         gender,
@@ -87,7 +86,6 @@ const ExportCSV = ({ data }: AdminTableProps) => {
         employment_status,
         main_caregiver,
         caregiving_length,
-        mSWId,
         qn1,
         qn2,
         qn3,

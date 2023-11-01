@@ -5,9 +5,9 @@ import { handleCapitalise } from "./handle-capitalise";
 import { handleMainCaregiver } from "./handle-main-caregiver";
 import { handleQuestions } from "./handle-questions";
 import { handleCaregivingLength } from "./handle-caregiving-length";
-import { TableForm } from "@/pages/admin";
+import { FormWithUser } from "@/pages/cra-results/[id]";
 
-const columnHelper = createColumnHelper<TableForm>();
+const columnHelper = createColumnHelper<FormWithUser>();
 export const columns = [
   columnHelper.accessor("id", {
     header: "ID",

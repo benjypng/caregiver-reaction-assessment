@@ -19,6 +19,8 @@ import { ProfileContext } from "@/pages/cra-results/[id]";
 const ProfileResults = () => {
   const profile = useContext(ProfileContext);
   if (!profile) return null;
+  const msw_name = profile.msw_name;
+  if (!msw_name) return null;
 
   return (
     <Card mb="10">
@@ -28,13 +30,13 @@ const ProfileResults = () => {
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">
           <SimpleGrid columns={2} gap="2">
-            <ProfileCard value={profile.msw_name} label={"MSW Name"} />
+            <ProfileCard value={msw_name} label={"MSW Name"} />
             <ProfileCard
               value={format(new Date(profile.survey_date), "dd-MM-yyyy")}
               label={"Survey Date"}
             />
           </SimpleGrid>
-          <SimpleGrid columns={2} gap="2">
+          <SimpleGrid columns={2}>
             <ProfileCard
               value={handleAge(profile.age_group)}
               label={"Age Group"}

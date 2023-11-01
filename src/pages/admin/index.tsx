@@ -1,13 +1,8 @@
 import { Flex, Spacer, Text } from "@chakra-ui/react";
 import { trpc } from "@/utils/trpc-hooks";
-import { Form } from "@prisma/client";
 import AdminTable from "@/features/admin/components/AdminTable";
 import ExportCSV from "@/features/admin/components/ExportCSV";
 import { useRouter } from "next/navigation";
-
-export interface TableForm extends Form {
-  msw_name: string;
-}
 
 const AdminDashboard = () => {
   const router = useRouter();
@@ -20,7 +15,7 @@ const AdminDashboard = () => {
   if (!res.data) return null;
   const data = res.data?.map((d) => ({
     ...d,
-    msw_name: d.msw_name.name,
+    msw_name: d.User?.name,
     survey_date: new Date(d.survey_date),
   }));
 

@@ -6,7 +6,7 @@ export const formRouter = router({
   getAllForms: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.prisma.form.findMany({
       include: {
-        msw_name: true,
+        User: true,
       },
     });
   }),
@@ -22,7 +22,7 @@ export const formRouter = router({
           id: input.id,
         },
         include: {
-          msw_name: true,
+          User: true,
         },
       });
       return craResult;

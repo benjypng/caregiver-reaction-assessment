@@ -24,10 +24,10 @@ import {
 } from "@tanstack/react-table";
 import { columns } from "@/libs/table-helpers/columns";
 import { Button } from "@opengovsg/design-system-react";
-import { TableForm } from "@/pages/admin";
+import { FormWithUser } from "@/pages/cra-results/[id]";
 
 export type AdminTableProps = {
-  data: TableForm[];
+  data: FormWithUser[];
 };
 
 const AdminTable = ({ data }: AdminTableProps) => {

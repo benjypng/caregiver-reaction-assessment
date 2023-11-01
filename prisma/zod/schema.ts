@@ -55,7 +55,6 @@ export const FormSchema = z.object({
   caregiving_length: caregiving_lengthSchema,
   survey_date: z.coerce.date(),
   main_caregiver: z.boolean(),
-  mSWId: z.string(),
   qn1: z.string(),
   qn2: z.string(),
   qn3: z.string(),
@@ -81,6 +80,7 @@ export const FormSchema = z.object({
   lack_of_finances: z.number(),
   lack_of_family_support: z.number(),
   esteem: z.number(),
+  userId: z.string().nullable(),
 });
 
 export const MSWSchema = z.object({

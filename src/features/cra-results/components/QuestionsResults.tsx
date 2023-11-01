@@ -1,4 +1,4 @@
-import { ProfileContext } from "@/pages/cra-results/[id]";
+import { FormWithUser, ProfileContext } from "@/pages/cra-results/[id]";
 import {
   Text,
   Box,
@@ -11,7 +11,6 @@ import {
 import React, { useContext } from "react";
 import questions from "@/constants/questions.json";
 import { handleQuestions } from "@/libs/table-helpers/handle-questions";
-import { TableForm } from "@/pages/admin";
 
 const QuestionsResults = () => {
   const profile = useContext(ProfileContext);
@@ -21,7 +20,7 @@ const QuestionsResults = () => {
     <Box px="3">
       <Stack divider={<StackDivider borderWidth="medium" />} spacing="4">
         {questions.map((q) => {
-          const question = profile[q.no as keyof TableForm] as string;
+          const question = profile[q.no as keyof FormWithUser] as string;
           return (
             <Flex key={q.no} wrap="wrap" gap="2" mb="3">
               <Box w="100%">

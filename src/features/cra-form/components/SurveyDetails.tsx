@@ -25,7 +25,7 @@ const SurveyDetails = ({ users }: SurveyDetailsProps) => {
       <SimpleGrid columns={[1, null, 2]} gap={3} w="full" mb="10">
         <Controller
           control={control}
-          name="mSWId"
+          name="userId"
           rules={{ required: "Required" }}
           render={({ field, fieldState: { error } }) => (
             <FormControl isInvalid={!!error}>
