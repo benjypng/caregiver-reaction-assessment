@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Button, Flex, Text, Box } from "@chakra-ui/react";
+import { Button, Text, Box } from "@chakra-ui/react";
 import SurveyDetails from "@/features/cra-form/components/SurveyDetails";
 import CaregiverDetails from "@/features/cra-form/components/CaregiverDetails";
 import Questions from "@/features/cra-form/components/Questions";
