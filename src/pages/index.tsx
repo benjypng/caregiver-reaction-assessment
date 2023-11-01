@@ -12,6 +12,8 @@ import { InferGetStaticPropsType } from "next";
 import prisma from "prisma/client";
 import Citations from "@/features/cra-form/components/Citations";
 
+console.log("Testing to see if vercel deploys");
+
 export const getStaticProps = async () => {
   const users = await prisma.user.findMany();
   if (!users) return;
