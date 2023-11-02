@@ -16,7 +16,7 @@ jobs:
           ref: main
 
       - name: Checkout ah-cra branch
-        run: git checkout -B ah-cra origin/ah-cra
+        run: git checkout ah-cra
         if: success()
 
       - name: Merge changes from main
@@ -28,7 +28,7 @@ jobs:
         if: success()
 
       - name: Checkout domain branch
-        run: git checkout -B jhc-cra origin/jhc-cra
+        run: git checkout jhc-cra
         if: success()
 
       - name: Merge changes from main
