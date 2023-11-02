@@ -1,0 +1,40 @@
+name: Sync Main Branch with Institution Branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Checkout ah-cra branch
+        run: git checkout -B ah-cra origin/ah-cra
+        if: success()
+
+      - name: Merge changes from main
+        run: git merge main
+        if: success()
+
+      - name: Push changes to ah-cra
+        run: git push origin ah-cra
+        if: success()
+
+      - name: Checkout domain branch
+        run: git checkout -B jhc-cra origin/jhc-cra
+        if: success()
+
+      - name: Merge changes from main
+        run: git merge main
+        if: success()
+
+      - name: Push changes to jhc-cra
+        run: git push origin jhc-cra
+        if: success()
