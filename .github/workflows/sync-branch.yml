@@ -15,6 +15,10 @@ jobs:
         with:
           ref: main
 
+      - name: Fetch latest changes from remote
+        run: git fetch origin
+        if: success()
+
       - name: Checkout ah-cra branch
         run: git checkout -B ah-cra origin/ah-cra
         if: success()
