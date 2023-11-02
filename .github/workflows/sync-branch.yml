@@ -25,7 +25,7 @@ jobs:
         if: success()
 
       - name: Merge changes from ah-cra
-        run: git merge --strategy=ours --allow-unrelated-histories ah-cra
+        run: git merge --strategy=ours --allow-unrelated-histories origin/ah-cra
         if: success()
 
       - name: Checkout ah-cra branch
@@ -33,7 +33,7 @@ jobs:
         if: success()
 
       - name: Merge changes from main
-        run: git merge --strategy=ours --allow-unrelated-histories main
+        run: git merge --strategy=ours --allow-unrelated-histories origin/main
         if: success()
 
       - name: Push changes to ah-cra
@@ -46,7 +46,7 @@ jobs:
           ref: main
 
       - name: Merge changes from jhc-cra
-        run: git merge --strategy=ours --allow-unrelated-histories jhc-cra
+        run: git merge --strategy=ours --allow-unrelated-histories origin/jhc-cra
         if: success()
 
       - name: Checkout jhc-cra branch
@@ -54,7 +54,7 @@ jobs:
         if: success()
 
       - name: Merge changes from main
-        run: git merge --strategy=ours --allow-unrelated-histories main
+        run: git merge --strategy=ours --allow-unrelated-histories origin/main
         if: success()
 
       - name: Push changes to jhc-cra
