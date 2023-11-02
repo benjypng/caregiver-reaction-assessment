@@ -3,6 +3,7 @@ import {
   CardBody,
   CardHeader,
   SimpleGrid,
+  Spacer,
   Stack,
   StackDivider,
   Text,
@@ -15,6 +16,7 @@ import { handleCaregivingLength } from "@/libs/table-helpers/handle-caregiving-l
 import ProfileCard from "./ProfileCard";
 import { useContext } from "react";
 import { ProfileContext } from "@/pages/cra-results/[id]";
+import Link from "next/link";
 
 const ProfileResults = () => {
   const profile = useContext(ProfileContext);
@@ -24,8 +26,12 @@ const ProfileResults = () => {
 
   return (
     <Card mb="10">
-      <CardHeader>
+      <CardHeader display="flex">
         <Text textStyle="h4">Profile: {profile.id}</Text>
+        <Spacer />
+        <Text>
+          <Link href="/">Submit a New Survey</Link>
+        </Text>
       </CardHeader>
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">
