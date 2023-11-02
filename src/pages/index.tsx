@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Button, Text, Box } from "@chakra-ui/react";
+import { Button, Text, Box, Skeleton } from "@chakra-ui/react";
 import SurveyDetails from "@/features/cra-form/components/SurveyDetails";
 import CaregiverDetails from "@/features/cra-form/components/CaregiverDetails";
 import Questions from "@/features/cra-form/components/Questions";
@@ -8,24 +8,16 @@ import { Form } from "@prisma/client";
 import { trpc } from "@/utils/trpc-hooks";
 import { useRouter } from "next/navigation";
 import { calculateScore } from "@/libs/calculate-score";
-import { InferGetStaticPropsType } from "next";
-import prisma from "prisma/client";
 import Citations from "@/features/cra-form/components/Citations";
 
-export const getStaticProps = async () => {
-  const users = await prisma.user.findMany();
-  if (!users) return;
-  return { props: { users } };
-};
-
-export default function Home({
-  users,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home() {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const router = useRouter();
   const formMethods = useForm<Form>({
     mode: "onBlur",
   });
+
+  const { data: users, isLoading } = trpc.users.findAll.useQuery();
 
   const submitForm = trpc.forms.submitForm.useMutation({
     onError: (response) => {
@@ -53,7 +45,8 @@ export default function Home({
         Caregiver Reaction Assessment
       </Text>
       <FormProvider {...formMethods}>
-        <SurveyDetails users={users} />
+        {isLoading && <Skeleton />}
+        {users && <SurveyDetails users={users} />}
         <CaregiverDetails />
         <Questions />
         <Button

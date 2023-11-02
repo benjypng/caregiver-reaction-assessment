@@ -1,75 +1,34 @@
-// seed.ts
-
 import { PrismaClient } from "@prisma/client";
 import { createId } from "@paralleldrive/cuid2";
 
-function generateRandomEnglishName() {
-  // Generate a random English name
-  const englishFirstNames = [
-    "Alice",
-    "Bob",
-    "Charlie",
-    "David",
-    "Emily",
-    "Fiona",
-    "George",
-  ];
-  const randomEnglishFirstName =
-    englishFirstNames[Math.floor(Math.random() * englishFirstNames.length)];
-  const randomLastName = "Doe"; // You can modify this to generate random last names
+const prisma = new PrismaClient();
 
-  return randomEnglishFirstName + " " + randomLastName;
-}
-
-function generateRandomEmail(name: string) {
-  // Generate a random email based on the English name
-  return `${name.replace(/\s/g, ".").toLowerCase()}@nuhs.edu.sg`;
-}
-
-function generateRandomPassword() {
-  // Generate a random password (you can use a password generator library for more secure passwords)
-  return createId();
-}
+const userData = [
+  {
+    name: "Amber Kwek",
+    email: "amber_kwek@nuhs.edu.sg",
+  },
+];
 
 async function seedUsers() {
-  const prisma = new PrismaClient();
-
-  try {
-    // Define user data for three users
-    const userData = [
-      {
-        id: createId(),
-        name: generateRandomEnglishName(),
-        email: generateRandomEmail(generateRandomEnglishName()),
-        password: generateRandomPassword(),
+  for (const user of userData) {
+    const userId = createId();
+    await prisma.user.create({
+      data: {
+        id: userId,
+        name: user.name,
+        email: user.email,
+        password: "",
       },
-      {
-        id: createId(),
-        name: generateRandomEnglishName(),
-        email: generateRandomEmail(generateRandomEnglishName()),
-        password: generateRandomPassword(),
-      },
-      {
-        id: createId(),
-        name: generateRandomEnglishName(),
-        email: generateRandomEmail(generateRandomEnglishName()),
-        password: generateRandomPassword(),
-      },
-    ];
-
-    // Insert user data into the database
-    for (const user of userData) {
-      await prisma.user.create({
-        data: user,
-      });
-    }
-
-    console.log("Users seeded successfully");
-  } catch (error) {
-    console.error("Error seeding users:", error);
-  } finally {
-    await prisma.$disconnect();
+    });
+    console.log(`User with ID ${userId} and name ${user.name} created.`);
   }
 }
 
-seedUsers();
+seedUsers()
+  .catch((error) => {
+    console.error("Error seeding users:", error);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
