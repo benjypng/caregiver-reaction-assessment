@@ -1,4 +1,4 @@
-name: Sync Main Branch with Institution Branch
+name: Sync Main Branch with Institution Branches
 
 on:
   push:
