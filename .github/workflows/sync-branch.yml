@@ -10,17 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: git fetch
-        run: git fetch
-        if: success()
-
       - name: Checkout main branch
         uses: actions/checkout@v2
         with:
           ref: main
 
       - name: Checkout ah-cra branch
-        run: git checkout ah-cra
+        run: git checkout -B ah-cra origin/ah-cra
         if: success()
 
       - name: Merge changes from main
@@ -31,8 +27,8 @@ jobs:
         run: git push origin ah-cra
         if: success()
 
-      - name: Checkout domain branch
-        run: git checkout jhc-cra
+      - name: Checkout jhc-cra branch
+        run: git checkout -B jhc-cra origin/jhc-cra
         if: success()
 
       - name: Merge changes from main
