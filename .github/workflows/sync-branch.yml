@@ -26,6 +26,8 @@ jobs:
       - name: Merge changes from main
         run: git merge --strategy=ours --allow-unrelated-histories main
         if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changes to ah-cra
         run: git push origin ah-cra
@@ -38,6 +40,8 @@ jobs:
       - name: Merge changes from main
         run: git merge --strategy=ours --allow-unrelated-histories main
         if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changes to jhc-cra
         run: git push origin jhc-cra
