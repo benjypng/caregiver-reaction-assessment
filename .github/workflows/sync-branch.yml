@@ -24,7 +24,7 @@ jobs:
         if: success()
 
       - name: Merge changes from main
-        run: git merge main
+        run: git merge --strategy=ours --allow-unrelated-histories main
         if: success()
 
       - name: Push changes to ah-cra
@@ -36,7 +36,7 @@ jobs:
         if: success()
 
       - name: Merge changes from main
-        run: git merge main
+        run: git merge --strategy=ours --allow-unrelated-histories main
         if: success()
 
       - name: Push changes to jhc-cra
