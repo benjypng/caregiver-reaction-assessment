@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Configure Git
+        run: |
+          git config --global user.email ${{ secrets.GIT_USER_EMAIL }}
+          git config --global user.name hkgnp
+
       - name: Checkout main branch
         uses: actions/checkout@v2
         with:
@@ -26,8 +31,6 @@ jobs:
       - name: Merge changes from main
         run: git merge --strategy=ours --allow-unrelated-histories main
         if: success()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changes to ah-cra
         run: git push origin ah-cra
@@ -40,8 +43,6 @@ jobs:
       - name: Merge changes from main
         run: git merge --strategy=ours --allow-unrelated-histories main
         if: success()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changes to jhc-cra
         run: git push origin jhc-cra
