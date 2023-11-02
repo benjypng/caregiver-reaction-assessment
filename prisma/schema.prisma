@@ -8,10 +8,6 @@ generator client {
   previewFeatures = ["fullTextSearch"]
 }
 
-generator zod {
-  provider = "npx zod-prisma-types"
-}
-
 enum age_group {
   BELOW_21
   FROM_21_TO_30
