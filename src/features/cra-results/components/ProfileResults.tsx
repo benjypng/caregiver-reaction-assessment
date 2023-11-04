@@ -3,7 +3,6 @@ import {
   CardBody,
   CardHeader,
   SimpleGrid,
-  Spacer,
   Stack,
   StackDivider,
   Text,
@@ -16,7 +15,6 @@ import { handleCaregivingLength } from "@/libs/table-helpers/handle-caregiving-l
 import ProfileCard from "./ProfileCard";
 import { useContext } from "react";
 import { ProfileContext } from "@/pages/cra-results/[id]";
-import Link from "next/link";
 
 const ProfileResults = () => {
   const profile = useContext(ProfileContext);

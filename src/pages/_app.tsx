@@ -7,7 +7,6 @@ import { Skeleton } from "@chakra-ui/react";
 import { DefaultLayout } from "../templates/layouts/DefaultLayout";
 import { ThemeProvider } from "@opengovsg/design-system-react";
 import { SessionProvider } from "next-auth/react";
-import NavMenu from "@/components/NavMenu";
 
 type AppPropsWithAuthAndLayout = AppProps & {
   Component: NextPageWithLayout;
