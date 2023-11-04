@@ -3,6 +3,7 @@ import {
   FormErrorMessage,
   FormLabel,
   SimpleGrid,
+  SkeletonText,
   Text,
 } from "@chakra-ui/react";
 import { SingleSelect, DatePicker } from "@opengovsg/design-system-react";
@@ -11,10 +12,11 @@ import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 type SurveyDetailsProps = {
-  users: User[];
+  users: User[] | undefined;
+  isLoading: boolean;
 };
 
-const SurveyDetails = ({ users }: SurveyDetailsProps) => {
+const SurveyDetails = ({ users, isLoading }: SurveyDetailsProps) => {
   const { control } = useFormContext();
 
   return (
@@ -30,6 +32,9 @@ const SurveyDetails = ({ users }: SurveyDetailsProps) => {
           render={({ field, fieldState: { error } }) => (
             <FormControl isInvalid={!!error}>
               <FormLabel mb={1}>MSW Name</FormLabel>
+              {isLoading && (
+                <SkeletonText noOfLines={3} spacing="2" skeletonHeight="1" />
+              )}
               {users && (
                 <SingleSelect
                   placeholder="Select option"

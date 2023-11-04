@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Button, Text, Box, Skeleton } from "@chakra-ui/react";
+import { Button, Text, Box } from "@chakra-ui/react";
 import SurveyDetails from "@/features/cra-form/components/SurveyDetails";
 import CaregiverDetails from "@/features/cra-form/components/CaregiverDetails";
 import Questions from "@/features/cra-form/components/Questions";
@@ -45,8 +45,7 @@ export default function Home() {
         Caregiver Reaction Assessment
       </Text>
       <FormProvider {...formMethods}>
-        {isLoading && <Skeleton />}
-        {users && <SurveyDetails users={users} />}
+        <SurveyDetails users={users} isLoading={isLoading} />
         <CaregiverDetails />
         <Questions />
         <Button
