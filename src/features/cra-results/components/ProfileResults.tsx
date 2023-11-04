@@ -28,10 +28,6 @@ const ProfileResults = () => {
     <Card mb="10">
       <CardHeader display="flex">
         <Text textStyle="h4">Profile: {profile.id}</Text>
-        <Spacer />
-        <Text>
-          <Link href="/">Submit a New Survey</Link>
-        </Text>
       </CardHeader>
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">

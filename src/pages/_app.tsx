@@ -1,3 +1,4 @@
+import Head from "next/head";
 import type { AppProps, AppType } from "next/app";
 import { trpc } from "../utils/trpc-hooks";
 import { NextPageWithLayout } from "../libs/types";
@@ -6,6 +7,7 @@ import { Skeleton } from "@chakra-ui/react";
 import { DefaultLayout } from "../templates/layouts/DefaultLayout";
 import { ThemeProvider } from "@opengovsg/design-system-react";
 import { SessionProvider } from "next-auth/react";
+import NavMenu from "@/components/NavMenu";
 
 type AppPropsWithAuthAndLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -29,7 +31,20 @@ const ChildWithLayout = ({
   pageProps,
 }: AppPropsWithAuthAndLayout) => {
   const getLayout =
-    Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
+    Component.getLayout ??
+    ((page) => (
+      <>
+        <Head>
+          <title>Caregiver Reaction Assessment</title>
+          <link rel="icon" href="/favicon.png" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          />
+        </Head>
+        <DefaultLayout>{page}</DefaultLayout>
+      </>
+    ));
 
   return <>{getLayout(<Component {...pageProps} />)}</>;
 };
