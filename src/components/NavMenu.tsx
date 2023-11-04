@@ -4,7 +4,16 @@ import NextLink from "next/link";
 
 const NavMenu = () => {
   return (
-    <Flex fontSize="sm" bgColor="telegram.500" color="white" mt="0" p="3">
+    <Flex
+      pos="fixed"
+      bottom="0"
+      w="100%"
+      fontSize="sm"
+      bgColor="telegram.500"
+      color="white"
+      mt="0"
+      p="3"
+    >
       Links:{" "}
       <NextLink passHref href="/api/auth/signin">
         <Text textDecoration="underline" color="white">

@@ -1,5 +1,6 @@
 import CRAResults from "@/features/cra-results";
 import { trpc } from "@/utils/trpc-hooks";
+import { Heading, Skeleton } from "@chakra-ui/react";
 import { Form } from "@prisma/client";
 import { useRouter } from "next/router";
 import { createContext } from "react";
@@ -14,21 +15,25 @@ export const ProfileContext = createContext<FormWithUser | null>(null);
 const Result = () => {
   const router = useRouter();
 
-  const res = trpc.forms.getForm.useQuery(
+  const { data, isLoading } = trpc.forms.getForm.useQuery(
     { id: router.query.id as string },
     { enabled: !!router.query.id },
   );
-  if (!res.data) return null;
+  if (!data) {
+    return <Heading>Unable to retrieve profile</Heading>;
+  }
   const profile = {
-    ...res.data,
-    msw_name: res.data.User?.name,
-    survey_date: new Date(res.data.survey_date),
+    ...data,
+    msw_name: data.User?.name,
+    survey_date: new Date(data.survey_date),
   };
 
   return (
-    <ProfileContext.Provider value={profile}>
-      <CRAResults />
-    </ProfileContext.Provider>
+    <Skeleton isLoaded={!isLoading}>
+      <ProfileContext.Provider value={profile}>
+        <CRAResults />
+      </ProfileContext.Provider>
+    </Skeleton>
   );
 };
 export default Result;
