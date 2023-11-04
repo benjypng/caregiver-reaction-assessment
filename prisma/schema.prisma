@@ -44,13 +44,13 @@ enum education_level {
   ITE
   DIPLOMA
   OTHERS
-  DEGREE    @map("Degree and above")
+  DEGREE
 }
 
 enum employment_status {
   FULLTIME
   PARTTIME
-  UNEMPLOYED @map("Not working")
+  UNEMPLOYED
 }
 
 enum caregiving_length {
