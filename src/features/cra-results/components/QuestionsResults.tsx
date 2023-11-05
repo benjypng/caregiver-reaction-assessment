@@ -3,7 +3,16 @@ import { Box, StackDivider, Stack, Heading } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import questions from "@/constants/questions.json";
 import QuestionComponent from "./QuestionComponent";
-import { filterFns } from "@tanstack/react-table";
+
+const filterArrayByIndex = (indexArr: number[]) => {
+  return questions
+    .sort((a: { no: string }, b: { no: string }) => {
+      const noA = parseInt(a.no.replace("qn", ""));
+      const noB = parseInt(b.no.replace("qn", ""));
+      return noA - noB;
+    })
+    .filter((d, i) => indexArr.indexOf(i + 1) !== -1);
+};
 
 const QuestionsResults = () => {
   const profile = useContext(ProfileContext);
@@ -15,20 +24,10 @@ const QuestionsResults = () => {
   const familySupport = [2, 8, 10, 12, 15];
   const esteem = [3, 5, 9, 11, 17, 19];
 
-  function filterArrayByIndex(indexArr, array) {
-    return array
-      .sort((a: { no: string }, b: { no: string }) => {
-        const noA = parseInt(a.no.replace("qn", ""));
-        const noB = parseInt(b.no.replace("qn", ""));
-        return noA - noB;
-      })
-      .filter((d, i) => indexArr.indexOf(i + 1) !== -1);
-  }
-
-  const poorHealthQns = filterArrayByIndex(poorHealth, questions);
-  const financeQns = filterArrayByIndex(finances, questions);
-  const familySupportQns = filterArrayByIndex(familySupport, questions);
-  const esteemQns = filterArrayByIndex(esteem, questions);
+  const poorHealthQns = filterArrayByIndex(poorHealth);
+  const financeQns = filterArrayByIndex(finances);
+  const familySupportQns = filterArrayByIndex(familySupport);
+  const esteemQns = filterArrayByIndex(esteem);
 
   return (
     <Box px="3">
