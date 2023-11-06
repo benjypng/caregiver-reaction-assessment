@@ -8,7 +8,7 @@ interface EmailTemplateProps {
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   resultId,
 }) => {
-  const url = `${getBaseUrl()}/cra-results/${resultId}"`;
+  const url = `${getBaseUrl()}/cra-results/${resultId}`;
 
   return (
     <div>
