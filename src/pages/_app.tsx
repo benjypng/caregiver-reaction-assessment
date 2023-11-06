@@ -3,19 +3,10 @@ import type { AppProps, AppType } from "next/app";
 import { trpc } from "../utils/trpc-hooks";
 import { NextPageWithLayout } from "../libs/types";
 import { Suspense } from "react";
-import { Skeleton, extendTheme } from "@chakra-ui/react";
+import { Skeleton } from "@chakra-ui/react";
 import { DefaultLayout } from "../templates/layouts/DefaultLayout";
 import { ThemeProvider } from "@opengovsg/design-system-react";
 import { SessionProvider } from "next-auth/react";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
-
-const theme = extendTheme({
-  fonts: {
-    body: inter.style.fontFamily,
-    heading: inter.style.fontFamily,
-  },
-});
 
 type AppPropsWithAuthAndLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -24,7 +15,7 @@ type AppPropsWithAuthAndLayout = AppProps & {
 const App = ((props: AppPropsWithAuthAndLayout) => {
   return (
     <SessionProvider>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider>
         <Suspense fallback={<Skeleton width="100vw" height="100vh" />}>
           <ChildWithLayout {...props} />
         </Suspense>
