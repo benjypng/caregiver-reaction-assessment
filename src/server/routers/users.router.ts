@@ -1,12 +1,14 @@
 import { router, procedure } from "../trpc";
 import { z } from "zod";
-import { exclude } from "./remove-sensitive-fields";
-import { User } from "@prisma/client";
 
 export const userRouter = router({
   findAll: procedure.query(async ({ ctx }) => {
-    const users = await ctx.prisma.user.findMany();
-    return users.map((u: User) => exclude(u, ["password", "email"]));
+    return await ctx.prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
   }),
   findById: procedure
     .input(z.object({ id: z.string() }))

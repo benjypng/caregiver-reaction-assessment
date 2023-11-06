@@ -26,7 +26,11 @@ export const formRouter = router({
           id: input.id,
         },
         include: {
-          User: true,
+          User: {
+            select: {
+              name: true,
+            },
+          },
         },
       });
     }),

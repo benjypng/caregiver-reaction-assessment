@@ -19,8 +19,6 @@ const AdminDashboard = () => {
     survey_date: new Date(d.survey_date),
   }));
 
-  console.log(data);
-
   return (
     <>
       <Flex>

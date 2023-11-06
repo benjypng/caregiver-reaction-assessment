@@ -1,6 +1,6 @@
 import CRAResults from "@/features/cra-results";
 import { trpc } from "@/utils/trpc-hooks";
-import { Heading, Skeleton } from "@chakra-ui/react";
+import { Skeleton } from "@chakra-ui/react";
 import { Form } from "@prisma/client";
 import { useRouter } from "next/router";
 import { createContext } from "react";
@@ -19,9 +19,8 @@ const Result = () => {
     { id: router.query.id as string },
     { enabled: !!router.query.id },
   );
-  if (!data) {
-    return <Heading>Unable to retrieve profile</Heading>;
-  }
+  if (!data) return null;
+
   const profile = {
     ...data,
     msw_name: data.User?.name,
