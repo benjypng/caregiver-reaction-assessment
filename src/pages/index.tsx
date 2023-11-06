@@ -11,11 +11,11 @@ import { calculateScore } from "@/libs/calculate-score";
 import Citations from "@/features/cra-form/components/Citations";
 
 export default function Home() {
-  const [submitting, setSubmitting] = useState<boolean>(false);
   const router = useRouter();
   const formMethods = useForm<Form>({
     mode: "onBlur",
   });
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   const { data: users, isLoading } = trpc.users.findAll.useQuery();
 
@@ -24,7 +24,7 @@ export default function Home() {
       console.log(response);
       setSubmitting(false);
     },
-    onSettled: (response) => {
+    onSettled: async (response) => {
       router.push(`/cra-results/${response?.id}`);
     },
   });

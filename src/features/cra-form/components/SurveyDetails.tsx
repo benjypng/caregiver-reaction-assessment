@@ -7,12 +7,16 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { SingleSelect, DatePicker } from "@opengovsg/design-system-react";
-import { User } from "@prisma/client";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
+type SensitiveUser = {
+  id: string;
+  name: string;
+};
+
 type SurveyDetailsProps = {
-  users: User[] | undefined;
+  users: SensitiveUser[] | undefined;
   isLoading: boolean;
 };
 
@@ -40,7 +44,7 @@ const SurveyDetails = ({ users, isLoading }: SurveyDetailsProps) => {
                   placeholder="Select option"
                   {...field}
                   size="sm"
-                  items={users.map((m: User) => ({
+                  items={users.map((m) => ({
                     value: m.id,
                     label: m.name,
                   }))}
