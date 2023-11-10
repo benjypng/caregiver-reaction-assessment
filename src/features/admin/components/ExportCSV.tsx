@@ -43,7 +43,7 @@ const ExportCSV = ({ data }: AdminTableProps) => {
     ...data.map(
       ({
         id,
-        userId,
+        msw_name,
         survey_date,
         age_group,
         gender,
@@ -76,7 +76,7 @@ const ExportCSV = ({ data }: AdminTableProps) => {
         qn21,
       }) => [
         id,
-        userId,
+        msw_name,
         survey_date,
         age_group,
         gender,
@@ -113,7 +113,7 @@ const ExportCSV = ({ data }: AdminTableProps) => {
 
   return (
     <Button variant="ghost" mb="5">
-      <CSVLink className="downloadbtn" filename="my-file.csv" data={csvData}>
+      <CSVLink className="downloadbtn" filename="cra.csv" data={csvData}>
         Export Table to CSV
       </CSVLink>
     </Button>
