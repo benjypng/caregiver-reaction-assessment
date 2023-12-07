@@ -43,10 +43,11 @@ export const formRouter = router({
         id: input.userId!,
       },
     });
+    if (!user) throw new Error("Unable to find user");
     await resend.emails.send({
-      from: "AH CRA <no-reply@ah-cra.toolsforsocial.work>",
+      from: `Caregiver Reaction Assessment <${process.env.EMAIL_FROM}>`,
       to: [user!.email],
-      subject: "AH-CRA Result",
+      subject: "CRA Result",
       react: EmailTemplate({ resultId: craForm.id }),
       text: "",
     });
