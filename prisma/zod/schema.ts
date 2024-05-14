@@ -94,3 +94,10 @@ export const CredentialsSchema = z.object({
   email: z.string(),
   password: z.string().min(5).max(20),
 });
+
+export const UserSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  email: z.string(),
+  is_admin: z.boolean(),
+});

@@ -5,9 +5,10 @@ const prisma = new PrismaClient();
 
 const userData: Prisma.UserCreateInput[] = [
   {
-    name: "Jayden Tan",
-    email: "tan_boyuan_jayden@nuhs.edu.sg",
+    name: "admin",
+    email: "admin@nuhs.edu.sg",
     password: generateRandomString(),
+    is_admin: true,
   },
 ];
 

@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 
 const NavMenu = () => {
   const { data: session, status } = useSession();
-  console.log(status);
 
   return (
     <Flex
