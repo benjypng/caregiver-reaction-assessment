@@ -5,8 +5,20 @@ const prisma = new PrismaClient();
 
 const userData: Prisma.UserCreateInput[] = [
   {
-    name: "admin",
-    email: "admin@nuhs.edu.sg",
+    name: "test",
+    email: "test@nuhs.edu.sg",
+    password: generateRandomString(),
+    is_admin: true,
+  },
+  {
+    name: "test2",
+    email: "test2@nuhs.edu.sg",
+    password: generateRandomString(),
+    is_admin: true,
+  },
+  {
+    name: "test3",
+    email: "test3@nuhs.edu.sg",
     password: generateRandomString(),
     is_admin: true,
   },

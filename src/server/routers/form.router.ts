@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { router, procedure, protectedProcedure } from "../trpc";
 import { FormSchema } from "prisma/zod/schema";
-import { EmailTemplate } from "@/features/email";
-import { Resend } from "resend";
+// import { EmailTemplate } from "@/features/email";
+// import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const formRouter = router({
   getAllForms: protectedProcedure.query(async ({ ctx }) => {
@@ -44,13 +44,13 @@ export const formRouter = router({
       },
     });
     if (!user) throw new Error("Unable to find user");
-    await resend.emails.send({
-      from: `Caregiver Reaction Assessment <${process.env.EMAIL_FROM}>`,
-      to: [user!.email],
-      subject: "CRA Result",
-      react: EmailTemplate({ resultId: craForm.id }),
-      text: "",
-    });
+    //await resend.emails.send({
+    //  from: `Caregiver Reaction Assessment <${process.env.EMAIL_FROM}>`,
+    //  to: [user!.email],
+    //  subject: "CRA Result",
+    //  react: EmailTemplate({ resultId: craForm.id }),
+    //  text: "",
+    //});
     return craForm;
   }),
 });

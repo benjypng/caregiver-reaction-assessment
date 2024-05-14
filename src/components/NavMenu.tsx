@@ -4,7 +4,7 @@ import NextLink from "next/link";
 import { useSession } from "next-auth/react";
 
 const NavMenu = () => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   return (
     <Flex

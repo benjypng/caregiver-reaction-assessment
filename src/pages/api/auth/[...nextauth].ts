@@ -3,9 +3,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "prisma/client";
 import { CredentialsSchema } from "prisma/zod/schema";
-import { User } from "@prisma/client";
 
 export const authOptions: AuthOptions = {
+  //@ts-ignore
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
