@@ -11,7 +11,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { Button } from "@opengovsg/design-system-react";
+import { Button, Input } from "@opengovsg/design-system-react";
 import { trpc } from "@/utils/trpc-hooks";
 import { User } from "@prisma/client";
 
@@ -22,8 +22,17 @@ type FormsTableProps = {
 
 const UserList = ({ session, setManageUsers }: FormsTableProps) => {
   const [users, setUsers] = useState<Partial<User>[]>([]);
+  const [editingRowId, setEditingRowId] = useState<string>("");
+  const [editedName, setEditedName] = useState<string>("");
 
   const getUsers = trpc.users.findAll.useQuery();
+  const updateUserName = trpc.users.updateOne.useMutation({
+    onSettled: () => {
+      console.log("New name saved");
+      setEditingRowId("");
+      setEditedName("");
+    },
+  });
 
   // TODO: Prevent deleting of self
   const deleteUser = trpc.users.deleteOne.useMutation({
@@ -45,6 +54,10 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
     deleteUser.mutate({ id });
   };
 
+  const save = () => {
+    updateUserName.mutate({ id: editingRowId, name: editedName });
+  };
+
   return (
     <Box>
       <Flex>
@@ -64,7 +77,7 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
         )}
       </Flex>
       <TableContainer>
-        <Table variant="simple">
+        <Table variant="simple" layout="fixed">
           <Thead>
             <Tr>
               <Th>Username</Th>
@@ -74,15 +87,54 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
           <Tbody>
             {users.map((user) => (
               <Tr key={user.id}>
-                <Th>{user.name}</Th>
-                <Th>
-                  <Button
-                    variant="ghost"
+                {editingRowId !== user.id && <Th>{user.name}</Th>}
+                {editingRowId === user.id && (
+                  <Input
+                    width="auto"
+                    mt="3"
+                    ml="5"
                     size="xs"
-                    onClick={() => handleDelete(user.id as string)}
-                  >
-                    Delete
-                  </Button>
+                    value={editedName}
+                    onChange={(e: any) => setEditedName(e.target.value)}
+                  />
+                )}
+                <Th>
+                  {editingRowId !== user.id && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        size="xs"
+                        mr="2"
+                        onClick={() => setEditingRowId(user.id as string)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="xs"
+                        color="red"
+                        onClick={() => handleDelete(user.id as string)}
+                      >
+                        Delete
+                      </Button>
+                    </>
+                  )}
+                  {editingRowId === user.id && (
+                    <>
+                      {" "}
+                      <Button variant="ghost" size="xs" mr="2" onClick={save}>
+                        Save
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="xs"
+                        color="red"
+                        onClick={() => setEditingRowId("")}
+                      >
+                        Cancel
+                      </Button>
+                    </>
+                  )}
                 </Th>
               </Tr>
             ))}
