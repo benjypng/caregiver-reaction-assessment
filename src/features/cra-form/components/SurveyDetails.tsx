@@ -1,3 +1,4 @@
+import { trpc } from "@/utils/trpc-hooks";
 import {
   FormControl,
   FormErrorMessage,
@@ -10,18 +11,9 @@ import { SingleSelect, DatePicker } from "@opengovsg/design-system-react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-type SensitiveUser = {
-  id: string;
-  name: string;
-};
-
-type SurveyDetailsProps = {
-  users: SensitiveUser[] | undefined;
-  isLoading: boolean;
-};
-
-const SurveyDetails = ({ users, isLoading }: SurveyDetailsProps) => {
+const SurveyDetails = () => {
   const { control } = useFormContext();
+  const { data: users, isLoading } = trpc.users.findAll.useQuery();
 
   return (
     <>

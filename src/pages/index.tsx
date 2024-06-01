@@ -17,8 +17,6 @@ export default function Home() {
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
 
-  const { data: users, isLoading } = trpc.users.findAll.useQuery();
-
   const submitForm = trpc.forms.submitForm.useMutation({
     onError: (response) => {
       console.log(response);
@@ -45,7 +43,7 @@ export default function Home() {
         Caregiver Reaction Assessment
       </Text>
       <FormProvider {...formMethods}>
-        <SurveyDetails users={users} isLoading={isLoading} />
+        <SurveyDetails />
         <CaregiverDetails />
         <Questions />
         <Button
