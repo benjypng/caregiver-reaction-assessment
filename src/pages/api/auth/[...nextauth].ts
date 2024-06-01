@@ -50,10 +50,8 @@ export const authOptions: AuthOptions = {
       session.user.is_admin = token.is_admin as boolean;
       return session;
     },
-    redirect: async ({ url, baseUrl }) => {
-      return url.startsWith(baseUrl)
-        ? Promise.resolve(url)
-        : Promise.resolve(`${baseUrl}/admin`);
+    redirect: async ({ _url, baseUrl }) => {
+      return Promise.resolve(`${baseUrl}/admin`);
     },
   },
 };
