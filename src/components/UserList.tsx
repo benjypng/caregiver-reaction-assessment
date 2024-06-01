@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
+  FormControl,
   Spacer,
   Table,
   TableContainer,
@@ -11,14 +12,19 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { Button, Input } from "@opengovsg/design-system-react";
+import {
+  Button,
+  FormErrorMessage,
+  Input,
+} from "@opengovsg/design-system-react";
 import { trpc } from "@/utils/trpc-hooks";
 import { User } from "@prisma/client";
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import NewUser from "./NewUser";
+import { Session } from "next-auth";
 
 type FormsTableProps = {
-  session: any;
+  session: Session;
   setManageUsers: (value: boolean) => void;
 };
 
@@ -33,8 +39,8 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
   });
   const [users, setUsers] = useState<Partial<User>[]>([]);
   const [formError, setFormError] = useState<string>("");
+
   const [editingRowId, setEditingRowId] = useState<string>("");
-  const [editedName, setEditedName] = useState<string>("");
   const [addUser, setAddUser] = useState<boolean>(false);
 
   useEffect(() => {
@@ -51,7 +57,6 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
     onSuccess: () => {
       console.log("New name saved");
       setEditingRowId("");
-      setEditedName("");
     },
   });
   // TODO: Prevent deleting of self
@@ -73,8 +78,8 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
     deleteUser.mutate({ id });
   };
 
-  const save = () => {
-    updateUserName.mutate({ id: editingRowId, name: editedName });
+  const updateUser = (data: { name: string }) => {
+    updateUserName.mutate({ id: editingRowId, name: data.name });
   };
 
   const saveNewUser = (data: NewUser) => {
@@ -151,59 +156,80 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
                 </FormProvider>
               </Tr>
             )}
-            {users.map((user) => (
-              <Tr key={user.id}>
-                {editingRowId !== user.id && <Th>{user.name}</Th>}
-                {editingRowId === user.id && (
-                  <Input
-                    width="auto"
-                    mt="3"
-                    ml="5"
-                    size="xs"
-                    value={editedName}
-                    onChange={(e: any) => setEditedName(e.target.value)}
-                  />
-                )}
-                <Th>
-                  {editingRowId !== user.id && (
-                    <>
-                      <Button
-                        variant="ghost"
-                        size="xs"
-                        mr="2"
-                        onClick={() => setEditingRowId(user.id as string)}
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="xs"
-                        color="red"
-                        onClick={() => handleDelete(user.id as string)}
-                      >
-                        Delete
-                      </Button>
-                    </>
-                  )}
-                  {editingRowId === user.id && (
-                    <>
-                      {" "}
-                      <Button variant="ghost" size="xs" mr="2" onClick={save}>
-                        Save
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="xs"
-                        color="red"
-                        onClick={() => setEditingRowId("")}
-                      >
-                        Cancel
-                      </Button>
-                    </>
-                  )}
-                </Th>
-              </Tr>
-            ))}
+            {users
+              .filter((user) => user.id !== session.user.id)
+              .map((user) => (
+                <Tr key={user.id}>
+                  {editingRowId !== user.id && <Th>{user.name}</Th>}
+                  <FormProvider {...formMethods}>
+                    {editingRowId === user.id && (
+                      <Th>
+                        <Controller
+                          name="name"
+                          rules={{ required: "Required" }}
+                          render={({ field, fieldState: { error } }) => (
+                            <FormControl isInvalid={!!error}>
+                              <Input
+                                {...field}
+                                size="xs"
+                                width="auto"
+                                placeholder="Name"
+                                defaultValue={user.name}
+                              />
+                              <FormErrorMessage>
+                                {error?.message}
+                              </FormErrorMessage>
+                            </FormControl>
+                          )}
+                        />
+                      </Th>
+                    )}
+                    <Th>
+                      {editingRowId === user.id && (
+                        <>
+                          {" "}
+                          <Button
+                            variant="ghost"
+                            size="xs"
+                            mr="2"
+                            onClick={formMethods.handleSubmit(updateUser)}
+                          >
+                            Save
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="xs"
+                            color="red"
+                            onClick={() => setEditingRowId("")}
+                          >
+                            Cancel
+                          </Button>
+                        </>
+                      )}
+                      {editingRowId !== user.id && (
+                        <>
+                          <Button
+                            variant="ghost"
+                            size="xs"
+                            mr="2"
+                            onClick={() => setEditingRowId(user.id as string)}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="xs"
+                            color="red"
+                            onClick={() => handleDelete(user.id as string)}
+                          >
+                            Delete
+                          </Button>
+                        </>
+                      )}
+                    </Th>
+                  </FormProvider>
+                </Tr>
+              ))}
           </Tbody>
         </Table>
       </TableContainer>
