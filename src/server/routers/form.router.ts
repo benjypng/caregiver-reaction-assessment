@@ -38,19 +38,6 @@ export const formRouter = router({
     const craForm = await ctx.prisma.form.create({
       data: input,
     });
-    const user = await ctx.prisma.user.findUnique({
-      where: {
-        id: input.userId!,
-      },
-    });
-    if (!user) throw new Error("Unable to find user");
-    //await resend.emails.send({
-    //  from: `Caregiver Reaction Assessment <${process.env.EMAIL_FROM}>`,
-    //  to: [user!.email],
-    //  subject: "CRA Result",
-    //  react: EmailTemplate({ resultId: craForm.id }),
-    //  text: "",
-    //});
     return craForm;
   }),
 });
