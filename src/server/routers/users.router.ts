@@ -28,6 +28,25 @@ export const userRouter = router({
         },
       });
     }),
+  createOne: procedure
+    .input(z.object({ name: z.string(), email: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      // Check unique email
+      const existingUser = await ctx.prisma.user.findUnique({
+        where: {
+          email: input.email,
+        },
+      });
+
+      if (existingUser) throw new Error("Email already exists");
+
+      return await ctx.prisma.user.create({
+        data: {
+          name: input.name,
+          email: input.email,
+        },
+      });
+    }),
   deleteOne: procedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input, ctx }) => {

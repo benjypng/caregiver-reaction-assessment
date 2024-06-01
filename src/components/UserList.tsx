@@ -14,32 +14,28 @@ import {
 import { Button, Input } from "@opengovsg/design-system-react";
 import { trpc } from "@/utils/trpc-hooks";
 import { User } from "@prisma/client";
+import { FormProvider, useForm } from "react-hook-form";
+import NewUser from "./NewUser";
 
 type FormsTableProps = {
   session: any;
   setManageUsers: (value: boolean) => void;
 };
 
+type NewUser = {
+  name: string;
+  email: string;
+};
+
 const UserList = ({ session, setManageUsers }: FormsTableProps) => {
+  const formMethods = useForm<NewUser>({
+    mode: "onBlur",
+  });
   const [users, setUsers] = useState<Partial<User>[]>([]);
+  const [formError, setFormError] = useState<string>("");
   const [editingRowId, setEditingRowId] = useState<string>("");
   const [editedName, setEditedName] = useState<string>("");
-
-  const getUsers = trpc.users.findAll.useQuery();
-  const updateUserName = trpc.users.updateOne.useMutation({
-    onSettled: () => {
-      console.log("New name saved");
-      setEditingRowId("");
-      setEditedName("");
-    },
-  });
-
-  // TODO: Prevent deleting of self
-  const deleteUser = trpc.users.deleteOne.useMutation({
-    onSettled: () => {
-      console.log("User deleted");
-    },
-  });
+  const [addUser, setAddUser] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -50,12 +46,39 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
+  const getUsers = trpc.users.findAll.useQuery();
+  const updateUserName = trpc.users.updateOne.useMutation({
+    onSuccess: () => {
+      console.log("New name saved");
+      setEditingRowId("");
+      setEditedName("");
+    },
+  });
+  // TODO: Prevent deleting of self
+  const deleteUser = trpc.users.deleteOne.useMutation({
+    onSuccess: () => {
+      console.log("User deleted");
+    },
+  });
+  const createNewUser = trpc.users.createOne.useMutation({
+    onSuccess: () => {
+      setAddUser(false);
+    },
+    onError(error) {
+      setFormError(error.message);
+    },
+  });
+
   const handleDelete = (id: string) => {
     deleteUser.mutate({ id });
   };
 
   const save = () => {
     updateUserName.mutate({ id: editingRowId, name: editedName });
+  };
+
+  const saveNewUser = (data: NewUser) => {
+    createNewUser.mutate({ name: data.name, email: data.email });
   };
 
   return (
@@ -66,14 +89,34 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
         </Text>
         <Spacer />
         {session && session.user.is_admin && (
-          <Button
-            variant="ghost"
-            mb="5"
-            mr="3"
-            onClick={() => setManageUsers(false)}
-          >
-            Manage Forms
-          </Button>
+          <>
+            {!addUser && (
+              <Button mb="5" mr="3" onClick={() => setAddUser(true)}>
+                Add User
+              </Button>
+            )}
+            {addUser && (
+              <Button
+                variant="solid"
+                colorScheme="critical"
+                mb="5"
+                mr="3"
+                onClick={() => {
+                  setAddUser(false);
+                }}
+              >
+                Cancel
+              </Button>
+            )}
+            <Button
+              variant="ghost"
+              mb="5"
+              mr="3"
+              onClick={() => setManageUsers(false)}
+            >
+              Manage Forms
+            </Button>
+          </>
         )}
       </Flex>
       <TableContainer>
@@ -85,6 +128,29 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
             </Tr>
           </Thead>
           <Tbody>
+            {addUser && (
+              <Tr key="addUser">
+                <FormProvider {...formMethods}>
+                  <Th>
+                    <NewUser />
+                  </Th>
+                  <Th>
+                    <Flex>
+                      <Button
+                        size="xs"
+                        mr="2"
+                        onClick={formMethods.handleSubmit(saveNewUser)}
+                      >
+                        Save
+                      </Button>
+                      <Text alignSelf="center" color="red">
+                        {formError}
+                      </Text>
+                    </Flex>
+                  </Th>
+                </FormProvider>
+              </Tr>
+            )}
             {users.map((user) => (
               <Tr key={user.id}>
                 {editingRowId !== user.id && <Th>{user.name}</Th>}
