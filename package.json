@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build:vercel": "prisma generate && next build",
     "start": "next start -p 8080",
-    "lint": "next lint",
+    "lint": "tsc && next lint",
     "migrate": "prisma migrate dev",
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
     "deploy:google": "pnpm run build && gcloud app deploy --quiet"

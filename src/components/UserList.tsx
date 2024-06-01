@@ -24,7 +24,7 @@ import NewUser from "./NewUser";
 import { Session } from "next-auth";
 
 type FormsTableProps = {
-  session: Session;
+  session: Session | null;
   setManageUsers: (value: boolean) => void;
 };
 
@@ -59,7 +59,7 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
       setEditingRowId("");
     },
   });
-  // TODO: Prevent deleting of self
+
   const deleteUser = trpc.users.deleteOne.useMutation({
     onSuccess: () => {
       console.log("User deleted");
@@ -157,7 +157,7 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
               </Tr>
             )}
             {users
-              .filter((user) => user.id !== session.user.id)
+              .filter((user) => user.id !== session?.user.id)
               .map((user) => (
                 <Tr key={user.id}>
                   {editingRowId !== user.id && <Th>{user.name}</Th>}
