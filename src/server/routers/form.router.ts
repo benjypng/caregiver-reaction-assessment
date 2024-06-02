@@ -1,10 +1,6 @@
 import { z } from "zod";
 import { router, procedure, protectedProcedure } from "../trpc";
 import { FormSchema } from "prisma/zod/schema";
-// import { EmailTemplate } from "@/features/email";
-// import { Resend } from "resend";
-
-// const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const formRouter = router({
   getAllForms: protectedProcedure.query(async ({ ctx }) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Spacer, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
@@ -19,6 +19,12 @@ const NavMenu = () => {
       mt="0"
       p="3"
     >
+      <NextLink passHref href="/">
+        <Text textDecoration="underline" color="white">
+          Home
+        </Text>
+      </NextLink>
+      {" | "}
       {status === "unauthenticated" && (
         <NextLink passHref href="/api/auth/signin">
           <Text textDecoration="underline" color="white">
@@ -28,16 +34,6 @@ const NavMenu = () => {
       )}
       {status === "authenticated" && (
         <>
-          {currPath === "/admin" && (
-            <>
-              <NextLink passHref href="/">
-                <Text textDecoration="underline" color="white">
-                  Home
-                </Text>
-              </NextLink>
-              {" | "}
-            </>
-          )}
           {currPath === "/" && (
             <>
               <NextLink passHref href="/admin">
@@ -54,6 +50,14 @@ const NavMenu = () => {
             </Text>
           </NextLink>
         </>
+      )}
+      <Spacer />
+      {status === "authenticated" && (
+        <NextLink passHref href="/forget-password">
+          <Text textDecoration="underline" color="white">
+            Forget Password
+          </Text>
+        </NextLink>
       )}
     </Flex>
   );

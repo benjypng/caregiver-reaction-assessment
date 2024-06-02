@@ -1,5 +1,6 @@
-import { router, procedure } from "../trpc";
+import { router, procedure, protectedProcedure } from "../trpc";
 import { z } from "zod";
+import bcrypt from "bcrypt";
 
 export const userRouter = router({
   findAll: procedure.query(async ({ ctx }) => {
@@ -28,7 +29,7 @@ export const userRouter = router({
         },
       });
     }),
-  createOne: procedure
+  createOne: protectedProcedure
     .input(z.object({ name: z.string(), email: z.string() }))
     .mutation(async ({ input, ctx }) => {
       // Check unique email
@@ -47,7 +48,7 @@ export const userRouter = router({
         },
       });
     }),
-  deleteOne: procedure
+  deleteOne: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input, ctx }) => {
       return await ctx.prisma.user.delete({
@@ -56,7 +57,7 @@ export const userRouter = router({
         },
       });
     }),
-  updateOne: procedure
+  updateName: protectedProcedure
     .input(z.object({ id: z.string(), name: z.string() }))
     .mutation(async ({ input, ctx }) => {
       return await ctx.prisma.user.update({
@@ -65,6 +66,21 @@ export const userRouter = router({
         },
         data: {
           name: input.name,
+        },
+      });
+    }),
+  updatePassword: procedure
+    .input(z.object({ id: z.string(), password: z.string().min(5).max(20) }))
+    .mutation(async ({ input, ctx }) => {
+      const salt = 10;
+      const hashedPassword = await bcrypt.hash(input.password, salt);
+
+      return await ctx.prisma.user.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          password: hashedPassword,
         },
       });
     }),

@@ -2,19 +2,55 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import FormsTable from "@/components/FormsTable";
 import UserList from "@/components/UserList";
+import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
+import { Button } from "@opengovsg/design-system-react";
+import { useRouter } from "next/navigation";
 
 const AdminDashboard = () => {
-  const [manageUser, setManageUsers] = useState(false);
+  const router = useRouter();
+  const [manageUsers, setManageUsers] = useState(false);
+  const { data: session, status } = useSession();
 
-  const { data: session } = useSession();
+  if (status === "unauthenticated") router.push("/");
 
   return (
     <>
-      {!manageUser && (
-        <FormsTable session={session} setManageUsers={setManageUsers} />
-      )}
-      {manageUser && (
-        <UserList session={session} setManageUsers={setManageUsers} />
+      {status === "authenticated" && (
+        <Box>
+          <Flex>
+            <Text textStyle="h4" mb="5">
+              Admin Dashboard
+            </Text>
+            <Spacer />
+            {session?.user.is_admin && (
+              <>
+                {!manageUsers && (
+                  <Button
+                    variant="ghost"
+                    mb="5"
+                    mr="3"
+                    onClick={() => setManageUsers(true)}
+                  >
+                    Manage Users
+                  </Button>
+                )}
+                {manageUsers && (
+                  <Button
+                    variant="ghost"
+                    mb="5"
+                    mr="3"
+                    onClick={() => setManageUsers(false)}
+                  >
+                    Manage Forms
+                  </Button>
+                )}
+              </>
+            )}
+          </Flex>
+          <Spacer />
+          {!manageUsers && <FormsTable />}
+          {manageUsers && <UserList session={session} />}
+        </Box>
       )}
     </>
   );

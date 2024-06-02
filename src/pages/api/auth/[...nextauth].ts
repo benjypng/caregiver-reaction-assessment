@@ -1,12 +1,15 @@
+import type { Adapter } from "next-auth/adapters";
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "prisma/client";
 import { CredentialsSchema } from "prisma/zod/schema";
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
+
+const prisma = new PrismaClient();
 
 export const authOptions: AuthOptions = {
-  //@ts-ignore
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -21,9 +24,15 @@ export const authOptions: AuthOptions = {
             email: creds.email,
           },
         });
-        if (user) {
-          if (user.password === creds.password) {
-            return user;
+
+        if (user && user.password) {
+          const isValid = await bcrypt.compare(creds.password, user.password);
+          if (isValid) {
+            return {
+              id: user.id,
+              name: user.name,
+              is_admin: user.is_admin,
+            };
           }
         }
         // Failed authorisation

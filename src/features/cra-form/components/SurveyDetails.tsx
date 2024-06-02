@@ -8,7 +8,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { SingleSelect, DatePicker } from "@opengovsg/design-system-react";
-import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 const SurveyDetails = () => {
@@ -29,7 +28,7 @@ const SurveyDetails = () => {
             <FormControl isInvalid={!!error}>
               <FormLabel mb={1}>MSW Name</FormLabel>
               {isLoading && (
-                <SkeletonText noOfLines={3} spacing="2" skeletonHeight="1" />
+                <SkeletonText noOfLines={2} spacing="2" skeletonHeight="1" />
               )}
               {users && (
                 <SingleSelect
