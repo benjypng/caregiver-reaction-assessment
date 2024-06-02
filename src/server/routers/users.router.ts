@@ -72,9 +72,10 @@ export const userRouter = router({
   updatePassword: procedure
     .input(z.object({ id: z.string(), password: z.string().min(5).max(20) }))
     .mutation(async ({ input, ctx }) => {
-      const salt = 10;
-      const hashedPassword = await bcrypt.hash(input.password, salt);
-
+      const hashedPassword = await bcrypt.hash(
+        input.password,
+        await bcrypt.genSalt(10),
+      );
       return await ctx.prisma.user.update({
         where: {
           id: input.id,

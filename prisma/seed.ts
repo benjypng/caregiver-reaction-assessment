@@ -1,19 +1,35 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 import crypto from "crypto";
-import { userList } from "./user-list";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
-const userData: Prisma.UserCreateInput[] = userList;
+const generateRandomString = async (): Promise<string> => {
+  const length = 8;
 
-//function generateRandomString(length: number = 16): string {
-//  return crypto
-//    .randomBytes(Math.ceil(length / 2))
-//    .toString("hex") // convert to hexadecimal format
-//    .slice(0, length); // return required number of characters
-//}
+  const plainPassword = crypto
+    .randomBytes(Math.ceil(length / 2))
+    .toString("hex") // convert to hexadecimal format
+    .slice(0, length); // return required number of characters
+
+  console.log("PW", plainPassword);
+
+  const hashedPassword = await bcrypt.hash(
+    plainPassword,
+    await bcrypt.genSalt(10),
+  );
+
+  return hashedPassword;
+};
 
 async function seed() {
+  const userData: Prisma.UserCreateInput[] = [
+    {
+      name: "Jayden Tan",
+      email: "test@test.com",
+      password: await generateRandomString(),
+    },
+  ];
   console.log("Start seeding...");
   for (const user of userData) {
     await prisma.user.create({ data: user });
