@@ -4,7 +4,7 @@ import { Context } from "./context";
 const t = initTRPC.context<Context>().create();
 
 const isAuthed = t.middleware(({ next, ctx }) => {
-  if (!ctx.session?.user?.email) {
+  if (!ctx.session?.user?.id) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
     });

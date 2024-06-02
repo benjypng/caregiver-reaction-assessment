@@ -1,12 +1,14 @@
+import type { Adapter } from "next-auth/adapters";
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "prisma/client";
 import { CredentialsSchema } from "prisma/zod/schema";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const authOptions: AuthOptions = {
-  //@ts-ignore
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -23,7 +25,11 @@ export const authOptions: AuthOptions = {
         });
         if (user) {
           if (user.password === creds.password) {
-            return user;
+            return {
+              id: user.id,
+              name: user.name,
+              is_admin: user.is_admin,
+            };
           }
         }
         // Failed authorisation

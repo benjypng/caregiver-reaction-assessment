@@ -1,4 +1,4 @@
-import { router, procedure } from "../trpc";
+import { router, procedure, protectedProcedure } from "../trpc";
 import { z } from "zod";
 
 export const userRouter = router({
@@ -28,7 +28,7 @@ export const userRouter = router({
         },
       });
     }),
-  createOne: procedure
+  createOne: protectedProcedure
     .input(z.object({ name: z.string(), email: z.string() }))
     .mutation(async ({ input, ctx }) => {
       // Check unique email
@@ -47,7 +47,7 @@ export const userRouter = router({
         },
       });
     }),
-  deleteOne: procedure
+  deleteOne: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input, ctx }) => {
       return await ctx.prisma.user.delete({
@@ -56,7 +56,7 @@ export const userRouter = router({
         },
       });
     }),
-  updateOne: procedure
+  updateOne: protectedProcedure
     .input(z.object({ id: z.string(), name: z.string() }))
     .mutation(async ({ input, ctx }) => {
       return await ctx.prisma.user.update({
