@@ -56,7 +56,7 @@ export const userRouter = router({
         },
       });
     }),
-  updateOne: protectedProcedure
+  updateName: protectedProcedure
     .input(z.object({ id: z.string(), name: z.string() }))
     .mutation(async ({ input, ctx }) => {
       return await ctx.prisma.user.update({
@@ -65,6 +65,18 @@ export const userRouter = router({
         },
         data: {
           name: input.name,
+        },
+      });
+    }),
+  updatePassword: procedure
+    .input(z.object({ id: z.string(), password: z.string().min(5).max(20) }))
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.prisma.user.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          password: input.password,
         },
       });
     }),

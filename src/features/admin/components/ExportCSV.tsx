@@ -112,7 +112,7 @@ const ExportCSV = ({ data }: AdminTableProps) => {
   ];
 
   return (
-    <Button variant="ghost" mb="5">
+    <Button variant="ghost" mb="5" mr="3">
       <CSVLink className="downloadbtn" filename="cra.csv" data={csvData}>
         Export Table to CSV
       </CSVLink>

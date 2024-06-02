@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
-  Box,
   Flex,
   FormControl,
-  Spacer,
   Table,
   TableContainer,
   Tbody,
@@ -23,17 +21,16 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import NewUser from "./NewUser";
 import { Session } from "next-auth";
 
-type FormsTableProps = {
-  session: Session | null;
-  setManageUsers: (value: boolean) => void;
-};
-
 type NewUser = {
   name: string;
   email: string;
 };
 
-const UserList = ({ session, setManageUsers }: FormsTableProps) => {
+type SessionProps = {
+  session: Session | null;
+};
+
+const UserList = ({ session }: SessionProps) => {
   const formMethods = useForm<NewUser>({
     mode: "onBlur",
   });
@@ -53,7 +50,7 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
   });
 
   const getUsers = trpc.users.findAll.useQuery();
-  const updateUserName = trpc.users.updateOne.useMutation({
+  const updateUserName = trpc.users.updateName.useMutation({
     onSuccess: () => {
       console.log("New name saved");
       setEditingRowId("");
@@ -87,43 +84,25 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
   };
 
   return (
-    <Box>
-      <Flex>
-        <Text textStyle="h4" mb="5">
-          Admin Dashboard
-        </Text>
-        <Spacer />
-        {session && session.user.is_admin && (
-          <>
-            {!addUser && (
-              <Button mb="5" mr="3" onClick={() => setAddUser(true)}>
-                Add User
-              </Button>
-            )}
-            {addUser && (
-              <Button
-                variant="solid"
-                colorScheme="critical"
-                mb="5"
-                mr="3"
-                onClick={() => {
-                  setAddUser(false);
-                }}
-              >
-                Cancel
-              </Button>
-            )}
-            <Button
-              variant="ghost"
-              mb="5"
-              mr="3"
-              onClick={() => setManageUsers(false)}
-            >
-              Manage Forms
-            </Button>
-          </>
-        )}
-      </Flex>
+    <>
+      {!addUser && (
+        <Button mb="5" mr="3" onClick={() => setAddUser(true)}>
+          Add User
+        </Button>
+      )}
+      {addUser && (
+        <Button
+          variant="solid"
+          colorScheme="critical"
+          mb="5"
+          mr="3"
+          onClick={() => {
+            setAddUser(false);
+          }}
+        >
+          Cancel
+        </Button>
+      )}
       <TableContainer>
         <Table variant="simple" layout="fixed">
           <Thead>
@@ -233,7 +212,7 @@ const UserList = ({ session, setManageUsers }: FormsTableProps) => {
           </Tbody>
         </Table>
       </TableContainer>
-    </Box>
+    </>
   );
 };
 
