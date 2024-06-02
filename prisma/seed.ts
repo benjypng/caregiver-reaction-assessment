@@ -1,35 +1,17 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 import crypto from "crypto";
+import { userList } from "./user-list";
 
 const prisma = new PrismaClient();
 
-const userData: Prisma.UserCreateInput[] = [
-  {
-    name: "test",
-    email: "test@nuhs.edu.sg",
-    password: generateRandomString(),
-    is_admin: true,
-  },
-  {
-    name: "test2",
-    email: "test2@nuhs.edu.sg",
-    password: generateRandomString(),
-    is_admin: true,
-  },
-  {
-    name: "test3",
-    email: "test3@nuhs.edu.sg",
-    password: generateRandomString(),
-    is_admin: true,
-  },
-];
+const userData: Prisma.UserCreateInput[] = userList;
 
-function generateRandomString(length: number = 16): string {
-  return crypto
-    .randomBytes(Math.ceil(length / 2))
-    .toString("hex") // convert to hexadecimal format
-    .slice(0, length); // return required number of characters
-}
+//function generateRandomString(length: number = 16): string {
+//  return crypto
+//    .randomBytes(Math.ceil(length / 2))
+//    .toString("hex") // convert to hexadecimal format
+//    .slice(0, length); // return required number of characters
+//}
 
 async function seed() {
   console.log("Start seeding...");

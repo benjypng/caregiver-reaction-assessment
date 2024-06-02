@@ -8,8 +8,7 @@
     "start": "next start -p 8080",
     "lint": "tsc && next lint",
     "migrate": "prisma migrate dev",
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
-    "deploy:google": "pnpm run build && gcloud app deploy --quiet"
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.6.0",
