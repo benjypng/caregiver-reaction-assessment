@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { CredentialsSchema } from "prisma/zod/schema";
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -23,8 +24,10 @@ export const authOptions: AuthOptions = {
             email: creds.email,
           },
         });
-        if (user) {
-          if (user.password === creds.password) {
+
+        if (user && user.password) {
+          const isValid = await bcrypt.compare(creds.password, user.password);
+          if (isValid) {
             return {
               id: user.id,
               name: user.name,

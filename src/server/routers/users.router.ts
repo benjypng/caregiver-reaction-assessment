@@ -1,5 +1,6 @@
 import { router, procedure, protectedProcedure } from "../trpc";
 import { z } from "zod";
+import bcrypt from "bcrypt";
 
 export const userRouter = router({
   findAll: procedure.query(async ({ ctx }) => {
@@ -71,12 +72,15 @@ export const userRouter = router({
   updatePassword: procedure
     .input(z.object({ id: z.string(), password: z.string().min(5).max(20) }))
     .mutation(async ({ input, ctx }) => {
+      const salt = 10;
+      const hashedPassword = await bcrypt.hash(input.password, salt);
+
       return await ctx.prisma.user.update({
         where: {
           id: input.id,
         },
         data: {
-          password: input.password,
+          password: hashedPassword,
         },
       });
     }),

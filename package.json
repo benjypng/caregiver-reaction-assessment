@@ -28,6 +28,7 @@
     "@trpc/react-query": "^10.45.2",
     "@trpc/server": "^10.45.2",
     "@types/react-csv": "^1.1.10",
+    "bcrypt": "^5.1.1",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.18.0",
     "next": "13.5.6",
@@ -43,6 +44,7 @@
     "zod-prisma-types-monorepo": "github:chrishoermann/zod-prisma-types"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.2",
