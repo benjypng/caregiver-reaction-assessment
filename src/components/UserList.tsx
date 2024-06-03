@@ -45,7 +45,7 @@ const UserList = ({ session }: SessionProps) => {
     (async () => {
       const res = await getUsers.refetch();
       if (!res.data) return;
-      setUsers(res.data);
+      setUsers(res.data.sort((a, b) => a.name.localeCompare(b.name)));
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   });
@@ -148,7 +148,6 @@ const UserList = ({ session }: SessionProps) => {
             )}
             {users
               .filter((user) => user.id !== session?.user.id)
-              .sort()
               .map((user) => (
                 <Tr key={user.id}>
                   {editingRowId !== user.id && (
