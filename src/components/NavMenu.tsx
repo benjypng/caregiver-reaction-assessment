@@ -59,13 +59,6 @@ const NavMenu = () => {
           </Text>
         </NextLink>
       )}
-      {status === "unauthenticated" && (
-        <NextLink passHref href="/forget-password">
-          <Text textDecoration="underline" color="white">
-            Forget Password
-          </Text>
-        </NextLink>
-      )}
     </Flex>
   );
 };
