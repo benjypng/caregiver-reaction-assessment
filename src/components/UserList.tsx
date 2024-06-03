@@ -169,11 +169,11 @@ const UserList = ({ session }: SessionProps) => {
                               <Input
                                 {...field}
                                 size="xs"
-                                width="auto"
+                                width="200px"
                                 placeholder="Name"
                                 defaultValue={user.name}
                               />
-                              <FormErrorMessage>
+                              <FormErrorMessage size="xs">
                                 {error?.message}
                               </FormErrorMessage>
                             </FormControl>
