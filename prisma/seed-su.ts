@@ -1,34 +1,17 @@
 import { PrismaClient, Prisma } from "@prisma/client";
-import crypto from "crypto";
-import bcrypt from "bcrypt";
-console.log("Hello");
+import {
+  generateHashPassword,
+  generatePlainPassword,
+} from "@/utils/generate-pw";
 
 const prisma = new PrismaClient();
-
-const generateRandomString = async (): Promise<string> => {
-  const length = 8;
-
-  const plainPassword = crypto
-    .randomBytes(Math.ceil(length / 2))
-    .toString("hex") // convert to hexadecimal format
-    .slice(0, length); // return required number of characters
-
-  console.log("PW", plainPassword);
-
-  const hashedPassword = await bcrypt.hash(
-    plainPassword,
-    await bcrypt.genSalt(10),
-  );
-
-  return hashedPassword;
-};
 
 async function seed() {
   const userData: Prisma.UserCreateInput[] = [
     {
       name: "Jayden Tan",
       email: "test@test.com",
-      password: await generateRandomString(),
+      password: await generateHashPassword(generatePlainPassword()),
     },
   ];
   console.log("Start seeding...");
