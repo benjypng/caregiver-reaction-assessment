@@ -31,36 +31,61 @@ type SessionProps = {
   session: Session | null;
 };
 
+type FormMessage = {
+  type: "error" | "success";
+  message: string;
+};
+
 const UserList = ({ session }: SessionProps) => {
   const formMethods = useForm<NewUser>({
     mode: "onBlur",
   });
-  const [users, setUsers] = useState<Partial<User>[]>([]);
-  const [formError, setFormError] = useState<string>("");
 
+  const [users, setUsers] = useState<Partial<User>[]>([]);
+  const [formMsg, setFormMsg] = useState<FormMessage | null>();
   const [editingRowId, setEditingRowId] = useState<string>("");
   const [addUser, setAddUser] = useState<boolean>(false);
 
   useEffect(() => {
-    (async () => {
-      const res = await getUsers.refetch();
-      if (!res.data) return;
-      setUsers(res.data.sort((a, b) => a.name.localeCompare(b.name)));
-    })();
+    if (formMsg) {
+      setTimeout(() => setFormMsg(null), 3000);
+      (async () => {
+        const res = await getUsers.refetch();
+        if (!res.data) return;
+        setUsers(res.data.sort((a, b) => a.name.localeCompare(b.name)));
+      })();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  });
+  }, [formMsg]);
 
   const getUsers = trpc.users.findAll.useQuery();
   const updateUserName = trpc.users.updateName.useMutation({
     onSuccess: () => {
-      console.log("New name saved");
       setEditingRowId("");
+      setFormMsg({
+        type: "success",
+        message: "User updated",
+      });
+    },
+    onError(error) {
+      setFormMsg({
+        type: "error",
+        message: error.message,
+      });
     },
   });
-
   const deleteUser = trpc.users.deleteOne.useMutation({
     onSuccess: () => {
-      console.log("User deleted");
+      setFormMsg({
+        type: "success",
+        message: "User deleted",
+      });
+    },
+    onError(error) {
+      setFormMsg({
+        type: "error",
+        message: error.message,
+      });
     },
   });
   const createNewUser = trpc.users.createOne.useMutation({
@@ -68,13 +93,25 @@ const UserList = ({ session }: SessionProps) => {
       setAddUser(false);
     },
     onError(error) {
-      setFormError(error.message);
+      setFormMsg({
+        type: "error",
+        message: error.message,
+      });
     },
   });
 
   const sendPwToUser = trpc.users.sendPassword.useMutation({
     onSuccess: () => {
-      console.log("SENT");
+      setFormMsg({
+        type: "success",
+        message: "Password successfully sent",
+      });
+    },
+    onError(error) {
+      setFormMsg({
+        type: "error",
+        message: error.message,
+      });
     },
   });
 
@@ -97,9 +134,15 @@ const UserList = ({ session }: SessionProps) => {
   return (
     <>
       {!addUser && (
-        <Button mb="5" mr="3" onClick={() => setAddUser(true)}>
-          Add User
-        </Button>
+        <Flex alignContent="center" gap="2" mb="3">
+          <Button onClick={() => setAddUser(true)}>Add User</Button>
+          <Text
+            alignSelf="center"
+            color={formMsg?.type === "success" ? "green" : "red"}
+          >
+            {formMsg?.message}
+          </Text>
+        </Flex>
       )}
       {addUser && (
         <Button
@@ -138,9 +181,6 @@ const UserList = ({ session }: SessionProps) => {
                       >
                         Save
                       </Button>
-                      <Text alignSelf="center" color="red">
-                        {formError}
-                      </Text>
                     </Flex>
                   </Th>
                 </FormProvider>
