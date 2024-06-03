@@ -13,6 +13,7 @@ export const userRouter = router({
       select: {
         id: true,
         name: true,
+        email: true,
       },
     });
   }),
@@ -34,7 +35,7 @@ export const userRouter = router({
         },
       });
     }),
-  sendPassword: procedure
+  sendPassword: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input, ctx }) => {
       const user = await ctx.prisma.user.findUnique({
@@ -102,7 +103,7 @@ export const userRouter = router({
         },
       });
     }),
-  updatePassword: procedure
+  updatePassword: protectedProcedure
     .input(z.object({ id: z.string(), password: z.string().min(5).max(20) }))
     .mutation(async ({ input, ctx }) => {
       const hashedPassword = await bcrypt.hash(

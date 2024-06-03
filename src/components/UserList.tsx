@@ -14,6 +14,7 @@ import {
   Button,
   FormErrorMessage,
   Input,
+  Tag,
 } from "@opengovsg/design-system-react";
 import { trpc } from "@/utils/trpc-hooks";
 import { User } from "@prisma/client";
@@ -150,7 +151,14 @@ const UserList = ({ session }: SessionProps) => {
               .sort()
               .map((user) => (
                 <Tr key={user.id}>
-                  {editingRowId !== user.id && <Th>{user.name}</Th>}
+                  {editingRowId !== user.id && (
+                    <Th>
+                      <Text ml="2" mb="1">
+                        {user.name}
+                      </Text>{" "}
+                      <Tag size="xs">{user.email}</Tag>
+                    </Th>
+                  )}
                   <FormProvider {...formMethods}>
                     {editingRowId === user.id && (
                       <Th>
