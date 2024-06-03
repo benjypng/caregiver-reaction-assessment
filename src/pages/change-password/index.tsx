@@ -15,7 +15,7 @@ type FormMessage = {
   message: string;
 };
 
-const ForgetPassword = () => {
+const ChangePassword = () => {
   const session = useSession();
   const formMethods = useForm<{ newpassword: string }>({ mode: "onBlur" });
   const [formMsg, setFormMsg] = useState<FormMessage | null>();
@@ -79,4 +79,4 @@ const ForgetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+export default ChangePassword;

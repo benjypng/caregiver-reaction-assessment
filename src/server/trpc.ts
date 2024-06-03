@@ -28,3 +28,5 @@ export const procedure = t.procedure;
  * Protected procedure
  */
 export const protectedProcedure = t.procedure.use(isAuthed);
+
+export const createCallerFactory = t.createCallerFactory;

@@ -35,7 +35,7 @@ const SurveyDetails = () => {
                   placeholder="Select option"
                   {...field}
                   size="sm"
-                  items={users.map((m) => ({
+                  items={users.sort().map((m) => ({
                     value: m.id,
                     label: m.name,
                   }))}

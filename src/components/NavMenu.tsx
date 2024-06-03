@@ -53,6 +53,13 @@ const NavMenu = () => {
       )}
       <Spacer />
       {status === "authenticated" && (
+        <NextLink passHref href="/change-password">
+          <Text textDecoration="underline" color="white">
+            Change Password
+          </Text>
+        </NextLink>
+      )}
+      {status === "unauthenticated" && (
         <NextLink passHref href="/forget-password">
           <Text textDecoration="underline" color="white">
             Forget Password

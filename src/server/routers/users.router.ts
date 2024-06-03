@@ -1,6 +1,11 @@
 import { router, procedure, protectedProcedure } from "../trpc";
 import { z } from "zod";
 import bcrypt from "bcrypt";
+import { transporter } from "@/utils/transporter";
+import {
+  generateHashPassword,
+  generatePlainPassword,
+} from "@/utils/generate-pw";
 
 export const userRouter = router({
   findAll: procedure.query(async ({ ctx }) => {
@@ -28,6 +33,34 @@ export const userRouter = router({
           email: input.email,
         },
       });
+    }),
+  sendPassword: procedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const user = await ctx.prisma.user.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (user) {
+        const plain = generatePlainPassword();
+        const pw = await generateHashPassword(plain);
+        await ctx.prisma.user.update({
+          where: {
+            id: input.id,
+          },
+          data: {
+            password: pw,
+          },
+        });
+        transporter.sendMail({
+          to: user.email,
+          subject: "New Password",
+          text: `Your new password is ${plain}. You are encouraged to change it after you log in for the first time.`,
+          html: `<p>Your new password is ${plain}</p><p>You are encouraged to change it after you log in for the first time.`,
+        });
+      }
     }),
   createOne: protectedProcedure
     .input(z.object({ name: z.string(), email: z.string() }))

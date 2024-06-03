@@ -71,6 +71,12 @@ const UserList = ({ session }: SessionProps) => {
     },
   });
 
+  const sendPwToUser = trpc.users.sendPassword.useMutation({
+    onSuccess: () => {
+      console.log("SENT");
+    },
+  });
+
   const handleDelete = (id: string) => {
     deleteUser.mutate({ id });
   };
@@ -81,6 +87,10 @@ const UserList = ({ session }: SessionProps) => {
 
   const saveNewUser = (data: NewUser) => {
     createNewUser.mutate({ name: data.name, email: data.email });
+  };
+
+  const sendPassword = (id: string) => {
+    sendPwToUser.mutate({ id });
   };
 
   return (
@@ -137,6 +147,7 @@ const UserList = ({ session }: SessionProps) => {
             )}
             {users
               .filter((user) => user.id !== session?.user.id)
+              .sort()
               .map((user) => (
                 <Tr key={user.id}>
                   {editingRowId !== user.id && <Th>{user.name}</Th>}
@@ -199,9 +210,18 @@ const UserList = ({ session }: SessionProps) => {
                             variant="ghost"
                             size="xs"
                             color="red"
+                            mr="2"
                             onClick={() => handleDelete(user.id as string)}
                           >
                             Delete
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="xs"
+                            color="green"
+                            onClick={() => sendPassword(user.id as string)}
+                          >
+                            Send Password
                           </Button>
                         </>
                       )}
