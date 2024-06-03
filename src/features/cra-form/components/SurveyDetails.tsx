@@ -4,7 +4,6 @@ import {
   FormErrorMessage,
   FormLabel,
   SimpleGrid,
-  SkeletonText,
   Text,
 } from "@chakra-ui/react";
 import { SingleSelect, DatePicker } from "@opengovsg/design-system-react";
@@ -27,20 +26,19 @@ const SurveyDetails = () => {
           render={({ field, fieldState: { error } }) => (
             <FormControl isInvalid={!!error}>
               <FormLabel mb={1}>MSW Name</FormLabel>
-              {isLoading && (
-                <SkeletonText noOfLines={2} spacing="2" skeletonHeight="1" />
-              )}
-              {users && (
-                <SingleSelect
-                  placeholder="Select option"
-                  {...field}
-                  size="sm"
-                  items={users.sort().map((m) => ({
-                    value: m.id,
-                    label: m.name,
-                  }))}
-                />
-              )}
+              <SingleSelect
+                placeholder="Select option"
+                {...field}
+                size="sm"
+                items={
+                  !isLoading && users
+                    ? users.sort().map((m) => ({
+                        value: m.id,
+                        label: m.name,
+                      }))
+                    : ["Loading"]
+                }
+              />
               <FormErrorMessage>{error?.message}</FormErrorMessage>
             </FormControl>
           )}
