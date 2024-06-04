@@ -2,7 +2,7 @@ import { PrismaClient, Prisma } from "@prisma/client";
 import {
   generateHashPassword,
   generatePlainPassword,
-} from "@/utils/generate-pw";
+} from "../src/utils/generate-pw";
 
 const prisma = new PrismaClient();
 

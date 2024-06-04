@@ -46,19 +46,25 @@ const UserList = ({ session }: SessionProps) => {
   const [editingRowId, setEditingRowId] = useState<string>("");
   const [addUser, setAddUser] = useState<boolean>(false);
 
+  const getUsers = trpc.users.findAll.useQuery();
+
+  const putUsers = async () => {
+    const res = await getUsers.refetch();
+    if (!res.data) return;
+    setUsers(res.data.sort((a, b) => a.name.localeCompare(b.name)));
+  };
+
+  useEffect(() => {
+    putUsers();
+  }, []);
+
   useEffect(() => {
     if (formMsg) {
       setTimeout(() => setFormMsg(null), 3000);
-      (async () => {
-        const res = await getUsers.refetch();
-        if (!res.data) return;
-        setUsers(res.data.sort((a, b) => a.name.localeCompare(b.name)));
-      })();
+      putUsers();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formMsg]);
 
-  const getUsers = trpc.users.findAll.useQuery();
   const updateUserName = trpc.users.updateName.useMutation({
     onSuccess: () => {
       setEditingRowId("");
