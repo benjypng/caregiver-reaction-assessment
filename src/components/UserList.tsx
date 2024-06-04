@@ -56,6 +56,7 @@ const UserList = ({ session }: SessionProps) => {
 
   useEffect(() => {
     putUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
