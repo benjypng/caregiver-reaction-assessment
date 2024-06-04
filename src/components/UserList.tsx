@@ -64,6 +64,7 @@ const UserList = ({ session }: SessionProps) => {
       setTimeout(() => setFormMsg(null), 3000);
       putUsers();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formMsg]);
 
   const updateUserName = trpc.users.updateName.useMutation({
