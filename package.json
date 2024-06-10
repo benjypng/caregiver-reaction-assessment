@@ -33,6 +33,7 @@
     "bcrypt": "^5.1.1",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.18.0",
+    "inter-ui": "^4.0.2",
     "next": "13.5.6",
     "next-auth": "^4.24.7",
     "nodemailer": "^6.9.13",
@@ -42,6 +43,7 @@
     "react-hook-form": "^7.51.4",
     "react-icons": "^4.12.0",
     "resend": "^2.1.0",
+    "sass": "^1.77.4",
     "superjson": "^2.2.1",
     "zod": "^3.23.8",
     "zod-prisma-types-monorepo": "github:chrishoermann/zod-prisma-types"

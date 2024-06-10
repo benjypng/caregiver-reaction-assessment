@@ -1,3 +1,5 @@
+import "../styles/main.scss";
+
 import Head from "next/head";
 import type { AppProps, AppType } from "next/app";
 import { trpc } from "../utils/trpc-hooks";
