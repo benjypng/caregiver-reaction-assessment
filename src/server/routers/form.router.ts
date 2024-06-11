@@ -1,7 +1,9 @@
-import { z } from "zod";
-import { router, procedure, protectedProcedure } from "../trpc";
-import { FormSchema } from "prisma/zod/schema";
-import { transporter } from "@/utils/transporter";
+import { FormSchema } from 'prisma/zod/schema';
+import { z } from 'zod';
+
+import { transporter } from '@/utils/transporter';
+
+import { procedure, protectedProcedure, router } from '../trpc';
 
 export const formRouter = router({
   getAllForms: protectedProcedure.query(async ({ ctx }) => {
@@ -48,7 +50,7 @@ export const formRouter = router({
         // Send email
         transporter.sendMail({
           to: user.email,
-          subject: "[For info pls] New CRA Form",
+          subject: '[For info pls] New CRA Form',
           text: `A new CRA form has been submitted on ${input.survey_date}. Link: http://localhost:3000/cra-results/${craForm.id}`,
           html: `<p>A new CRA form has been submitted on ${input.survey_date}</p> Link: <a href="http://localhost:3000/cra-results/${craForm.id}">View Form</a>`,
         });

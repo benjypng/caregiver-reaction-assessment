@@ -8,9 +8,12 @@
   ],
   "plugins": [
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "simple-import-sort"
   ],
   "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": "error",
@@ -25,5 +28,9 @@
         "varsIgnorePattern": "^_"
       }
     ]
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
   }
 }

@@ -1,10 +1,10 @@
-import type { Adapter } from "next-auth/adapters";
-import NextAuth, { AuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { CredentialsSchema } from "prisma/zod/schema";
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
+import NextAuth, { AuthOptions } from 'next-auth';
+import type { Adapter } from 'next-auth/adapters';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { CredentialsSchema } from 'prisma/zod/schema';
 
 const prisma = new PrismaClient();
 
@@ -12,10 +12,10 @@ export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         const creds = await CredentialsSchema.parseAsync(credentials);
@@ -41,11 +41,11 @@ export const authOptions: AuthOptions = {
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 3600,
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV === "development",
+  debug: process.env.NODE_ENV === 'development',
   callbacks: {
     async jwt({ token, user }: { token: any; user: any }) {
       if (user) {

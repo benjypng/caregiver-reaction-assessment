@@ -1,36 +1,37 @@
-import { trpc } from "@/utils/trpc-hooks";
-import { Box, FormControl, Text } from "@chakra-ui/react";
+import { Box, FormControl, Text } from '@chakra-ui/react';
 import {
   Button,
   FormErrorMessage,
   FormLabel,
   Input,
-} from "@opengovsg/design-system-react";
-import { useSession } from "next-auth/react";
-import React, { useState } from "react";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+} from '@opengovsg/design-system-react';
+import { useSession } from 'next-auth/react';
+import React, { useState } from 'react';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
+
+import { trpc } from '@/utils/trpc-hooks';
 
 type FormMessage = {
-  type: "error" | "success";
+  type: 'error' | 'success';
   message: string;
 };
 
 const ChangePassword = () => {
   const session = useSession();
-  const formMethods = useForm<{ newpassword: string }>({ mode: "onBlur" });
+  const formMethods = useForm<{ newpassword: string }>({ mode: 'onBlur' });
   const [formMsg, setFormMsg] = useState<FormMessage | null>();
 
   const updatePassword = trpc.users.updatePassword.useMutation({
     onSuccess: () => {
       setFormMsg({
-        type: "success",
-        message: "Password updated successfully",
+        type: 'success',
+        message: 'Password updated successfully',
       });
     },
     onError: (error) => {
       const errorArr = JSON.parse(error.message);
       setFormMsg({
-        type: "error",
+        type: 'error',
         message: errorArr[0].message,
       });
     },
@@ -53,7 +54,7 @@ const ChangePassword = () => {
       <FormProvider {...formMethods}>
         <Controller
           name="newpassword"
-          rules={{ required: "Required" }}
+          rules={{ required: 'Required' }}
           render={({ field, fieldState: { error } }) => (
             <FormControl isInvalid={!!error}>
               <FormLabel isRequired mb={1}>
@@ -69,7 +70,7 @@ const ChangePassword = () => {
         </Button>
         <Text
           fontSize="small"
-          color={formMsg?.type === "error" ? "red" : "blue"}
+          color={formMsg?.type === 'error' ? 'red' : 'blue'}
           mt="3"
         >
           {formMsg?.message}

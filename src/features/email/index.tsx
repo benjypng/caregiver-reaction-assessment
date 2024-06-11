@@ -1,5 +1,6 @@
-import { Link } from "@react-email/link";
-import { getBaseUrl } from "@/utils/trpc-hooks";
+import { Link } from '@react-email/link';
+
+import { getBaseUrl } from '@/utils/trpc-hooks';
 
 interface EmailTemplateProps {
   resultId: string;

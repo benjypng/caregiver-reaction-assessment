@@ -1,11 +1,13 @@
-import { router, procedure, protectedProcedure } from "../trpc";
-import { z } from "zod";
-import bcrypt from "bcrypt";
-import { transporter } from "@/utils/transporter";
+import bcrypt from 'bcrypt';
+import { z } from 'zod';
+
 import {
   generateHashPassword,
   generatePlainPassword,
-} from "@/utils/generate-pw";
+} from '@/utils/generate-pw';
+import { transporter } from '@/utils/transporter';
+
+import { procedure, protectedProcedure, router } from '../trpc';
 
 export const userRouter = router({
   findAll: procedure.query(async ({ ctx }) => {
@@ -57,7 +59,7 @@ export const userRouter = router({
         });
         transporter.sendMail({
           to: user.email,
-          subject: "New Password",
+          subject: 'New Password',
           text: `Your new password is ${plain}. You are encouraged to change it after you log in for the first time.`,
           html: `<p>Your new password is ${plain}</p><p>You are encouraged to change it after you log in for the first time.`,
         });
@@ -73,7 +75,7 @@ export const userRouter = router({
         },
       });
 
-      if (existingUser) throw new Error("Email already exists");
+      if (existingUser) throw new Error('Email already exists');
 
       return await ctx.prisma.user.create({
         data: {

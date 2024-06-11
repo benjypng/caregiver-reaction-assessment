@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   Flex,
   FormControl,
@@ -9,18 +8,21 @@ import {
   Th,
   Thead,
   Tr,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   Button,
   FormErrorMessage,
   Input,
   Tag,
-} from "@opengovsg/design-system-react";
-import { trpc } from "@/utils/trpc-hooks";
-import { User } from "@prisma/client";
-import { Controller, FormProvider, useForm } from "react-hook-form";
-import NewUser from "./NewUser";
-import { Session } from "next-auth";
+} from '@opengovsg/design-system-react';
+import { User } from '@prisma/client';
+import { Session } from 'next-auth';
+import React, { useEffect, useState } from 'react';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
+
+import { trpc } from '@/utils/trpc-hooks';
+
+import NewUser from './NewUser';
 
 type NewUser = {
   name: string;
@@ -32,18 +34,18 @@ type SessionProps = {
 };
 
 type FormMessage = {
-  type: "error" | "success";
+  type: 'error' | 'success';
   message: string;
 };
 
 const UserList = ({ session }: SessionProps) => {
   const formMethods = useForm<NewUser>({
-    mode: "onBlur",
+    mode: 'onBlur',
   });
 
   const [users, setUsers] = useState<Partial<User>[]>([]);
   const [formMsg, setFormMsg] = useState<FormMessage | null>();
-  const [editingRowId, setEditingRowId] = useState<string>("");
+  const [editingRowId, setEditingRowId] = useState<string>('');
   const [addUser, setAddUser] = useState<boolean>(false);
 
   const getUsers = trpc.users.findAll.useQuery();
@@ -69,15 +71,15 @@ const UserList = ({ session }: SessionProps) => {
 
   const updateUserName = trpc.users.updateName.useMutation({
     onSuccess: () => {
-      setEditingRowId("");
+      setEditingRowId('');
       setFormMsg({
-        type: "success",
-        message: "User updated",
+        type: 'success',
+        message: 'User updated',
       });
     },
     onError(error) {
       setFormMsg({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     },
@@ -85,13 +87,13 @@ const UserList = ({ session }: SessionProps) => {
   const deleteUser = trpc.users.deleteOne.useMutation({
     onSuccess: () => {
       setFormMsg({
-        type: "success",
-        message: "User deleted",
+        type: 'success',
+        message: 'User deleted',
       });
     },
     onError(error) {
       setFormMsg({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     },
@@ -102,7 +104,7 @@ const UserList = ({ session }: SessionProps) => {
     },
     onError(error) {
       setFormMsg({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     },
@@ -111,13 +113,13 @@ const UserList = ({ session }: SessionProps) => {
   const sendPwToUser = trpc.users.sendPassword.useMutation({
     onSuccess: () => {
       setFormMsg({
-        type: "success",
-        message: "Password successfully sent",
+        type: 'success',
+        message: 'Password successfully sent',
       });
     },
     onError(error) {
       setFormMsg({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     },
@@ -146,7 +148,7 @@ const UserList = ({ session }: SessionProps) => {
           <Button onClick={() => setAddUser(true)}>Add User</Button>
           <Text
             alignSelf="center"
-            color={formMsg?.type === "success" ? "green" : "red"}
+            color={formMsg?.type === 'success' ? 'green' : 'red'}
           >
             {formMsg?.message}
           </Text>
@@ -202,7 +204,7 @@ const UserList = ({ session }: SessionProps) => {
                     <Th>
                       <Text ml="2" mb="1">
                         {user.name}
-                      </Text>{" "}
+                      </Text>{' '}
                       <Tag size="xs">{user.email}</Tag>
                     </Th>
                   )}
@@ -211,7 +213,7 @@ const UserList = ({ session }: SessionProps) => {
                       <Th>
                         <Controller
                           name="name"
-                          rules={{ required: "Required" }}
+                          rules={{ required: 'Required' }}
                           render={({ field, fieldState: { error } }) => (
                             <FormControl isInvalid={!!error}>
                               <Input
@@ -232,7 +234,7 @@ const UserList = ({ session }: SessionProps) => {
                     <Th>
                       {editingRowId === user.id && (
                         <>
-                          {" "}
+                          {' '}
                           <Button
                             variant="ghost"
                             size="xs"
@@ -245,7 +247,7 @@ const UserList = ({ session }: SessionProps) => {
                             variant="ghost"
                             size="xs"
                             color="red"
-                            onClick={() => setEditingRowId("")}
+                            onClick={() => setEditingRowId('')}
                           >
                             Cancel
                           </Button>

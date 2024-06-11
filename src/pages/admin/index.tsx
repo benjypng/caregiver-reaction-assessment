@@ -1,21 +1,22 @@
-import { useSession } from "next-auth/react";
-import { useState } from "react";
-import FormsTable from "@/components/FormsTable";
-import UserList from "@/components/UserList";
-import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
-import { Button } from "@opengovsg/design-system-react";
-import { useRouter } from "next/navigation";
+import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
+import { Button } from '@opengovsg/design-system-react';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { useState } from 'react';
+
+import FormsTable from '@/components/FormsTable';
+import UserList from '@/components/UserList';
 
 const AdminDashboard = () => {
   const router = useRouter();
   const [manageUsers, setManageUsers] = useState(false);
   const { data: session, status } = useSession();
 
-  if (status === "unauthenticated") router.push("/");
+  if (status === 'unauthenticated') router.push('/');
 
   return (
     <>
-      {status === "authenticated" && (
+      {status === 'authenticated' && (
         <Box>
           <Flex>
             <Text textStyle="h4" mb="5">

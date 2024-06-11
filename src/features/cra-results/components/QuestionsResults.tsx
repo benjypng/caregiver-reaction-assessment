@@ -1,14 +1,16 @@
-import { FormWithUser, ProfileContext } from "@/pages/cra-results/[id]";
-import { Box, StackDivider, Stack, Heading } from "@chakra-ui/react";
-import React, { useContext } from "react";
-import questions from "@/constants/questions.json";
-import QuestionComponent from "./QuestionComponent";
+import { Box, Heading, Stack, StackDivider } from '@chakra-ui/react';
+import React, { useContext } from 'react';
+
+import questions from '@/constants/questions.json';
+import { FormWithUser, ProfileContext } from '@/pages/cra-results/[id]';
+
+import QuestionComponent from './QuestionComponent';
 
 const filterArrayByIndex = (indexArr: number[]) => {
   return questions
     .sort((a: { no: string }, b: { no: string }) => {
-      const noA = parseInt(a.no.replace("qn", ""));
-      const noB = parseInt(b.no.replace("qn", ""));
+      const noA = parseInt(a.no.replace('qn', ''));
+      const noB = parseInt(b.no.replace('qn', ''));
       return noA - noB;
     })
     .filter((d, i) => indexArr.indexOf(i + 1) !== -1);

@@ -1,9 +1,10 @@
-import type { inferAsyncReturnType } from "@trpc/server";
-import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import prisma from "prisma/client";
-import { Session } from "next-auth";
+import type { inferAsyncReturnType } from '@trpc/server';
+import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
+import { Session } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
+import prisma from 'prisma/client';
+
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface CreateContextOptions {

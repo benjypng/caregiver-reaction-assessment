@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { Button, Text, Box } from "@chakra-ui/react";
-import SurveyDetails from "@/features/cra-form/components/SurveyDetails";
-import CaregiverDetails from "@/features/cra-form/components/CaregiverDetails";
-import Questions from "@/features/cra-form/components/Questions";
-import { Form } from "@prisma/client";
-import { trpc } from "@/utils/trpc-hooks";
-import { useRouter } from "next/navigation";
-import { calculateScore } from "@/libs/calculate-score";
-import Citations from "@/features/cra-form/components/Citations";
+import { Box, Button, Text } from '@chakra-ui/react';
+import { Form } from '@prisma/client';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+
+import CaregiverDetails from '@/features/cra-form/components/CaregiverDetails';
+import Citations from '@/features/cra-form/components/Citations';
+import Questions from '@/features/cra-form/components/Questions';
+import SurveyDetails from '@/features/cra-form/components/SurveyDetails';
+import { calculateScore } from '@/libs/calculate-score';
+import { trpc } from '@/utils/trpc-hooks';
 
 export default function Home() {
   const router = useRouter();
   const formMethods = useForm<Form>({
-    mode: "onBlur",
+    mode: 'onBlur',
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
 
@@ -38,7 +39,7 @@ export default function Home() {
   };
 
   return (
-    <Box maxW={["100%", "100%", "90%"]}>
+    <Box maxW={['100%', '100%', '90%']}>
       <Text textStyle="h3" mb="8">
         Caregiver Reaction Assessment
       </Text>

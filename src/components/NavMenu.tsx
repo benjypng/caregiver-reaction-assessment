@@ -1,8 +1,8 @@
-import React from "react";
-import { Flex, Spacer, Text } from "@chakra-ui/react";
-import NextLink from "next/link";
-import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { Flex, Spacer, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import React from 'react';
 
 const NavMenu = () => {
   const { status } = useSession();
@@ -24,24 +24,24 @@ const NavMenu = () => {
           Home
         </Text>
       </NextLink>
-      {" | "}
-      {status === "unauthenticated" && (
+      {' | '}
+      {status === 'unauthenticated' && (
         <NextLink passHref href="/api/auth/signin">
           <Text textDecoration="underline" color="white">
             Sign In
           </Text>
         </NextLink>
       )}
-      {status === "authenticated" && (
+      {status === 'authenticated' && (
         <>
-          {currPath === "/" && (
+          {currPath === '/' && (
             <>
               <NextLink passHref href="/admin">
                 <Text textDecoration="underline" color="white">
                   Admin
                 </Text>
               </NextLink>
-              {" | "}
+              {' | '}
             </>
           )}
           <NextLink passHref href="/api/auth/signout">
@@ -52,7 +52,7 @@ const NavMenu = () => {
         </>
       )}
       <Spacer />
-      {status === "authenticated" && (
+      {status === 'authenticated' && (
         <NextLink passHref href="/change-password">
           <Text textDecoration="underline" color="white">
             Change Password

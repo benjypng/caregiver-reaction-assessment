@@ -1,14 +1,15 @@
-import { ProfileContext } from "@/pages/cra-results/[id]";
 import {
   Box,
-  Text,
   Card,
   CardBody,
   CardHeader,
   Heading,
   Spacer,
-} from "@chakra-ui/react";
-import React, { useContext } from "react";
+  Text,
+} from '@chakra-ui/react';
+import React, { useContext } from 'react';
+
+import { ProfileContext } from '@/pages/cra-results/[id]';
 
 const Score = () => {
   const profile = useContext(ProfileContext);
@@ -20,7 +21,7 @@ const Score = () => {
         <Heading size="md">Client Report</Heading>
       </CardHeader>
 
-      <CardBody display={{ md: "flex" }}>
+      <CardBody display={{ md: 'flex' }}>
         <Box p="2" w="100%" display="flex" flexDir="column">
           <Heading size="xs" textTransform="uppercase">
             Disturbed Schedule & Poor Health

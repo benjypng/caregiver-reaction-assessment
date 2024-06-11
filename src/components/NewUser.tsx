@@ -1,7 +1,7 @@
-import { Flex, FormControl } from "@chakra-ui/react";
-import { FormErrorMessage, Input } from "@opengovsg/design-system-react";
-import React from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { Flex, FormControl } from '@chakra-ui/react';
+import { FormErrorMessage, Input } from '@opengovsg/design-system-react';
+import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const NewUser = () => {
   const { control } = useFormContext();
@@ -11,7 +11,7 @@ const NewUser = () => {
       <Controller
         control={control}
         name="name"
-        rules={{ required: "Required" }}
+        rules={{ required: 'Required' }}
         render={({ field, fieldState: { error } }) => (
           <FormControl isInvalid={!!error}>
             <Input {...field} size="xs" width="auto" placeholder="Name" />
@@ -23,10 +23,10 @@ const NewUser = () => {
         control={control}
         name="email"
         rules={{
-          required: "Required",
+          required: 'Required',
           pattern: {
             value: /^\S+@\S+$/i,
-            message: "Invalid email",
+            message: 'Invalid email',
           },
         }}
         render={({ field, fieldState: { error } }) => (

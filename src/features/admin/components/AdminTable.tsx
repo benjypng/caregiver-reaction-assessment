@@ -1,30 +1,31 @@
-import { useState } from "react";
+import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
 import {
-  Thead,
-  Table,
-  Tbody,
-  Tr,
-  Th,
-  Td,
+  Box,
   chakra,
   Menu,
   MenuButton,
+  MenuItemOption,
   MenuList,
   MenuOptionGroup,
-  MenuItemOption,
-  Box,
-} from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from '@chakra-ui/react';
+import { Button } from '@opengovsg/design-system-react';
 import {
-  useReactTable,
   flexRender,
   getCoreRowModel,
-  SortingState,
   getSortedRowModel,
-} from "@tanstack/react-table";
-import { columns } from "@/libs/table-helpers/columns";
-import { Button } from "@opengovsg/design-system-react";
-import { FormWithUser } from "@/pages/cra-results/[id]";
+  SortingState,
+  useReactTable,
+} from '@tanstack/react-table';
+import { useState } from 'react';
+
+import { columns } from '@/libs/table-helpers/columns';
+import { FormWithUser } from '@/pages/cra-results/[id]';
 
 export type AdminTableProps = {
   data: FormWithUser[];
@@ -86,7 +87,7 @@ const AdminTable = ({ data }: AdminTableProps) => {
                     <Th
                       bg="gray.100"
                       key={header.id}
-                      _hover={{ cursor: "pointer" }}
+                      _hover={{ cursor: 'pointer' }}
                       onClick={header.column.getToggleSortingHandler()}
                       isNumeric={meta?.isNumeric}
                     >
@@ -97,7 +98,7 @@ const AdminTable = ({ data }: AdminTableProps) => {
 
                       <chakra.span pl="4">
                         {header.column.getIsSorted() ? (
-                          header.column.getIsSorted() === "desc" ? (
+                          header.column.getIsSorted() === 'desc' ? (
                             <TriangleDownIcon aria-label="sorted descending" />
                           ) : (
                             <TriangleUpIcon aria-label="sorted ascending" />

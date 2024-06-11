@@ -1,6 +1,6 @@
-import { FormControl, FormLabel } from "@chakra-ui/react";
-import { FormErrorMessage, SingleSelect } from "@opengovsg/design-system-react";
-import { Controller, useFormContext } from "react-hook-form";
+import { FormControl, FormLabel } from '@chakra-ui/react';
+import { FormErrorMessage, SingleSelect } from '@opengovsg/design-system-react';
+import { Controller, useFormContext } from 'react-hook-form';
 
 type CaregiverSelectProps = {
   name: string;
@@ -19,7 +19,7 @@ const CaregiverSelect = ({
     <Controller
       control={control}
       name={name}
-      rules={{ required: "Required" }}
+      rules={{ required: 'Required' }}
       render={({ field, fieldState: { error } }) => (
         <FormControl isInvalid={!!error}>
           <FormLabel mb={1}>{description}</FormLabel>

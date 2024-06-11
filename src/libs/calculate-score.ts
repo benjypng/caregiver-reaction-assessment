@@ -1,4 +1,4 @@
-import { Form } from "@prisma/client";
+import { Form } from '@prisma/client';
 
 // Scoring Rubrics
 // Disturbed schedule and poor health: 	Items 1, 4, 6, 7, 13, 14, 16 and 18.

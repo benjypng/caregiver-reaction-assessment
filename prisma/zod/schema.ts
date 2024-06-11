@@ -1,48 +1,48 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const age_groupSchema = z.enum([
-  "BELOW_21",
-  "FROM_21_TO_30",
-  "FROM_31_TO_40",
-  "FROM_41_TO_50",
-  "FROM_51_TO_60",
-  "FROM_61_TO_70",
-  "ABOVE_70",
+  'BELOW_21',
+  'FROM_21_TO_30',
+  'FROM_31_TO_40',
+  'FROM_41_TO_50',
+  'FROM_51_TO_60',
+  'FROM_61_TO_70',
+  'ABOVE_70',
 ]);
 
-export const genderSchema = z.enum(["MALE", "FEMALE", "OTHERS"]);
+export const genderSchema = z.enum(['MALE', 'FEMALE', 'OTHERS']);
 
-export const raceSchema = z.enum(["CHINESE", "MALAY", "INDIAN", "OTHERS"]);
+export const raceSchema = z.enum(['CHINESE', 'MALAY', 'INDIAN', 'OTHERS']);
 
 export const marital_statusSchema = z.enum([
-  "SINGLE",
-  "MARRIED",
-  "WIDOWED",
-  "DIVORCED",
+  'SINGLE',
+  'MARRIED',
+  'WIDOWED',
+  'DIVORCED',
 ]);
 
 export const education_levelSchema = z.enum([
-  "PRIMARY",
-  "SECONDARY",
-  "ITE",
-  "DIPLOMA",
-  "OTHERS",
-  "DEGREE",
+  'PRIMARY',
+  'SECONDARY',
+  'ITE',
+  'DIPLOMA',
+  'OTHERS',
+  'DEGREE',
 ]);
 
 export const employment_statusSchema = z.enum([
-  "FULLTIME",
-  "PARTTIME",
-  "UNEMPLOYED",
+  'FULLTIME',
+  'PARTTIME',
+  'UNEMPLOYED',
 ]);
 
 export const caregiving_lengthSchema = z.enum([
-  "BELOW_1_YEAR",
-  "FROM_1_TO_3_YEARS",
-  "FROM_4_TO_6_YEARS",
-  "FROM_7_TO_10_YEARS",
-  "FROM_11_TO_20_YEARS",
-  "ABOVE_21_YEARS",
+  'BELOW_1_YEAR',
+  'FROM_1_TO_3_YEARS',
+  'FROM_4_TO_6_YEARS',
+  'FROM_7_TO_10_YEARS',
+  'FROM_11_TO_20_YEARS',
+  'ABOVE_21_YEARS',
 ]);
 
 export const FormSchema = z.object({

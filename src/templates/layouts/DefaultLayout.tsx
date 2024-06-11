@@ -1,6 +1,7 @@
-import { type ReactNode } from "react";
-import { Box } from "@chakra-ui/react";
-import NavMenu from "@/components/NavMenu";
+import { Box } from '@chakra-ui/react';
+import { type ReactNode } from 'react';
+
+import NavMenu from '@/components/NavMenu';
 
 type DefaultLayoutProps = { children: ReactNode };
 
