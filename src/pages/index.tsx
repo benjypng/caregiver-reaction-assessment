@@ -1,4 +1,4 @@
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import { Form } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -19,8 +19,7 @@ export default function Home() {
   const [submitting, setSubmitting] = useState<boolean>(false);
 
   const submitForm = trpc.forms.submitForm.useMutation({
-    onError: (response) => {
-      console.log(response);
+    onError: () => {
       setSubmitting(false);
     },
     onSettled: async (response) => {
@@ -40,9 +39,6 @@ export default function Home() {
 
   return (
     <Box maxW={['100%', '100%', '90%']}>
-      <Text textStyle="h3" mb="8">
-        Caregiver Reaction Assessment
-      </Text>
       <FormProvider {...formMethods}>
         <SurveyDetails />
         <CaregiverDetails />

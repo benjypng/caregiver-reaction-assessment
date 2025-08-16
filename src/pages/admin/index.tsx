@@ -1,5 +1,4 @@
-import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
-import { Button } from '@opengovsg/design-system-react';
+import { Box, Button, Flex, Spacer, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';

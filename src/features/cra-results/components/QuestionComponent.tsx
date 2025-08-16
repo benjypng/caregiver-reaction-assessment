@@ -32,7 +32,7 @@ const QuestionComponent = ({ q, question }: QuestionComponentProps) => {
         </Text>
       </Box>
       <Spacer />
-      <Tag colorScheme="facebook">{handleQuestions(question)}</Tag>
+      <Tag colorScheme="blue">{handleQuestions(question)}</Tag>
     </Flex>
   );
 };

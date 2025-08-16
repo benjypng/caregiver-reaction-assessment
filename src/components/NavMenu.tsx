@@ -1,66 +1,47 @@
-import { Flex, Spacer, Text } from '@chakra-ui/react';
-import NextLink from 'next/link';
-import { usePathname } from 'next/navigation';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import {
+  HStack,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import React from 'react';
 
-const NavMenu = () => {
+export const NavMenu = () => {
+  const router = useRouter();
   const { status } = useSession();
-  const currPath = usePathname();
 
   return (
-    <Flex
-      pos="fixed"
-      bottom="0"
-      w="100%"
-      fontSize="sm"
-      bgColor="telegram.500"
-      color="white"
-      mt="0"
-      p="3"
-    >
-      <NextLink passHref href="/">
-        <Text textDecoration="underline" color="white">
-          Home
-        </Text>
-      </NextLink>
-      {' | '}
-      {status === 'unauthenticated' && (
-        <NextLink passHref href="/api/auth/signin">
-          <Text textDecoration="underline" color="white">
-            Sign In
-          </Text>
-        </NextLink>
-      )}
-      {status === 'authenticated' && (
-        <>
-          {currPath === '/' && (
-            <>
-              <NextLink passHref href="/admin">
-                <Text textDecoration="underline" color="white">
-                  Admin
-                </Text>
-              </NextLink>
-              {' | '}
-            </>
-          )}
-          <NextLink passHref href="/api/auth/signout">
-            <Text textDecoration="underline" color="white">
+    <HStack justifyContent="space-between" alignItems="center" p="5">
+      <Text textStyle="h3" cursor="pointer" onClick={() => router.push('/')}>
+        Caregiver Reaction Assessment
+      </Text>
+      <Menu>
+        <MenuButton
+          as={IconButton}
+          aria-label="Open menu"
+          icon={<HamburgerIcon />}
+          variant="ghost"
+        />
+        <MenuList>
+          <MenuItem onClick={() => router.push('/')}>
+            Create New Survey
+          </MenuItem>
+          {status === 'authenticated' ? (
+            <MenuItem onClick={() => router.push('/api/auth/signout')}>
               Sign Out
-            </Text>
-          </NextLink>
-        </>
-      )}
-      <Spacer />
-      {status === 'authenticated' && (
-        <NextLink passHref href="/change-password">
-          <Text textDecoration="underline" color="white">
-            Change Password
-          </Text>
-        </NextLink>
-      )}
-    </Flex>
+            </MenuItem>
+          ) : (
+            <MenuItem onClick={() => router.push('/api/auth/signin')}>
+              Sign In
+            </MenuItem>
+          )}
+        </MenuList>
+      </Menu>
+    </HStack>
   );
 };
-
-export default NavMenu;

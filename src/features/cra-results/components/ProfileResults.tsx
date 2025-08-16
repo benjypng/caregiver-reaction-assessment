@@ -26,7 +26,7 @@ const ProfileResults = () => {
 
   return (
     <Card mb="10">
-      <CardHeader display="flex">
+      <CardHeader display="flex" justifyContent="space-between">
         <Text textStyle="h4">Profile: {profile.id}</Text>
       </CardHeader>
       <CardBody>

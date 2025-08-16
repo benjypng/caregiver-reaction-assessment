@@ -1,20 +1,18 @@
 import {
+  Button,
   Flex,
   FormControl,
+  FormErrorMessage,
+  Input,
   Table,
   TableContainer,
+  Tag,
   Tbody,
   Text,
   Th,
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import {
-  Button,
-  FormErrorMessage,
-  Input,
-  Tag,
-} from '@opengovsg/design-system-react';
 import { User } from '@prisma/client';
 import { Session } from 'next-auth';
 import React, { useEffect, useState } from 'react';

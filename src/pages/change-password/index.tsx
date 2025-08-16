@@ -1,10 +1,12 @@
-import { Box, FormControl, Text } from '@chakra-ui/react';
 import {
+  Box,
   Button,
+  FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
-} from '@opengovsg/design-system-react';
+  Text,
+} from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
@@ -57,9 +59,7 @@ const ChangePassword = () => {
           rules={{ required: 'Required' }}
           render={({ field, fieldState: { error } }) => (
             <FormControl isInvalid={!!error}>
-              <FormLabel isRequired mb={1}>
-                New Password
-              </FormLabel>
+              <FormLabel mb={1}>New Password</FormLabel>
               <Input {...field} size="sm" width="200" />
               <FormErrorMessage>{error?.message}</FormErrorMessage>
             </FormControl>

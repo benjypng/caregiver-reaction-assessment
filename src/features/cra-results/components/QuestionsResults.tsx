@@ -13,7 +13,7 @@ const filterArrayByIndex = (indexArr: number[]) => {
       const noB = parseInt(b.no.replace('qn', ''));
       return noA - noB;
     })
-    .filter((d, i) => indexArr.indexOf(i + 1) !== -1);
+    .filter((_d, i) => indexArr.indexOf(i + 1) !== -1);
 };
 
 const QuestionsResults = () => {
@@ -34,7 +34,7 @@ const QuestionsResults = () => {
   return (
     <Box px="3">
       <Stack divider={<StackDivider borderWidth="medium" />} spacing="4">
-        <Heading size="sm">Disturbed Schedule && Poor Health</Heading>
+        <Heading size="sm">Disturbed Schedule & Poor Health</Heading>
         {poorHealthQns.map((q, index: number) => {
           const question = profile[q.no as keyof FormWithUser] as string;
           return <QuestionComponent key={index} q={q} question={question} />;
