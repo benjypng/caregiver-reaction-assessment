@@ -1,9 +1,9 @@
-import { FormSchema } from 'prisma/zod/schema';
-import { z } from 'zod';
+import { FormSchema } from 'prisma/zod/schema'
+import { z } from 'zod'
 
-import { transporter } from '@/utils/transporter';
+import { transporter } from '@/utils/transporter'
 
-import { procedure, protectedProcedure, router } from '../trpc';
+import { procedure, protectedProcedure, router } from '../trpc'
 
 export const formRouter = router({
   getAllForms: protectedProcedure.query(async ({ ctx }) => {
@@ -11,7 +11,7 @@ export const formRouter = router({
       include: {
         User: true,
       },
-    });
+    })
   }),
   getForm: procedure
     .input(
@@ -31,12 +31,12 @@ export const formRouter = router({
             },
           },
         },
-      });
+      })
     }),
   submitForm: procedure.input(FormSchema).mutation(async ({ input, ctx }) => {
     const craForm = await ctx.prisma.form.create({
       data: input,
-    });
+    })
 
     if (input.userId) {
       // Get user
@@ -44,7 +44,7 @@ export const formRouter = router({
         where: {
           id: input.userId,
         },
-      });
+      })
 
       if (user) {
         // Send email
@@ -53,10 +53,10 @@ export const formRouter = router({
           subject: '[For info pls] New CRA Form',
           text: `A new CRA form has been submitted on ${input.survey_date}. Link: http://localhost:3000/cra-results/${craForm.id}`,
           html: `<p>A new CRA form has been submitted on ${input.survey_date}</p> Link: <a href="http://localhost:3000/cra-results/${craForm.id}">View Form</a>`,
-        });
+        })
       }
     }
 
-    return craForm;
+    return craForm
   }),
-});
+})

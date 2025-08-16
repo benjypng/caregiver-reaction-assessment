@@ -6,23 +6,23 @@ import {
   Stack,
   StackDivider,
   Text,
-} from '@chakra-ui/react';
-import { format } from 'date-fns';
-import { useContext } from 'react';
+} from '@chakra-ui/react'
+import { format } from 'date-fns'
+import { useContext } from 'react'
 
-import { handleAge } from '@/libs/table-helpers/handle-age';
-import { handleCapitalise } from '@/libs/table-helpers/handle-capitalise';
-import { handleCaregivingLength } from '@/libs/table-helpers/handle-caregiving-length';
-import { handleMainCaregiver } from '@/libs/table-helpers/handle-main-caregiver';
-import { ProfileContext } from '@/pages/cra-results/[id]';
+import { handleAge } from '@/libs/table-helpers/handle-age'
+import { handleCapitalise } from '@/libs/table-helpers/handle-capitalise'
+import { handleCaregivingLength } from '@/libs/table-helpers/handle-caregiving-length'
+import { handleMainCaregiver } from '@/libs/table-helpers/handle-main-caregiver'
+import { ProfileContext } from '@/pages/cra-results/[id]'
 
-import ProfileCard from './ProfileCard';
+import ProfileCard from './ProfileCard'
 
 const ProfileResults = () => {
-  const profile = useContext(ProfileContext);
-  if (!profile) return null;
-  const msw_name = profile.msw_name;
-  if (!msw_name) return null;
+  const profile = useContext(ProfileContext)
+  if (!profile) return null
+  const msw_name = profile.msw_name
+  if (!msw_name) return null
 
   return (
     <Card mb="10">
@@ -81,7 +81,7 @@ const ProfileResults = () => {
         </Stack>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export default ProfileResults;
+export default ProfileResults

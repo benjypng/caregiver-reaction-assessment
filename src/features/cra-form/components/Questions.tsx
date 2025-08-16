@@ -5,23 +5,23 @@ import {
   FormLabel,
   RadioGroup,
   Text,
-} from '@chakra-ui/react';
-import { Radio } from '@opengovsg/design-system-react';
-import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+} from '@chakra-ui/react'
+import { Radio } from '@opengovsg/design-system-react'
+import React from 'react'
+import { Controller, useFormContext } from 'react-hook-form'
 
-import questions from '../../../constants/questions.json';
+import questions from '../../../constants/questions.json'
 
 type Question = {
-  no: string;
-  qn: string;
-  'qn-cn': string;
-  'qn-my': string;
-  'qn-tm': string;
-};
+  no: string
+  qn: string
+  'qn-cn': string
+  'qn-my': string
+  'qn-tm': string
+}
 
 const Questions = () => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
   return (
     <>
       <Text textStyle="h5" mb="5">
@@ -29,9 +29,9 @@ const Questions = () => {
       </Text>
       {questions
         .sort((a: { no: string }, b: { no: string }) => {
-          const noA = parseInt(a.no.replace('qn', ''));
-          const noB = parseInt(b.no.replace('qn', ''));
-          return noA - noB;
+          const noA = parseInt(a.no.replace('qn', ''))
+          const noB = parseInt(b.no.replace('qn', ''))
+          return noA - noB
         })
         .map((q: Question) => (
           <Box key={q.qn}>
@@ -94,7 +94,7 @@ const Questions = () => {
           </Box>
         ))}
     </>
-  );
-};
+  )
+}
 
-export default Questions;
+export default Questions

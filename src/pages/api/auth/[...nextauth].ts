@@ -1,12 +1,12 @@
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcrypt';
-import NextAuth, { AuthOptions } from 'next-auth';
-import type { Adapter } from 'next-auth/adapters';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { CredentialsSchema } from 'prisma/zod/schema';
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import { PrismaClient } from '@prisma/client'
+import bcrypt from 'bcrypt'
+import NextAuth, { AuthOptions } from 'next-auth'
+import type { Adapter } from 'next-auth/adapters'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { CredentialsSchema } from 'prisma/zod/schema'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
@@ -18,25 +18,25 @@ export const authOptions: AuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const creds = await CredentialsSchema.parseAsync(credentials);
+        const creds = await CredentialsSchema.parseAsync(credentials)
         const user = await prisma.user.findUnique({
           where: {
             email: creds.email,
           },
-        });
+        })
 
         if (user && user.password) {
-          const isValid = await bcrypt.compare(creds.password, user.password);
+          const isValid = await bcrypt.compare(creds.password, user.password)
           if (isValid) {
             return {
               id: user.id,
               name: user.name,
               is_admin: user.is_admin,
-            };
+            }
           }
         }
         // Failed authorisation
-        return null;
+        return null
       },
     }),
   ],
@@ -49,20 +49,20 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
-        token.id = user.id;
-        token.is_admin = user.is_admin;
+        token.id = user.id
+        token.is_admin = user.is_admin
       }
-      return token;
+      return token
     },
     async session({ session, token }) {
-      session.user.id = token.id as string;
-      session.user.is_admin = token.is_admin as boolean;
-      return session;
+      session.user.id = token.id as string
+      session.user.is_admin = token.is_admin as boolean
+      return session
     },
     redirect: async ({ baseUrl }) => {
-      return Promise.resolve(`${baseUrl}/admin`);
+      return Promise.resolve(`${baseUrl}/admin`)
     },
   },
-};
+}
 
-export default NextAuth(authOptions);
+export default NextAuth(authOptions)

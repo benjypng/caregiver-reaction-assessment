@@ -1,18 +1,18 @@
-import { Box, Flex, Spacer, Tag, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Flex, Spacer, Tag, Text } from '@chakra-ui/react'
+import React from 'react'
 
-import { handleQuestions } from '@/libs/table-helpers/handle-questions';
+import { handleQuestions } from '@/libs/table-helpers/handle-questions'
 
 type QuestionComponentProps = {
   q: {
-    no: string;
-    qn: string;
-    'qn-cn': string;
-    'qn-my': string;
-    'qn-tm': string;
-  };
-  question: string;
-};
+    no: string
+    qn: string
+    'qn-cn': string
+    'qn-my': string
+    'qn-tm': string
+  }
+  question: string
+}
 
 const QuestionComponent = ({ q, question }: QuestionComponentProps) => {
   return (
@@ -34,7 +34,7 @@ const QuestionComponent = ({ q, question }: QuestionComponentProps) => {
       <Spacer />
       <Tag colorScheme="blue">{handleQuestions(question)}</Tag>
     </Flex>
-  );
-};
+  )
+}
 
-export default QuestionComponent;
+export default QuestionComponent

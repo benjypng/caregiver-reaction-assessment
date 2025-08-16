@@ -1,19 +1,19 @@
-import { FormControl, FormLabel } from '@chakra-ui/react';
-import { FormErrorMessage, SingleSelect } from '@opengovsg/design-system-react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { FormControl, FormLabel } from '@chakra-ui/react'
+import { FormErrorMessage, SingleSelect } from '@opengovsg/design-system-react'
+import { Controller, useFormContext } from 'react-hook-form'
 
 type CaregiverSelectProps = {
-  name: string;
-  description: string;
-  items: { value: string; label: string }[];
-};
+  name: string
+  description: string
+  items: { value: string; label: string }[]
+}
 
 const CaregiverSelect = ({
   name,
   description,
   items,
 }: CaregiverSelectProps) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
 
   return (
     <Controller
@@ -34,7 +34,7 @@ const CaregiverSelect = ({
         </FormControl>
       )}
     />
-  );
-};
+  )
+}
 
-export default CaregiverSelect;
+export default CaregiverSelect

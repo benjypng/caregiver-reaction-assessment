@@ -1,19 +1,19 @@
-import '../styles/main.scss';
+import '../styles/main.scss'
 
-import { Skeleton } from '@chakra-ui/react';
-import { ThemeProvider } from '@opengovsg/design-system-react';
-import type { AppProps, AppType } from 'next/app';
-import Head from 'next/head';
-import { SessionProvider } from 'next-auth/react';
-import { Suspense } from 'react';
+import { Skeleton } from '@chakra-ui/react'
+import { ThemeProvider } from '@opengovsg/design-system-react'
+import type { AppProps, AppType } from 'next/app'
+import Head from 'next/head'
+import { SessionProvider } from 'next-auth/react'
+import { Suspense } from 'react'
 
-import { NextPageWithLayout } from '../libs/types';
-import { DefaultLayout } from '../templates/layouts/DefaultLayout';
-import { trpc } from '../utils/trpc-hooks';
+import { NextPageWithLayout } from '../libs/types'
+import { DefaultLayout } from '../templates/layouts/DefaultLayout'
+import { trpc } from '../utils/trpc-hooks'
 
 type AppPropsWithAuthAndLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
+  Component: NextPageWithLayout
+}
 
 const App = ((props: AppPropsWithAuthAndLayout) => {
   return (
@@ -24,8 +24,8 @@ const App = ((props: AppPropsWithAuthAndLayout) => {
         </Suspense>
       </ThemeProvider>
     </SessionProvider>
-  );
-}) as AppType;
+  )
+}) as AppType
 
 // This is needed so suspense will be triggered for anything within the LayoutComponents which uses useSuspenseQuery
 const ChildWithLayout = ({
@@ -46,9 +46,9 @@ const ChildWithLayout = ({
         </Head>
         <DefaultLayout>{page}</DefaultLayout>
       </>
-    ));
+    ))
 
-  return <>{getLayout(<Component {...pageProps} />)}</>;
-};
+  return <>{getLayout(<Component {...pageProps} />)}</>
+}
 
-export default trpc.withTRPC(App);
+export default trpc.withTRPC(App)

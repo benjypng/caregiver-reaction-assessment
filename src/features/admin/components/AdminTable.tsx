@@ -1,4 +1,4 @@
-import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
+import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
 import {
   Box,
   chakra,
@@ -13,27 +13,27 @@ import {
   Th,
   Thead,
   Tr,
-} from '@chakra-ui/react';
-import { Button } from '@opengovsg/design-system-react';
+} from '@chakra-ui/react'
+import { Button } from '@opengovsg/design-system-react'
 import {
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   SortingState,
   useReactTable,
-} from '@tanstack/react-table';
-import { useState } from 'react';
+} from '@tanstack/react-table'
+import { useState } from 'react'
 
-import { columns } from '@/libs/table-helpers/columns';
-import { FormWithUser } from '@/pages/cra-results/[id]';
+import { columns } from '@/libs/table-helpers/columns'
+import { FormWithUser } from '@/pages/cra-results/[id]'
 
 export type AdminTableProps = {
-  data: FormWithUser[];
-};
+  data: FormWithUser[]
+}
 
 const AdminTable = ({ data }: AdminTableProps) => {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnVisibility, setColumnVisibility] = useState({});
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnVisibility, setColumnVisibility] = useState({})
 
   const table = useReactTable({
     data,
@@ -47,7 +47,7 @@ const AdminTable = ({ data }: AdminTableProps) => {
     getSortedRowModel: getSortedRowModel(),
     enableSortingRemoval: false,
     onColumnVisibilityChange: setColumnVisibility,
-  });
+  })
 
   return (
     <>
@@ -70,7 +70,7 @@ const AdminTable = ({ data }: AdminTableProps) => {
                 >
                   {column.id}
                 </MenuItemOption>
-              );
+              )
             })}
           </MenuOptionGroup>
         </MenuList>
@@ -82,7 +82,7 @@ const AdminTable = ({ data }: AdminTableProps) => {
               <Tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-                  const meta: any = header.column.columnDef.meta;
+                  const meta: any = header.column.columnDef.meta
                   return (
                     <Th
                       bg="gray.100"
@@ -106,7 +106,7 @@ const AdminTable = ({ data }: AdminTableProps) => {
                         ) : null}
                       </chakra.span>
                     </Th>
-                  );
+                  )
                 })}
               </Tr>
             ))}
@@ -116,7 +116,7 @@ const AdminTable = ({ data }: AdminTableProps) => {
               <Tr key={row.id}>
                 {row.getVisibleCells().map((cell) => {
                   // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-                  const meta: any = cell.column.columnDef.meta;
+                  const meta: any = cell.column.columnDef.meta
                   return (
                     <Td key={cell.id} isNumeric={meta?.isNumeric}>
                       {flexRender(
@@ -124,7 +124,7 @@ const AdminTable = ({ data }: AdminTableProps) => {
                         cell.getContext(),
                       )}
                     </Td>
-                  );
+                  )
                 })}
               </Tr>
             ))}
@@ -132,7 +132,7 @@ const AdminTable = ({ data }: AdminTableProps) => {
         </Table>
       </Box>
     </>
-  );
-};
+  )
+}
 
-export default AdminTable;
+export default AdminTable

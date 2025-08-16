@@ -1,8 +1,8 @@
-import { Button } from '@chakra-ui/react';
-import React from 'react';
-import { CSVLink } from 'react-csv';
+import { Button } from '@chakra-ui/react'
+import React from 'react'
+import { CSVLink } from 'react-csv'
 
-import { AdminTableProps } from './AdminTable';
+import { AdminTableProps } from './AdminTable'
 
 const ExportCSV = ({ data }: AdminTableProps) => {
   const csvData = [
@@ -110,7 +110,7 @@ const ExportCSV = ({ data }: AdminTableProps) => {
         qn21,
       ],
     ),
-  ];
+  ]
 
   return (
     <Button variant="ghost" mb="5" mr="3">
@@ -118,7 +118,7 @@ const ExportCSV = ({ data }: AdminTableProps) => {
         Export Table to CSV
       </CSVLink>
     </Button>
-  );
-};
+  )
+}
 
-export default ExportCSV;
+export default ExportCSV

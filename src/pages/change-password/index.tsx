@@ -6,47 +6,47 @@ import {
   FormLabel,
   Input,
   Text,
-} from '@chakra-ui/react';
-import { useSession } from 'next-auth/react';
-import React, { useState } from 'react';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+} from '@chakra-ui/react'
+import { useSession } from 'next-auth/react'
+import React, { useState } from 'react'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
 
-import { trpc } from '@/utils/trpc-hooks';
+import { trpc } from '@/utils/trpc-hooks'
 
 type FormMessage = {
-  type: 'error' | 'success';
-  message: string;
-};
+  type: 'error' | 'success'
+  message: string
+}
 
 const ChangePassword = () => {
-  const session = useSession();
-  const formMethods = useForm<{ newpassword: string }>({ mode: 'onBlur' });
-  const [formMsg, setFormMsg] = useState<FormMessage | null>();
+  const session = useSession()
+  const formMethods = useForm<{ newpassword: string }>({ mode: 'onBlur' })
+  const [formMsg, setFormMsg] = useState<FormMessage | null>()
 
   const updatePassword = trpc.users.updatePassword.useMutation({
     onSuccess: () => {
       setFormMsg({
         type: 'success',
         message: 'Password updated successfully',
-      });
+      })
     },
     onError: (error) => {
-      const errorArr = JSON.parse(error.message);
+      const errorArr = JSON.parse(error.message)
       setFormMsg({
         type: 'error',
         message: errorArr[0].message,
-      });
+      })
     },
-  });
+  })
 
   const onSubmit = (data: { newpassword: string }) => {
     if (session && session.data) {
       updatePassword.mutate({
         id: session.data?.user.id,
         password: data.newpassword,
-      });
+      })
     }
-  };
+  }
 
   return (
     <Box>
@@ -77,7 +77,7 @@ const ChangePassword = () => {
         </Text>
       </FormProvider>
     </Box>
-  );
-};
+  )
+}
 
-export default ChangePassword;
+export default ChangePassword

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const age_groupSchema = z.enum([
   'BELOW_21',
@@ -8,18 +8,18 @@ export const age_groupSchema = z.enum([
   'FROM_51_TO_60',
   'FROM_61_TO_70',
   'ABOVE_70',
-]);
+])
 
-export const genderSchema = z.enum(['MALE', 'FEMALE', 'OTHERS']);
+export const genderSchema = z.enum(['MALE', 'FEMALE', 'OTHERS'])
 
-export const raceSchema = z.enum(['CHINESE', 'MALAY', 'INDIAN', 'OTHERS']);
+export const raceSchema = z.enum(['CHINESE', 'MALAY', 'INDIAN', 'OTHERS'])
 
 export const marital_statusSchema = z.enum([
   'SINGLE',
   'MARRIED',
   'WIDOWED',
   'DIVORCED',
-]);
+])
 
 export const education_levelSchema = z.enum([
   'PRIMARY',
@@ -28,13 +28,13 @@ export const education_levelSchema = z.enum([
   'DIPLOMA',
   'OTHERS',
   'DEGREE',
-]);
+])
 
 export const employment_statusSchema = z.enum([
   'FULLTIME',
   'PARTTIME',
   'UNEMPLOYED',
-]);
+])
 
 export const caregiving_lengthSchema = z.enum([
   'BELOW_1_YEAR',
@@ -43,7 +43,7 @@ export const caregiving_lengthSchema = z.enum([
   'FROM_7_TO_10_YEARS',
   'FROM_11_TO_20_YEARS',
   'ABOVE_21_YEARS',
-]);
+])
 
 export const FormSchema = z.object({
   age_group: age_groupSchema,
@@ -81,23 +81,23 @@ export const FormSchema = z.object({
   lack_of_family_support: z.number(),
   esteem: z.number(),
   userId: z.string().nullable(),
-});
+})
 
 export const ScoreSchema = z.object({
   poor_health: z.number(),
   lack_of_finances: z.number(),
   lack_of_family_support: z.number(),
   esteem: z.number(),
-});
+})
 
 export const CredentialsSchema = z.object({
   email: z.string(),
   password: z.string().min(5).max(20),
-});
+})
 
 export const UserSchema = z.object({
   id: z.string(),
   name: z.string(),
   email: z.string(),
   is_admin: z.boolean(),
-});
+})

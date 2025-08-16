@@ -1,3 +1,3 @@
 export const handleMainCaregiver = (boo: boolean) => {
-  return boo ? 'Yes' : 'No';
-};
+  return boo ? 'Yes' : 'No'
+}

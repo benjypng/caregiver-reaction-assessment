@@ -6,7 +6,7 @@
     "dev": "concurrently \"docker compose up\" \"next dev\"",
     "build": "npx prisma generate && next build",
     "start": "next start -p 8080",
-    "lint": "tsc && next lint",
+    "lint": "tsc && next lint --fix",
     "migrate": "dotenv -e .env.development -- npx prisma migrate dev",
     "prepare": "husky",
     "seed:su": "dotenv -e .env.development -- ts-node --project ./tsconfig.scripts.json prisma/seed-su.ts",

@@ -1,4 +1,4 @@
-import { HamburgerIcon } from '@chakra-ui/icons';
+import { HamburgerIcon } from '@chakra-ui/icons'
 import {
   HStack,
   IconButton,
@@ -7,13 +7,13 @@ import {
   MenuItem,
   MenuList,
   Text,
-} from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
+} from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 
 export const NavMenu = () => {
-  const router = useRouter();
-  const { status } = useSession();
+  const router = useRouter()
+  const { status } = useSession()
 
   return (
     <HStack justifyContent="space-between" alignItems="center" p="5">
@@ -46,5 +46,5 @@ export const NavMenu = () => {
         </MenuList>
       </Menu>
     </HStack>
-  );
-};
+  )
+}

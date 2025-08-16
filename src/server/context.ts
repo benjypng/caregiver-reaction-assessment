@@ -1,14 +1,14 @@
-import type { inferAsyncReturnType } from '@trpc/server';
-import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
-import { Session } from 'next-auth';
-import { getServerSession } from 'next-auth/next';
-import prisma from 'prisma/client';
+import type { inferAsyncReturnType } from '@trpc/server'
+import type { CreateNextContextOptions } from '@trpc/server/adapters/next'
+import { Session } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
+import prisma from 'prisma/client'
 
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface CreateContextOptions {
-  session: Session | null;
+  session: Session | null
 }
 /**
  * Creates context for an incoming request
@@ -16,15 +16,15 @@ interface CreateContextOptions {
  */
 
 export async function createContextInner(_opts: CreateContextOptions) {
-  return {};
+  return {}
 }
 
 export async function createContext(opts: CreateNextContextOptions) {
-  const session = await getServerSession(opts.req, opts.res, authOptions);
+  const session = await getServerSession(opts.req, opts.res, authOptions)
   return {
     session,
     prisma,
-  };
+  }
 }
 
-export type Context = inferAsyncReturnType<typeof createContext>;
+export type Context = inferAsyncReturnType<typeof createContext>

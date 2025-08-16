@@ -1,9 +1,9 @@
-import { Box } from '@chakra-ui/react';
-import { type ReactNode } from 'react';
+import { Box } from '@chakra-ui/react'
+import { type ReactNode } from 'react'
 
-import { NavMenu } from '@/components/NavMenu';
+import { NavMenu } from '@/components/NavMenu'
 
-type DefaultLayoutProps = { children: ReactNode };
+type DefaultLayoutProps = { children: ReactNode }
 
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
@@ -13,5 +13,5 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         {children}
       </Box>
     </>
-  );
-};
+  )
+}

@@ -1,10 +1,10 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Heading, Text } from '@chakra-ui/react'
+import React from 'react'
 
 type ProfileCardProps = {
-  value: string | boolean;
-  label: string;
-};
+  value: string | boolean
+  label: string
+}
 
 const ProfileCard = ({ value, label }: ProfileCardProps) => {
   return (
@@ -16,7 +16,7 @@ const ProfileCard = ({ value, label }: ProfileCardProps) => {
         {value}
       </Text>
     </Box>
-  );
-};
+  )
+}
 
-export default ProfileCard;
+export default ProfileCard

@@ -12,132 +12,129 @@ import {
   Th,
   Thead,
   Tr,
-} from '@chakra-ui/react';
-import { User } from '@prisma/client';
-import { Session } from 'next-auth';
-import React, { useEffect, useState } from 'react';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+} from '@chakra-ui/react'
+import { User } from '@prisma/client'
+import { useSession } from 'next-auth/react'
+import React, { useEffect, useState } from 'react'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
 
-import { trpc } from '@/utils/trpc-hooks';
+import { trpc } from '@/utils/trpc-hooks'
 
-import NewUser from './NewUser';
+import NewUser from './NewUser'
 
 type NewUser = {
-  name: string;
-  email: string;
-};
-
-type SessionProps = {
-  session: Session | null;
-};
+  name: string
+  email: string
+}
 
 type FormMessage = {
-  type: 'error' | 'success';
-  message: string;
-};
+  type: 'error' | 'success'
+  message: string
+}
 
-const UserList = ({ session }: SessionProps) => {
+const UserList = () => {
+  const { data } = useSession()
   const formMethods = useForm<NewUser>({
     mode: 'onBlur',
-  });
+  })
 
-  const [users, setUsers] = useState<Partial<User>[]>([]);
-  const [formMsg, setFormMsg] = useState<FormMessage | null>();
-  const [editingRowId, setEditingRowId] = useState<string>('');
-  const [addUser, setAddUser] = useState<boolean>(false);
+  const [users, setUsers] = useState<Partial<User>[]>([])
+  const [formMsg, setFormMsg] = useState<FormMessage | null>()
+  const [editingRowId, setEditingRowId] = useState<string>('')
+  const [addUser, setAddUser] = useState<boolean>(false)
 
-  const getUsers = trpc.users.findAll.useQuery();
+  const getUsers = trpc.users.findAll.useQuery()
 
   const putUsers = async () => {
-    const res = await getUsers.refetch();
-    if (!res.data) return;
-    setUsers(res.data.sort((a, b) => a.name.localeCompare(b.name)));
-  };
+    const res = await getUsers.refetch()
+    if (!res.data) return
+    setUsers(res.data.sort((a, b) => a.name.localeCompare(b.name)))
+  }
 
   useEffect(() => {
-    putUsers();
+    putUsers()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (formMsg) {
-      setTimeout(() => setFormMsg(null), 3000);
-      putUsers();
+      setTimeout(() => setFormMsg(null), 3000)
+      putUsers()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formMsg]);
+  }, [formMsg])
 
   const updateUserName = trpc.users.updateName.useMutation({
     onSuccess: () => {
-      setEditingRowId('');
+      setEditingRowId('')
       setFormMsg({
         type: 'success',
         message: 'User updated',
-      });
+      })
     },
     onError(error) {
       setFormMsg({
         type: 'error',
         message: error.message,
-      });
+      })
     },
-  });
+  })
   const deleteUser = trpc.users.deleteOne.useMutation({
     onSuccess: () => {
       setFormMsg({
         type: 'success',
         message: 'User deleted',
-      });
+      })
     },
     onError(error) {
       setFormMsg({
         type: 'error',
         message: error.message,
-      });
+      })
     },
-  });
+  })
   const createNewUser = trpc.users.createOne.useMutation({
     onSuccess: () => {
-      setAddUser(false);
+      setAddUser(false)
     },
     onError(error) {
       setFormMsg({
         type: 'error',
         message: error.message,
-      });
+      })
     },
-  });
+  })
 
   const sendPwToUser = trpc.users.sendPassword.useMutation({
     onSuccess: () => {
       setFormMsg({
         type: 'success',
         message: 'Password successfully sent',
-      });
+      })
     },
     onError(error) {
       setFormMsg({
         type: 'error',
         message: error.message,
-      });
+      })
     },
-  });
+  })
 
   const handleDelete = (id: string) => {
-    deleteUser.mutate({ id });
-  };
+    deleteUser.mutate({ id })
+  }
 
   const updateUser = (data: { name: string }) => {
-    updateUserName.mutate({ id: editingRowId, name: data.name });
-  };
+    updateUserName.mutate({ id: editingRowId, name: data.name })
+  }
 
   const saveNewUser = (data: NewUser) => {
-    createNewUser.mutate({ name: data.name, email: data.email });
-  };
+    createNewUser.mutate({ name: data.name, email: data.email })
+  }
 
   const sendPassword = (id: string) => {
-    sendPwToUser.mutate({ id });
-  };
+    sendPwToUser.mutate({ id })
+  }
 
   return (
     <>
@@ -159,7 +156,7 @@ const UserList = ({ session }: SessionProps) => {
           mb="5"
           mr="3"
           onClick={() => {
-            setAddUser(false);
+            setAddUser(false)
           }}
         >
           Cancel
@@ -195,7 +192,7 @@ const UserList = ({ session }: SessionProps) => {
               </Tr>
             )}
             {users
-              .filter((user) => user.id !== session?.user.id)
+              .filter((user) => user.id !== data?.user.id)
               .map((user) => (
                 <Tr key={user.id}>
                   {editingRowId !== user.id && (
@@ -288,7 +285,7 @@ const UserList = ({ session }: SessionProps) => {
         </Table>
       </TableContainer>
     </>
-  );
-};
+  )
+}
 
-export default UserList;
+export default UserList

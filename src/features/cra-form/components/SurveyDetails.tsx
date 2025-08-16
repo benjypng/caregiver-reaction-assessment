@@ -4,15 +4,15 @@ import {
   FormLabel,
   SimpleGrid,
   Text,
-} from '@chakra-ui/react';
-import { DatePicker, SingleSelect } from '@opengovsg/design-system-react';
-import { Controller, useFormContext } from 'react-hook-form';
+} from '@chakra-ui/react'
+import { DatePicker, SingleSelect } from '@opengovsg/design-system-react'
+import { Controller, useFormContext } from 'react-hook-form'
 
-import { trpc } from '@/utils/trpc-hooks';
+import { trpc } from '@/utils/trpc-hooks'
 
 const SurveyDetails = () => {
-  const { control } = useFormContext();
-  const { data: users, isLoading } = trpc.users.findAll.useQuery();
+  const { control } = useFormContext()
+  const { data: users, isLoading } = trpc.users.findAll.useQuery()
 
   return (
     <>
@@ -58,7 +58,7 @@ const SurveyDetails = () => {
         />
       </SimpleGrid>
     </>
-  );
-};
+  )
+}
 
-export default SurveyDetails;
+export default SurveyDetails

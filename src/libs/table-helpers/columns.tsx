@@ -1,22 +1,22 @@
-import { createColumnHelper } from '@tanstack/react-table';
-import format from 'date-fns/format';
-import Link from 'next/link';
+import { createColumnHelper } from '@tanstack/react-table'
+import format from 'date-fns/format'
+import Link from 'next/link'
 
-import { FormWithUser } from '@/pages/cra-results/[id]';
+import { FormWithUser } from '@/pages/cra-results/[id]'
 
-import { handleAge } from './handle-age';
-import { handleCapitalise } from './handle-capitalise';
-import { handleCaregivingLength } from './handle-caregiving-length';
-import { handleMainCaregiver } from './handle-main-caregiver';
-import { handleQuestions } from './handle-questions';
+import { handleAge } from './handle-age'
+import { handleCapitalise } from './handle-capitalise'
+import { handleCaregivingLength } from './handle-caregiving-length'
+import { handleMainCaregiver } from './handle-main-caregiver'
+import { handleQuestions } from './handle-questions'
 
-const columnHelper = createColumnHelper<FormWithUser>();
+const columnHelper = createColumnHelper<FormWithUser>()
 export const columns = [
   columnHelper.accessor('id', {
     header: 'ID',
     cell: (info) => {
-      const id = info.getValue();
-      return <Link href={`/cra-results/${id}`}> {id}</Link>;
+      const id = info.getValue()
+      return <Link href={`/cra-results/${id}`}> {id}</Link>
     },
   }),
   columnHelper.accessor('msw_name', {
@@ -143,4 +143,4 @@ export const columns = [
     header: 'Question 21',
     cell: (info) => handleQuestions(info.getValue()),
   }),
-];
+]

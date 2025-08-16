@@ -1,17 +1,17 @@
-import { Box, Button, Flex, Spacer, Text } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { Box, Button, Flex, Spacer, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useState } from 'react'
 
-import FormsTable from '@/components/FormsTable';
-import UserList from '@/components/UserList';
+import FormsTable from '@/components/FormsTable'
+import UserList from '@/components/UserList'
 
 const AdminDashboard = () => {
-  const router = useRouter();
-  const [manageUsers, setManageUsers] = useState(false);
-  const { data: session, status } = useSession();
+  const router = useRouter()
+  const [manageUsers, setManageUsers] = useState(false)
+  const { data: session, status } = useSession()
 
-  if (status === 'unauthenticated') router.push('/');
+  if (status === 'unauthenticated') router.push('/')
 
   return (
     <>
@@ -49,11 +49,11 @@ const AdminDashboard = () => {
           </Flex>
           <Spacer />
           {!manageUsers && <FormsTable />}
-          {manageUsers && <UserList session={session} />}
+          {manageUsers && <UserList />}
         </Box>
       )}
     </>
-  );
-};
+  )
+}
 
-export default AdminDashboard;
+export default AdminDashboard

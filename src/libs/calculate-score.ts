@@ -1,4 +1,4 @@
-import { Form } from '@prisma/client';
+import { Form } from '@prisma/client'
 
 // Scoring Rubrics
 // Disturbed schedule and poor health: 	Items 1, 4, 6, 7, 13, 14, 16 and 18.
@@ -10,32 +10,30 @@ type ScoreCategory =
   | 'poor_health'
   | 'lack_of_finances'
   | 'lack_of_family_support'
-  | 'esteem';
+  | 'esteem'
 
-type ScoreResult = Record<ScoreCategory, number>;
+type ScoreResult = Record<ScoreCategory, number>
 
-const MAX_SCORE_PER_QUESTION = 5;
+const MAX_SCORE_PER_QUESTION = 5
 
 const QUESTIONS: Record<ScoreCategory, number[]> = {
   poor_health: [1, 4, 6, 7, 13, 14, 16, 18],
   lack_of_finances: [20, 21],
   lack_of_family_support: [8, 10, 12, 15],
   esteem: [3, 5, 9, 11, 17, 19],
-};
+}
 
 const answerKey = (qnNumber: number): keyof Form =>
-  `qn${qnNumber}` as keyof Form;
+  `qn${qnNumber}` as keyof Form
 
 const getAnswer = (data: Form, qnNumber: number): number => {
-  const raw = data[answerKey(qnNumber)];
-  const value = Number(raw);
+  const raw = data[answerKey(qnNumber)]
+  const value = Number(raw)
   if (!Number.isFinite(value)) {
-    throw new Error(
-      `Question ${qnNumber} is missing or not a number: "${raw}"`,
-    );
+    throw new Error(`Question ${qnNumber} is missing or not a number: "${raw}"`)
   }
-  return value;
-};
+  return value
+}
 
 const averageFromQuestions = (
   data: Form,
@@ -44,34 +42,34 @@ const averageFromQuestions = (
   const total = questionNumbers.reduce(
     (sum, qn) => sum + getAnswer(data, qn),
     0,
-  );
-  return total / questionNumbers.length;
-};
+  )
+  return total / questionNumbers.length
+}
 
 const reverseScore = (value: number): number =>
-  MAX_SCORE_PER_QUESTION + 1 - value;
+  MAX_SCORE_PER_QUESTION + 1 - value
 
 export const calculateScore = (data: Form): ScoreResult => {
-  const poorHealth = averageFromQuestions(data, QUESTIONS.poor_health);
-  const finances = averageFromQuestions(data, QUESTIONS.lack_of_finances);
+  const poorHealth = averageFromQuestions(data, QUESTIONS.poor_health)
+  const finances = averageFromQuestions(data, QUESTIONS.lack_of_finances)
 
   // Reverse q2
-  const q2Reversed = reverseScore(getAnswer(data, 2));
+  const q2Reversed = reverseScore(getAnswer(data, 2))
   const familySupportSum =
     q2Reversed +
     QUESTIONS.lack_of_family_support.reduce(
       (sum, qn) => sum + getAnswer(data, qn),
       0,
-    );
+    )
   const familySupportAvg =
-    familySupportSum / (QUESTIONS.lack_of_family_support.length + 1);
+    familySupportSum / (QUESTIONS.lack_of_family_support.length + 1)
 
-  const esteem = averageFromQuestions(data, QUESTIONS.esteem);
+  const esteem = averageFromQuestions(data, QUESTIONS.esteem)
 
   return {
     poor_health: poorHealth,
     lack_of_finances: finances,
     lack_of_family_support: familySupportAvg,
     esteem,
-  };
-};
+  }
+}

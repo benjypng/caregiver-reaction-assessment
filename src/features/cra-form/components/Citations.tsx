@@ -1,5 +1,5 @@
-import { Box, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Text } from '@chakra-ui/react'
+import React from 'react'
 
 const Citations = () => {
   return (
@@ -19,7 +19,7 @@ const Citations = () => {
         1992; 15: 271–283.
       </Text>
     </Box>
-  );
-};
+  )
+}
 
-export default Citations;
+export default Citations

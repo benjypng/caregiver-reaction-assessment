@@ -1,4 +1,4 @@
-import { SimpleGrid, Text } from '@chakra-ui/react';
+import { SimpleGrid, Text } from '@chakra-ui/react'
 import {
   age_group,
   caregiving_length,
@@ -7,11 +7,11 @@ import {
   gender,
   marital_status,
   race,
-} from '@prisma/client';
+} from '@prisma/client'
 
-import { dropdownHelper } from '@/libs/dropdown-helpers';
+import { dropdownHelper } from '@/libs/dropdown-helpers'
 
-import CaregiverSelect from './CaregiverSelectComponent';
+import CaregiverSelect from './CaregiverSelectComponent'
 
 const CaregiverDetails = () => {
   return (
@@ -71,7 +71,7 @@ const CaregiverDetails = () => {
         />
       </SimpleGrid>
     </>
-  );
-};
+  )
+}
 
-export default CaregiverDetails;
+export default CaregiverDetails

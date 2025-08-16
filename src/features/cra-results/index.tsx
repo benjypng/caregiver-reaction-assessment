@@ -1,8 +1,8 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react'
 
-import ProfileResults from './components/ProfileResults';
-import QuestionsResults from './components/QuestionsResults';
-import Score from './components/Score';
+import ProfileResults from './components/ProfileResults'
+import QuestionsResults from './components/QuestionsResults'
+import Score from './components/Score'
 
 const CRAResults = () => {
   return (
@@ -11,7 +11,7 @@ const CRAResults = () => {
       <Score />
       <QuestionsResults />
     </Box>
-  );
-};
+  )
+}
 
-export default CRAResults;
+export default CRAResults

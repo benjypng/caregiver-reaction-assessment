@@ -1,5 +1,5 @@
 interface EmailTemplateProps {
-  resultId: string;
+  resultId: string
 }
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
@@ -9,5 +9,5 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
     <div>
       <h1>{`The Link to your Caregiver Reaction Assessment is Ready: ${resultId}.`}</h1>
     </div>
-  );
-};
+  )
+}

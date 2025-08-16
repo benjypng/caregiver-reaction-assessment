@@ -1,10 +1,10 @@
-import { Flex, FormControl } from '@chakra-ui/react';
-import { FormErrorMessage, Input } from '@opengovsg/design-system-react';
-import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Flex, FormControl } from '@chakra-ui/react'
+import { FormErrorMessage, Input } from '@opengovsg/design-system-react'
+import React from 'react'
+import { Controller, useFormContext } from 'react-hook-form'
 
 const NewUser = () => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
 
   return (
     <Flex>
@@ -37,7 +37,7 @@ const NewUser = () => {
         )}
       />
     </Flex>
-  );
-};
+  )
+}
 
-export default NewUser;
+export default NewUser

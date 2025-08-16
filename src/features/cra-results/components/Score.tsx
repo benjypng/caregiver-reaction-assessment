@@ -6,14 +6,14 @@ import {
   Heading,
   Spacer,
   Text,
-} from '@chakra-ui/react';
-import React, { useContext } from 'react';
+} from '@chakra-ui/react'
+import React, { useContext } from 'react'
 
-import { ProfileContext } from '@/pages/cra-results/[id]';
+import { ProfileContext } from '@/pages/cra-results/[id]'
 
 const Score = () => {
-  const profile = useContext(ProfileContext);
-  if (!profile) return null;
+  const profile = useContext(ProfileContext)
+  if (!profile) return null
 
   return (
     <Card mb="10">
@@ -81,7 +81,7 @@ const Score = () => {
         </Box>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export default Score;
+export default Score

@@ -79,4 +79,4 @@ export const userList = [
     name: 'Tina Perez',
     email: 'tina.perez@example.com',
   },
-];
+]

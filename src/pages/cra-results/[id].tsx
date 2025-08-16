@@ -1,32 +1,32 @@
-import { Skeleton } from '@chakra-ui/react';
-import { Form } from '@prisma/client';
-import { useRouter } from 'next/router';
-import { createContext } from 'react';
+import { Skeleton } from '@chakra-ui/react'
+import { Form } from '@prisma/client'
+import { useRouter } from 'next/router'
+import { createContext } from 'react'
 
-import CRAResults from '@/features/cra-results';
-import { trpc } from '@/utils/trpc-hooks';
+import CRAResults from '@/features/cra-results'
+import { trpc } from '@/utils/trpc-hooks'
 
 export interface FormWithUser extends Form {
-  msw_name: string | undefined;
-  survey_date: Date;
+  msw_name: string | undefined
+  survey_date: Date
 }
 
-export const ProfileContext = createContext<FormWithUser | null>(null);
+export const ProfileContext = createContext<FormWithUser | null>(null)
 
 const Result = () => {
-  const router = useRouter();
+  const router = useRouter()
 
   const { data, isLoading } = trpc.forms.getForm.useQuery(
     { id: router.query.id as string },
     { enabled: !!router.query.id },
-  );
-  if (!data) return null;
+  )
+  if (!data) return null
 
   const profile = {
     ...data,
     msw_name: data.User?.name,
     survey_date: new Date(data.survey_date),
-  };
+  }
 
   return (
     <Skeleton isLoaded={!isLoading}>
@@ -34,6 +34,6 @@ const Result = () => {
         <CRAResults />
       </ProfileContext.Provider>
     </Skeleton>
-  );
-};
-export default Result;
+  )
+}
+export default Result
