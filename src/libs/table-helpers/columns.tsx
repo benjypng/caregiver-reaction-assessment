@@ -1,5 +1,6 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import format from 'date-fns/format';
+import Link from 'next/link';
 
 import { FormWithUser } from '@/pages/cra-results/[id]';
 
@@ -13,7 +14,10 @@ const columnHelper = createColumnHelper<FormWithUser>();
 export const columns = [
   columnHelper.accessor('id', {
     header: 'ID',
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      const id = info.getValue();
+      return <Link href={`/cra-results/${id}`}> {id}</Link>;
+    },
   }),
   columnHelper.accessor('msw_name', {
     header: 'MSW Name',

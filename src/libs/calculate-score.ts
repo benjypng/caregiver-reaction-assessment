@@ -6,44 +6,72 @@ import { Form } from '@prisma/client';
 // Lack of family support: 		Items 2, 8, 10, 12 and 15. (Note that Item 2 has to be reverse scored, to align it with the rest of the items in this subscale/domain)
 // Caregiver esteem: 			Items 3, 5, 9, 11, 17 and 19.
 
-export const calculateScore = (data: Form) => {
-  const scoreDescription = {
-    poor_health: 0,
-    lack_of_finances: 0,
-    lack_of_family_support: 0,
-    esteem: 0,
+type ScoreCategory =
+  | 'poor_health'
+  | 'lack_of_finances'
+  | 'lack_of_family_support'
+  | 'esteem';
+
+type ScoreResult = Record<ScoreCategory, number>;
+
+const MAX_SCORE_PER_QUESTION = 5;
+
+const QUESTIONS: Record<ScoreCategory, number[]> = {
+  poor_health: [1, 4, 6, 7, 13, 14, 16, 18],
+  lack_of_finances: [20, 21],
+  lack_of_family_support: [8, 10, 12, 15],
+  esteem: [3, 5, 9, 11, 17, 19],
+};
+
+const answerKey = (qnNumber: number): keyof Form =>
+  `qn${qnNumber}` as keyof Form;
+
+const getAnswer = (data: Form, qnNumber: number): number => {
+  const raw = data[answerKey(qnNumber)];
+  const value = Number(raw);
+  if (!Number.isFinite(value)) {
+    throw new Error(
+      `Question ${qnNumber} is missing or not a number: "${raw}"`,
+    );
+  }
+  return value;
+};
+
+const averageFromQuestions = (
+  data: Form,
+  questionNumbers: number[],
+): number => {
+  const total = questionNumbers.reduce(
+    (sum, qn) => sum + getAnswer(data, qn),
+    0,
+  );
+  return total / questionNumbers.length;
+};
+
+const reverseScore = (value: number): number =>
+  MAX_SCORE_PER_QUESTION + 1 - value;
+
+export const calculateScore = (data: Form): ScoreResult => {
+  const poorHealth = averageFromQuestions(data, QUESTIONS.poor_health);
+  const finances = averageFromQuestions(data, QUESTIONS.lack_of_finances);
+
+  // Reverse q2
+  const q2Reversed = reverseScore(getAnswer(data, 2));
+  const familySupportSum =
+    q2Reversed +
+    QUESTIONS.lack_of_family_support.reduce(
+      (sum, qn) => sum + getAnswer(data, qn),
+      0,
+    );
+  const familySupportAvg =
+    familySupportSum / (QUESTIONS.lack_of_family_support.length + 1);
+
+  const esteem = averageFromQuestions(data, QUESTIONS.esteem);
+
+  return {
+    poor_health: poorHealth,
+    lack_of_finances: finances,
+    lack_of_family_support: familySupportAvg,
+    esteem,
   };
-
-  scoreDescription.poor_health =
-    (parseInt(data.qn1) +
-      parseInt(data.qn4) +
-      parseInt(data.qn6) +
-      parseInt(data.qn7) +
-      parseInt(data.qn13) +
-      parseInt(data.qn14) +
-      parseInt(data.qn16) +
-      parseInt(data.qn18)) /
-    8;
-
-  scoreDescription.lack_of_finances =
-    (parseInt(data.qn20) + parseInt(data.qn21)) / 2;
-
-  scoreDescription.lack_of_family_support =
-    (Math.abs(parseInt(data.qn2) - 6) +
-      parseInt(data.qn8) +
-      parseInt(data.qn10) +
-      parseInt(data.qn12) +
-      parseInt(data.qn15)) /
-    5;
-
-  scoreDescription.esteem =
-    (parseInt(data.qn3) +
-      parseInt(data.qn5) +
-      parseInt(data.qn9) +
-      parseInt(data.qn11) +
-      parseInt(data.qn17) +
-      parseInt(data.qn19)) /
-    6;
-
-  return scoreDescription;
 };

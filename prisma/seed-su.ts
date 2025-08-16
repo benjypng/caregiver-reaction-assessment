@@ -13,6 +13,7 @@ async function seed() {
       name: 'Jayden Tan',
       email: 'test@test.com',
       password: await generateHashPassword(generatePlainPassword()),
+      is_admin: true,
     },
   ];
   console.log('Start seeding...');

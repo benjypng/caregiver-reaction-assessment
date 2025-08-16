@@ -22,7 +22,13 @@ const Score = () => {
       </CardHeader>
 
       <CardBody display={{ md: 'flex' }}>
-        <Box p="2" w="100%" display="flex" flexDir="column">
+        <Box
+          p="2"
+          w="100%"
+          display="flex"
+          flexDir="column"
+          justifyContent="space-between"
+        >
           <Heading size="xs" textTransform="uppercase">
             Disturbed Schedule & Poor Health
           </Heading>
@@ -30,7 +36,13 @@ const Score = () => {
             {profile.poor_health.toFixed(2)}
           </Text>
         </Box>
-        <Box p="2" w="100%" display="flex" flexDir="column">
+        <Box
+          p="2"
+          w="100%"
+          display="flex"
+          flexDir="column"
+          justifyContent="space-between"
+        >
           <Heading size="xs" textTransform="uppercase">
             Lack of Finances
           </Heading>
@@ -39,7 +51,13 @@ const Score = () => {
             {profile.lack_of_finances.toFixed(2)}
           </Text>
         </Box>
-        <Box p="2" w="100%" display="flex" flexDir="column">
+        <Box
+          p="2"
+          w="100%"
+          display="flex"
+          flexDir="column"
+          justifyContent="space-between"
+        >
           <Heading size="xs" textTransform="uppercase">
             Lack of Family Support
           </Heading>
@@ -47,7 +65,13 @@ const Score = () => {
             {profile.lack_of_family_support.toFixed(2)}
           </Text>
         </Box>
-        <Box p="2" w="100%" display="flex" flexDir="column">
+        <Box
+          p="2"
+          w="100%"
+          display="flex"
+          flexDir="column"
+          justifyContent="space-between"
+        >
           <Heading size="xs" textTransform="uppercase">
             Esteem
           </Heading>

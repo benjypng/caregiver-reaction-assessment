@@ -32,9 +32,12 @@ export const NavMenu = () => {
             Create New Survey
           </MenuItem>
           {status === 'authenticated' ? (
-            <MenuItem onClick={() => router.push('/api/auth/signout')}>
-              Sign Out
-            </MenuItem>
+            <>
+              <MenuItem onClick={() => router.push('/admin')}>Admin</MenuItem>
+              <MenuItem onClick={() => router.push('/api/auth/signout')}>
+                Sign Out
+              </MenuItem>
+            </>
           ) : (
             <MenuItem onClick={() => router.push('/api/auth/signin')}>
               Sign In

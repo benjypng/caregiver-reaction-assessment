@@ -46,7 +46,6 @@ export default function Home() {
         <Button
           isLoading={submitting}
           onClick={formMethods.handleSubmit(onSubmit)}
-          colorScheme="telegram"
           w="10em"
         >
           Submit
