@@ -13,7 +13,7 @@ import { useSession } from 'next-auth/react'
 
 export const NavMenu = () => {
   const router = useRouter()
-  const { status } = useSession()
+  const { status, data } = useSession()
 
   return (
     <HStack justifyContent="space-between" alignItems="center" p="5">
@@ -33,7 +33,12 @@ export const NavMenu = () => {
           </MenuItem>
           {status === 'authenticated' ? (
             <>
-              <MenuItem onClick={() => router.push('/admin')}>Admin</MenuItem>
+              {data.user.is_admin && (
+                <MenuItem onClick={() => router.push('/admin')}>Admin</MenuItem>
+              )}
+              <MenuItem onClick={() => router.push('/change-password')}>
+                Change Password
+              </MenuItem>
               <MenuItem onClick={() => router.push('/api/auth/signout')}>
                 Sign Out
               </MenuItem>

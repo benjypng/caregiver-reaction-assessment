@@ -1,2 +1,2 @@
-pnpm exec next lint
+npm exec next lint
 tsc

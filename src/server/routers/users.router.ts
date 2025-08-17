@@ -15,7 +15,6 @@ export const userRouter = router({
       select: {
         id: true,
         name: true,
-        email: true,
       },
     })
   }),
@@ -59,7 +58,7 @@ export const userRouter = router({
         })
         transporter.sendMail({
           to: user.email,
-          subject: 'New Password',
+          subject: 'Caregiver Reaction Assessment | New Password',
           text: `Your new password is ${plain}. You are encouraged to change it after you log in for the first time.`,
           html: `<p>Your new password is ${plain}</p><p>You are encouraged to change it after you log in for the first time.`,
         })

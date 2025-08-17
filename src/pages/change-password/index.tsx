@@ -1,12 +1,10 @@
+import { FormControl, Text } from '@chakra-ui/react'
 import {
-  Box,
   Button,
-  FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
-  Text,
-} from '@chakra-ui/react'
+} from '@opengovsg/design-system-react'
 import { useSession } from 'next-auth/react'
 import React, { useState } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
@@ -49,9 +47,9 @@ const ChangePassword = () => {
   }
 
   return (
-    <Box>
+    <>
       <Text textStyle="h4" mb="5">
-        Forget Password
+        Change Password
       </Text>
       <FormProvider {...formMethods}>
         <Controller
@@ -59,9 +57,9 @@ const ChangePassword = () => {
           rules={{ required: 'Required' }}
           render={({ field, fieldState: { error } }) => (
             <FormControl isInvalid={!!error}>
-              <FormLabel mb={1}>New Password</FormLabel>
-              <Input {...field} size="sm" width="200" />
-              <FormErrorMessage>{error?.message}</FormErrorMessage>
+              <FormLabel mb={1}>Enter your new password below</FormLabel>
+              <Input {...field} size="sm" required />
+              <FormErrorMessage>{error?.message ?? ' '}</FormErrorMessage>
             </FormControl>
           )}
         />
@@ -76,7 +74,7 @@ const ChangePassword = () => {
           {formMsg?.message}
         </Text>
       </FormProvider>
-    </Box>
+    </>
   )
 }
 
