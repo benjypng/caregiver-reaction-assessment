@@ -23,7 +23,6 @@ export default function Home() {
       setSubmitting(false)
     },
     onSettled: async (response) => {
-      console.log(response)
       router.push(`/cra-results/${response?.id}`)
     },
   })
