@@ -6,70 +6,61 @@ import { Form } from '@prisma/client'
 // Lack of family support: 		Items 2, 8, 10, 12 and 15. (Note that Item 2 has to be reverse scored, to align it with the rest of the items in this subscale/domain)
 // Caregiver esteem: 			Items 3, 5, 9, 11, 17 and 19.
 
-type ScoreCategory =
-  | 'poor_health'
-  | 'lack_of_finances'
-  | 'lack_of_family_support'
-  | 'esteem'
-
-type ScoreResult = Record<ScoreCategory, number>
-
-const MAX_SCORE_PER_QUESTION = 5
-
-const QUESTIONS: Record<ScoreCategory, number[]> = {
-  poor_health: [1, 4, 6, 7, 13, 14, 16, 18],
-  lack_of_finances: [20, 21],
-  lack_of_family_support: [8, 10, 12, 15],
-  esteem: [3, 5, 9, 11, 17, 19],
+type ScoreResult = {
+  poor_health: number
+  lack_of_finances: number
+  lack_of_family_support: number
+  esteem: number
 }
 
-const answerKey = (qnNumber: number): keyof Form =>
-  `qn${qnNumber}` as keyof Form
+const poorHealthItems = [
+  'qn1',
+  'qn4',
+  'qn6',
+  'qn7',
+  'qn13',
+  'qn14',
+  'qn16',
+  'qn18',
+]
+const financesItems = ['qn20', 'qn21']
+const familyItems = ['qn2', 'qn8', 'qn10', 'qn12', 'qn15']
+const esteemItems = ['qn3', 'qn5', 'qn9', 'qn11', 'qn17', 'qn19']
 
-const getAnswer = (data: Form, qnNumber: number): number => {
-  const raw = data[answerKey(qnNumber)]
-  const value = Number(raw)
-  if (!Number.isFinite(value)) {
-    throw new Error(`Question ${qnNumber} is missing or not a number: "${raw}"`)
-  }
-  return value
+const reverseScore = (score: number) => {
+  return 6 - score
 }
 
-const averageFromQuestions = (
-  data: Form,
-  questionNumbers: number[],
-): number => {
-  const total = questionNumbers.reduce(
-    (sum, qn) => sum + getAnswer(data, qn),
-    0,
-  )
-  return total / questionNumbers.length
-}
+const extractQnScore = (data: Record<string, any>) => {
+  const qnEntries = Object.entries(data)
+    .filter(([key]) => key.startsWith('qn')) // only qn1–qn21 etc.
+    .map(([key, value]) => [key, Number(value)]) // convert all to numbers
 
-const reverseScore = (value: number): number =>
-  MAX_SCORE_PER_QUESTION + 1 - value
+  return Object.fromEntries(qnEntries) as Record<string, number>
+}
 
 export const calculateScore = (data: Form): ScoreResult => {
-  const poorHealth = averageFromQuestions(data, QUESTIONS.poor_health)
-  const finances = averageFromQuestions(data, QUESTIONS.lack_of_finances)
+  const formData = extractQnScore(data)
 
-  // Reverse q2
-  const q2Reversed = reverseScore(getAnswer(data, 2))
-  const familySupportSum =
-    q2Reversed +
-    QUESTIONS.lack_of_family_support.reduce(
-      (sum, qn) => sum + getAnswer(data, qn),
-      0,
-    )
-  const familySupportAvg =
-    familySupportSum / (QUESTIONS.lack_of_family_support.length + 1)
-
-  const esteem = averageFromQuestions(data, QUESTIONS.esteem)
+  const poorHealthAvg =
+    poorHealthItems.reduce((s, i) => s + formData[i], 0) /
+    poorHealthItems.length
+  const financesAvg =
+    financesItems.reduce((s, i) => s + formData[i], 0) / financesItems.length
+  const familyAvg =
+    (reverseScore(formData['qn2']) +
+      formData['qn8'] +
+      formData['qn10'] +
+      formData['qn12'] +
+      formData['qn15']) /
+    familyItems.length
+  const esteemAvg =
+    esteemItems.reduce((s, i) => s + formData[i], 0) / esteemItems.length
 
   return {
-    poor_health: poorHealth,
-    lack_of_finances: finances,
-    lack_of_family_support: familySupportAvg,
-    esteem,
+    poor_health: poorHealthAvg,
+    lack_of_finances: financesAvg,
+    lack_of_family_support: familyAvg,
+    esteem: esteemAvg,
   }
 }

@@ -1,15 +1,15 @@
 export const handleQuestions = (str: string) => {
   switch (str) {
     case '1':
-      return 'Strongly Agree'
+      return 'Strongly Disagree'
     case '2':
-      return 'Agree'
+      return 'Disagree'
     case '3':
       return 'Neither Agree nor Disagree'
     case '4':
-      return 'Disagree'
+      return 'Agree'
     case '5':
-      return 'Strongly Disagree'
+      return 'Strongly Agree'
     default:
   }
 }
